@@ -1,0 +1,223 @@
+@import "_widget/*"
+
+html
+  font-size $font-size
+  letter-spacing $letter-spacing
+
+html, body
+  height 100%
+  font-family $font-family
+  overflow-wrap break-word
+
+body
+  transition color .2s ease-in-out, background-color .2s ease-in-out
+  background-color var(--body-bg-color)
+  color var(--text-color)
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+
+  a
+    color var(--text-color)
+    text-decoration none
+    cursor pointer
+    transition color .2s ease-in-out, background-color .2s ease-in-out
+
+    &:hover
+      color var(--link-hover-color)
+      text-decoration none
+      transition color .2s ease-in-out, background-color .2s ease-in-out
+
+code
+  color inherit
+
+table
+  font-size inherit
+  color var(--post-text-color)
+
+img[lazyload]
+  object-fit cover
+
+*[align="left"]
+  text-align left
+
+*[align="center"]
+  text-align center
+
+*[align="right"]
+  text-align right
+
+::-webkit-scrollbar
+  width 6px
+  height 6px
+
+::-webkit-scrollbar-thumb
+  background-color var(--scrollbar-color)
+  border-radius 6px
+
+  &:hover
+    background-color var(--scrollbar-hover-color)
+
+::-webkit-scrollbar-corner
+  background-color transparent
+
+label
+  margin-bottom 0
+
+i.iconfont
+  font-size 1em
+  line-height 1
+  
+/* 侧边栏 */
+#sidebar
+    position fixed
+    top 0
+    left 0
+    z-index 1040
+    overflow-y auto
+    width 300px
+    height 100%
+    color $sidebar-text-color
+    background-color $sidebar-background-color
+    -webkit-transition all .2s ease-in-out
+    -o-transition all .2s ease-in-out
+    transition all .2s ease-in
+    -webkit-box-shadow 0.25rem 0px 0.25rem 0px rgba(175, 175, 175, 0.6)
+    box-shadow 0.25rem 0px 0.25rem 0px rgba(175, 175, 175, 0.6)
+    overflow -moz-scrollbars-none
+    -ms-overflow-style none
+
+#sidebar::-webkit-scrollbar
+    display none    
+
+.sidebar-hide
+    margin-left -300px
+    -webkit-box-shadow none !important
+    box-shadow none !important
+
+.sidebar-button
+    position fixed
+    z-index 3
+    /* 按钮背景 */
+    padding .5rem .7rem .5rem .3rem
+    margin 2rem 0 2rem 0
+    border-radius 0 3rem 3rem 0
+    background-color rgba(255, 255, 255, 0.4)
+    /* padding 1rem */
+    bottom 0
+    color $sidebar-button-color
+    cursor pointer
+    -webkit-transition all .2s ease-in-out
+    -o-transition all .2s ease-in-out
+    transition all .2s ease-in-out
+
+.sidebar-button:hover
+    color $link-hover-color
+    -webkit-transition all .2s ease-in-out
+    -o-transition all .2s ease-in-out
+    transition all .2s ease-in-out
+
+.sidebar-button i 
+    transform rotateZ(180deg)
+
+.sidebar-button-shift
+    left 0
+    color $sidebar-button-shift-color
+    text-shadow $sidebar-button-shift-shadow
+
+.sidebar-button-shift i 
+    transform rotateZ(0deg)
+
+.sidebar-overlay
+    display none
+    width 100%
+    height 180px
+    background-color #fe91b4
+    position absolute
+
+.sidebar-intrude 
+    margin 60px auto 0 auto
+    z-index 3
+
+.sidebar-avatar 
+    position relative
+    border $sidebar-avatar-border
+    border-radius 300px
+    width 128px
+    height 128px
+    margin 0 auto
+    position relative
+    overflow hidden
+    background-color #88acdb
+    -webkit-transition all .2s ease-in
+    display -webkit-box
+    -webkit-box-pack center
+    -webkit-box-align center
+    text-align center;
+
+.sidebar-avatar img
+    border 0
+    vertical-align middle
+    max-width 100%
+
+.sidebar-about a
+    color $sidebar-about-link-color
+
+.sidebar-about a:hover
+    color $sidebar-about-link-hover-color
+    
+.sidebar-author
+    margin .67em 0
+    font-family Roboto,sans-serif
+    font-size 30px
+    transition .3s
+
+.sidebar-subtitle
+    color $sidebar-subtitle-color
+
+.sidebar-label-left
+    height 100%
+    padding 0 7px 0 7px
+    background-color $sidebar-about-link-color
+    float left
+
+.sidebar-friend
+    margin 40px auto
+    padding 0
+
+.sidebar-friend-title
+    max-width 120px
+    margin 20px auto
+    padding 0
+    line-height 2rem
+    color $sidebar-friend-title
+    background-color $sidebar-friend-title-background
+    text-align center
+
+.sidebar-friend a,a:hover 
+    -webkit-transition .1s !important
+    -o-transition .1s !important
+    transition .1s !important
+
+.sidebar-friend a
+    color $sidebar-friend-link
+
+.sidebar-friend a:hover
+    color $sidebar-friend-link-hover
+
+.sidebar-friend li
+    width calc(100% - 5rem)
+    margin 0 auto
+    background none
+    border-bottom $sidebar-friend-li-border
+    -webkit-transition all .2s ease-in-out
+    -o-transition all .2s ease-in-out
+    transition all .2s ease-in-out
+
+.sidebar-friend li:hover
+    background-color $sidebar-friend-li-hover
+    -webkit-transition all .2s ease-in-out
+    -o-transition all .2s ease-in-out
+    transition all .2s ease-in-out
+
+.sidebar-friend i.fa-quote-left
+    color $sidebar-friend-ico
