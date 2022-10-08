@@ -1,6 +1,6 @@
 ---
 title: 如何在mac上编写运行c++程序
-categories: 教程
+categories: 寄巧
 tags:
   - C++
   - 环境配置
