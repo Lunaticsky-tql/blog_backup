@@ -1,9 +1,8 @@
 ---
-title: 信息检索_索引构建
+title: 信息检索_索引构建、查询及压缩
 categories: 笔记
 tags:
   - 信息检索
-abbrlink: 64683
 ---
 ## 信息检索第一部分--索引构建
 
@@ -28,11 +27,11 @@ abbrlink: 64683
 
 Assume we have 1GB of text 800,000 documents 100 million tokens （Reuters-RCV1 collection）
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007114302922509_207_image-20220922094643439.png" alt="image-20220922094643439" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007114302922509_207_image-20220922094643439.png" alt="image-20220922094643439" width="50%" height="50%" />
 
 （假设是用int存docID）
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007114304089366_722_image-20220922095054178.png" alt="image-20220922095054178" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007114304089366_722_image-20220922095054178.png" alt="image-20220922095054178" width="50%" height="50%" />
 
 16*1.4
 
@@ -50,37 +49,37 @@ Assume we have 1GB of text 800,000 documents 100 million tokens （Reuters-RCV1 
 
 1、将文档中的词进行id的映射，这里可以用hash的方法去构造
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007114305306835_864_image-20220922100056227.png" alt="image-20220922100056227" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007114305306835_864_image-20220922100056227.png" alt="image-20220922100056227" width="50%" height="50%" />
 
 当然，可以先把全部文档读一遍构建映射，再分块构建倒排索引，也可以在构建每一块的倒排索引的时候边构建边映射。
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007114306795554_393_image-20220922101046446.png" alt="image-20220922101046446" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007114306795554_393_image-20220922101046446.png" alt="image-20220922101046446" width="50%" height="50%" />
 
 2、将文档分割成大小相等的部分。分治
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007114308758541_971_image-20220922095854934.png" alt="image-20220922095854934" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007114308758541_971_image-20220922095854934.png" alt="image-20220922095854934" width="50%" height="50%" />
 
 3、将每部分按照词ID对上文档ID的方式进行排序（保证分块可以在内存里放下）
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007114310058817_513_image-20220922095946828.png" alt="image-20220922095946828" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007114310058817_513_image-20220922095946828.png" alt="image-20220922095946828" width="50%" height="50%" />
 
 ![image-20220922100557902](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007114311192421_110_image-20220922100557902.png)
 
 4、将每部分排序好后的结果进行合并，最后写出到磁盘中。
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007180145320453_779_image-20220922095721101.png" alt="image-20220922095721101" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007180145320453_779_image-20220922095721101.png" alt="image-20220922095721101" width="50%" height="50%" />
 
 归并的过程中也可以分治，比如内存中只能放100个词条的总倒排索引，可以在第100个的时候写出磁盘（因为已经确定是最后结果了），从101个再继续。
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007180147540243_873_image-20220922102146120.png" alt="image-20220922102146120" style="zoom:33%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007180147540243_873_image-20220922102146120.png" alt="image-20220922102146120" width="50%" height="50%" />
 
 #### SPIMI（Single-Pass In-Memory Indexing）
 
 不作映射，其他与BSBI一样
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007180149525757_426_image-20220922101959755.png" alt="image-20220922101959755" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007180149525757_426_image-20220922101959755.png" alt="image-20220922101959755" width="50%" height="50%" />
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007180151639180_886_image-20220922102104189.png" alt="image-20220922102104189" style="zoom:33%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007180151639180_886_image-20220922102104189.png" alt="image-20220922102104189" width="50%" height="50%" />
 
 因为D显然要比T小的多
 
@@ -142,7 +141,7 @@ $$
 
 是一种很蠢的方法
 
- <img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007180213583731_314_image-20220928152210011.png" alt="image-20220928152210011" style="zoom:50%;" />
+ <img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007180213583731_314_image-20220928152210011.png" alt="image-20220928152210011" width="50%" height="50%" />
 
 ##### 方法二：指针
 
@@ -252,3 +251,50 @@ UTF-8 的编码规则很简单，只有二条：
 
 ![image-20221005154022485](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221007180255998810_196_image-20221005154022485.png)
 
+中间的？好像有点问题。。。
+
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221012160136828076_665_image-20221012140726185.png" alt="image-20221012140726185" width="50%" height="50%" />
+
+#### 轮排索引
+
+![image-20221012141847402](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221012160138707962_831_image-20221012141847402.png)
+
+采用B树。但通常这种方法产生的B树会非常大
+
+![image-20221012143335531](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221012160141846578_532_image-20221012143335531.png)
+
+#### K-gram
+
+一定程度上的优化
+
+在一定长度的字串上建索引
+
+![image-20221012143730369](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221012160146160785_186_image-20221012143730369.png)
+
+查\$co,ter,er\$,\$代表起始和结束符号
+
+![image-20221012144353569](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221012160150327210_849_image-20221012144353569.png)
+
+### 拼写检查支持
+
+#### 动态规划：编辑距离
+
+动态规划求字符串距离？
+
+![image-20221012150059012](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221012160152819416_899_image-20221012150059012.png)
+
+词项太多，算法显得有些复杂，慢
+
+#### 在K-gram基础上进行
+
+Jaccard distance判断相似度
+
+![image-20221012151057155](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA/20221012160155137362_211_image-20221012151057155.png)
+
+求并集的小trick
+
+#query term's k-grams +#found term's k-grams-#intersection
+
+#### 上下文相关检查
+
+利用搜索历史，启发式
