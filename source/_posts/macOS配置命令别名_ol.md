@@ -1,6 +1,6 @@
 ---
 title: macOS配置命令别名
-categories: 寄巧
+categories: 小寄巧
 tags:
   - linux
 abbrlink: 42356
