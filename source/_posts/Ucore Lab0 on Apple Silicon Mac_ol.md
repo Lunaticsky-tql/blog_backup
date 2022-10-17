@@ -65,7 +65,7 @@ git config --global --add safe.directory 报错信息中homebrew-cask路径
 
 然后需要添加一下环境变量。
 
-这时尝试qemu生成ucore的dmg，发现提示`i386-elf-gdb`找不到。这才注意到通过homebrew下载的是`x86_64-elf-gcc`。
+这时尝试qemu生成ucore的dmg，发现提示`i386-elf-gcc`找不到。这才注意到通过homebrew下载的是`x86_64-elf-gcc`。
 
 经过搜索，得知在make时需要添加`make GCCPREFIX=x86_64-elf-`指定交叉编译工具。这时可以高兴的看到控制台闪烁，执行也很顺利。
 
@@ -75,10 +75,103 @@ git config --global --add safe.directory 报错信息中homebrew-cask路径
 
 ![image-20221003230427926](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20221003231407841829_266_image-20221003230427926.png)
 
+### 调试
 
+首先，ARM 架构的Mac目前是不能使用`gdb`进行程序的调试的，默认的调试工具是`lldb`。然而经过查阅，对于交叉编译反而可以使用实验中对应的`gdb`工具：运行`brew install i386-elf-gdb`安装即可。
 
-最后需要使用gdb调试。则运行`brew install i386-elf-gdb`安装即可。
+以调试lab1中的BIOS的执行为例。
+
+下面的过程与指导书中“使用远程调试”部分类似。除此之外，额外将运行的汇编指令保存在q.log中。
+
+在一个终端先执行：
+
+```shell
+qemu-system-i386 -S -s -d in_asm -D bin/q.log -monitor stdio -hda bin/ucore.img
+```
+
+后在另一个终端执行:
+
+```shell
+i386-elf-gdb
+```
+
+进入gdb调试界面。
+
+```shell
+(gdb) file bin/kernel
+Reading symbols from bin/kernel...
+(gdb) target remote :1234
+Remote debugging using :1234
+0x0000fff0 in ?? ()
+```
+
+上述的过程相比原来`makrfile`中提供的`make debug`主要有两个好处：一是能够重定向到`q.log`方便进行对比；二是可以绕开`make`中的`TERMINAL:=gnome-terminal`(`gnome-terminal`仅在linux下可使用)
+
+查看 CS:EIP 由于此时在实际模式下 CPU 在加电后执行的第一条指令的地址为 0xf000:0xfff0 => 0xffff0
+
+```shell
+(gdb) x/i $cs
+	0xf000:	add    %al,(%eax)
+(gdb) x/i $eip
+	0xfff0:	add    %al,(%eax)
+```
+
+再来看看这个地址的指令是什么
+```shell
+(gdb) x/2i 0xffff0
+   0xffff0:	ljmp   $0x3630,$0xf000e05b
+   0xffff7:	das
+```
+
+可以看到 第一条指令执行完以后 会跳转到` 0xf000e05b `也就是说 BIOS 开始的地址是 `0xfe05b`。
+
+打上断点
+
+```shell
+(gdb) b *0x7c00
+Breakpoint 1 at 0x7c00
+(gdb) c
+Continuing.
+
+Breakpoint 1, 0x00007c00 in ?? ()
+```
+
+一开始为了方便后续在终端中配置了永久别名：
+
+```shell
+alias makeq="make GCCPREFIX=x86_64-elf-"
+```
+
+当然更优雅的方法其实是修改make中的宏：
+
+```makefile
+# try to infer the correct GCCPREFX
+ifndef GCCPREFIX
+# GCCPREFIX := $(shell if i386-elf-objdump -i 2>&1 | 
+#...comment the original shell function
+# 	echo "***" 1>&2; exit 1; fi)
+GCCPREFIX := x86_64-elf-
+endif
+```
+
+但是，由于`makefile`里默认认为调试工具一定叫`gdb`，且mac里没有gdb对应的command，因此这时候用永久别名是比较合适的。
+
+```shell
+alias gdb="i386-elf-gdb"
+```
+
+这时候也可以修改make来达到自动化调试的目的：
+
+```makefile
+WORKING_DIR=$(shell pwd)
+debug: $(UCOREIMG)
+	$(V)$(QEMU) -S -s -parallel stdio -hda $< -serial null &
+	$(V)sleep 2
+	$(V) osascript -e 'tell application "Terminal" to do script "cd $(WORKING_DIR); gdb -q -x tools/gdbinit"'
+```
+
+其中最后一句是为了产生一个在当前工作目录的新终端。
 
 ### 总结
 
-前前后后也花了大概三个小时。后续的内容其实更吸引着我们去深入探索。
+前前后后也花了大概五个小时来应对环境的不同。后续的内容其实更吸引着我们去深入探索。
