@@ -49,7 +49,7 @@ C
 
 ![image-20221018191442452](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/20221019110807671323_383_image-20221018191442452.png)
 
-### 进程管理和调度
+### 进程的组织
 
 #### 进程状态和切换
 
