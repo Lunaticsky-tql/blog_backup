@@ -222,42 +222,8 @@ color:
   button_hover_bg_color: "#f2f3f5"
   button_hover_bg_color_dark: "#46647e"
 
-  # 侧边栏颜色
-  sidebar_text_color: "#3c4858"
-  sidebar_background_color: "rgba(246, 248, 250, 0.82)" #f6f8fad1
-  sidebar_button_color: "#99a9bf"
-  sidebar_button_shift_color: "#ffffff"
-  sidebar_button_shift_shadow: "0.1rem 0.1rem 0.5rem #3e3e3e"
-  sidebar_about_link_color: "#3c4858"
-  sidebar_about_link_hover_color: "#57A7D9"
-  sidebar_avatar_border: "5px solid #ffffff"
-  sidebar_subtitle_color: "#999999"
-  sidebar_friend_title: "#ffffff"
-  sidebar_friend_title_background: "#8FABD7"
-  sidebar_friend_link: "#3c4858"
-  sidebar_friend_link_hover: "#ffffff"
-  sidebar_friend_li_border: "1px dashed #bdbdbd"
-  sidebar_friend_li_hover: "#57A7D9"
-  sidebar_friend_ico: "#bfbfbf"
 
-#---------------------------
-# 侧边栏
-# Sidebar
-#---------------------------
-sidebar:
-    enable: true
-    name: Lunatic sky
-    introduce:  # 支持 HTML，留空则使用网站subtitle
-    icons: # 更多图标可从 https://fontawesome.com/icons 查找，并以 "图标名: url" 的格式添加在下方
-        "fab fa-github": https://github.com/Lunaticsky-tql
-        "fas fa-envelope": mailto:2013599@mail.nankai.edu.cn
 
-#---------------------------
-# 侧边栏链接
-# Links
-#---------------------------    
-sidebar_links:
-  "my repository": https://github.com/Lunaticsky-tql?tab=repositories
 
 
 # 主题字体配置
@@ -582,7 +548,9 @@ post:
 
   # 文章在首页的默认封面图，当没有指定 index_img 时会使用该图片，若两者都为空则不显示任何图片
   # Path of the default post cover when `index_img` is not set. If both are empty, no image will be displayed
-  default_index_img:
+  default_index_img: 
+    - /img/melty.jpg
+    - /img/fan1.png
 
   # 文章标题下方的元信息
   # Meta information below title
@@ -609,7 +577,7 @@ post:
     # 估计阅读全文需要的时长
     # Estimated reading time
     min2read:
-      enable: true
+      enable: false
       # 每个字词的长度，建议：中文≈2，英文≈5，中英混合可自行调节
       # Average word length (chars count in word), ZH ≈ 2, EN ≈ 5
       awl: 2

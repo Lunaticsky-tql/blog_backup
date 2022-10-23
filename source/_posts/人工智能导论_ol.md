@@ -1,7 +1,7 @@
 ---
 title: 人工智能导论
 categories: 笔记
-date: 2019-9-10 10:00:00
+date: 2022-9-10 10:00:00
 tags:
   - 机器学习
 abbrlink: 46759
