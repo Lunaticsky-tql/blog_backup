@@ -12,7 +12,7 @@
   if (interval > 3600*24*30*1000){
     var days = parseInt(interval / 86400000)
     posts[0].insertAdjacentHTML('afterbegin', '<div class="note note-warning" style="font-size:0.9rem"><p>' +
-      '<div class="h6">提示</div><p>本文发布于 ' + days +' 天前，部分信息可能更新不及时，请注意甄别。' +
+      '<div class="h6">提示</div><p>本文发布于' + days +' 天前，部分信息可能更新不及时，请注意甄别。' +
       '</p></p></div>');
   }
 })();

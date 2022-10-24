@@ -69,6 +69,3 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ```
 
 在`.zshrc`中配置`alias`，`source`保存即可，里面还可以配置其他实用的配置。[这个博客](https://mrseawave.github.io/blogs/articles/2021/08/29/oh-my-zsh/)有较详细叙述。
-
-<iframe src="https://hexo.fluid-dev.com/" width="100%" height="200" name="topFrame" scrolling="yes"  noresize="noresize" frameborder="0" id="topFrame"></iframe>
-
