@@ -149,7 +149,7 @@ A
 
 ![image-20221018194121923](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/20221019110841591537_254_image-20221018194121923.png)
 
-###### ULT
+###### ULT(User Level Thread)
 
 需要注意的是在这种模式下调度仍是以进程为单位进行的
 
@@ -163,11 +163,9 @@ A
 
 劣势:
 
- 系统调用会引起进程阻塞
+1.系统调用(慢操作，如输入输出)会引起进程阻塞，而且进程内的所有线程都被阻塞。(内核每次分配给一个进程的仅有一个CPU，因此进程中仅有一个线程能执行)
 
- 这种线程不利于使用多处理器并行
-
-程被阻塞，而且进程内的所有线程都被阻塞。(内核每次分配给一个进程的仅有一个CPU，因此进程中仅有一个线程能执行)
+2.不利于使用多处理器并行
 
 ###### KLT
 
@@ -179,9 +177,9 @@ A
 
 ![image-20221018193551401](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/20221019110843340452_876_image-20221018193551401.png)
 
-![image-20221018192401379](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/20221019110845328702_264_image-20221018192401379.png)
+![image-20221031161210652](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20221031161210652.png)
 
->  C。这个显然只需要一个线程就够了
+![image-20221031161504084](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20221031161504084.png)
 
 ![image-20221018205754448](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/20221019110847145883_201_image-20221018205754448.png)
 
@@ -193,6 +191,6 @@ A
 
 ##### [轻权进程](https://en.wikipedia.org/wiki/Light-weight_process#cite_note-Vah96-1)
 
-类似于一种折衷的方案
+类似于一种折衷的方案。但是问题是太复杂
 
 ![image-20221018234308117](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/20221019110850808418_676_image-20221018234308117.png)
