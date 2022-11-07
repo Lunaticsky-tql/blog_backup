@@ -551,7 +551,8 @@ post:
   # Path of the default post cover when `index_img` is not set. If both are empty, no image will be displayed
   default_index_img: 
     - /img/melty.jpg
-    - /img/fan1.png
+    - /img/train.png
+    - /img/shadow.png
 
   # 文章标题下方的元信息
   # Meta information below title

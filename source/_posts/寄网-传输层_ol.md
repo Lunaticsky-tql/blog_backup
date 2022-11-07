@@ -117,7 +117,7 @@ abbrlink: 6389
 
 ![image-20221019183702448](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%AF%84%E7%BD%91-%E4%BC%A0%E8%BE%93%E5%B1%82/20221102112919789535_361_image-20221019183702448.png)
 
-接收端的主要变化是：在ACk中添加最后收到的包的序列和号，对应`make_pkt第二个参数`。
+接收端的主要变化是：在ACk中添加最后收到的包的序列和号，对应`make_pkt`第二个参数。
 
 ![image-20221019184436444](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%AF%84%E7%BD%91-%E4%BC%A0%E8%BE%93%E5%B1%82/20221102112923670147_103_image-20221019184436444.png)
 
