@@ -44,13 +44,15 @@ $$
 
 ![image-20220921102115526](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%AF%84%E7%BD%91-%E5%BA%94%E7%94%A8%E5%B1%82/20221026090244516116_167_image-20220921102115526.png)
 
-别忘了字节和bit的转换
+题中是Mb不是MB。别忘了字节和bit的转换，正确答案是C。
 
 #### 传输时延
 
 <font color='Apricot'>别忘了RTP的定义</font>
 
 ![image-20221012101652816](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%AF%84%E7%BD%91-%E5%BA%94%E7%94%A8%E5%B1%82/20221026090246765227_486_image-20221012101652816.png)
+
+![image-20221115202145242](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20221115202145242.png)
 
 ### Web服务器访问示例
 

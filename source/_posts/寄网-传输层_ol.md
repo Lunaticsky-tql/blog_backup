@@ -19,11 +19,14 @@ abbrlink: 6389
 
 ### 复用分用
 
-<p class="note note-info">复用就是多个应用层进程汇聚成一个传输层进程（八车道变一车道）
+<div class="note note-info">如何理解复用和分用？</div>
+
+
+复用就是多个应用层进程汇聚成一个传输层进程（八车道变一车道）
 
 分用就是反过来，传输层的多个进程相应的通向多个应用层进程（单车道变八车道）
 
-通常复用针对发送，分用针对接收。</p>
+通常复用针对发送，分用针对接收。
 
 ![image-20221019101337529](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%AF%84%E7%BD%91-%E4%BC%A0%E8%BE%93%E5%B1%82/20221102112836012813_910_image-20221019101337529.png)
 
@@ -68,14 +71,19 @@ abbrlink: 6389
 
 ![image-20221019162337067](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%AF%84%E7%BD%91-%E4%BC%A0%E8%BE%93%E5%B1%82/20221102112900136029_437_image-20221019162337067.png)
 
-发送，打包/拆包，交给下层发送
+发送端：打包数据，直接调用底层信道进行传输；
+
+接收端：拆包，将数据交给上层应用
 
 #### rdt2.0
 
+下层通道可能造成某些位出现错误（如:1变0，0变1)
+
 ![image-20221019163254576](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%AF%84%E7%BD%91-%E4%BC%A0%E8%BE%93%E5%B1%82/20221102112902564743_320_image-20221019163254576.png)
 
-<p class="note note-secondary">缩写：ACKnowledge character；Not AcKnowledge  character 肯定确认和否定确认
-为简便直白，对于package的翻译，用包代替分组</p>
+<p class="note note-secondary">缩写：ACKnowledge character；Not AcKnowledge  character 肯定确认和否定确认。
+同时为简便直白，对于package的翻译，用包代替分组</p>
+
 
 ##### 发送端：
 
