@@ -3,7 +3,6 @@ title: Ucore Lab0 on Apple Silicon Mac
 categories: 操作系统实验
 tags:
   - 操作系统
-abbrlink: 34966
 ---
 ## Ucore Lab0 on Apple Silicon Mac
 
@@ -175,3 +174,15 @@ debug: $(UCOREIMG)
 ### 总结
 
 前前后后也花了相当长的时间来应对环境的不同。后续的内容其实更吸引着我们去深入探索。
+
+### 后续
+
+已知问题: lab1 的`chellenge`无法正常切换`user_mode`，初步排查发现是出现了操作数异常，可能是`%esp`未正确赋值，但目前还没有找到方案。如果对此部分有较深研究，也欢迎交流。
+
+![image-20221130221829874](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20221130222055575294_180_image-20221130221829874.png)
+
+![image-20221130221851517](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20221130222057952350_733_image-20221130221851517.png)
+
+chellenge以外的部分以及后两个实验均可正确得到结果。
+
+![image-20221130222030887](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20221130222100838376_161_image-20221130222030887.png)

@@ -10,7 +10,7 @@ abbrlink: 23557
 
 # Makefile 急速入门
 
-或许你和我一样在没有接触过`makefile`的时候看到相对复杂一点的项目依赖感到头大。这里从最简单的情况，到常见用法，快速把`makefile`的基本用法捋一遍。
+或许你和我一样在完全没有接触过`makefile`的时候看到相对复杂一点的项目依赖感到头大。这里从最简单的情况，到常见用法，快速把`makefile`的基本用法捋一遍。
 
 ## 最小示例
 
@@ -32,13 +32,13 @@ return 0;
 正常情况下，通过 `gcc` 在命令行将其编译后产出相应文件，可执行文件或 object 文件等。
 
 ```shell
-$ gcc -o main.out main.c
+(base) ➜ gcc -o main.out main.c
 ```
 
 上面命令编译后运行 `main.out` 可执行文件。
 
 ```shell
-$ ./main.out
+(base) ➜ ./main.out
 hello world!
 ```
 
@@ -46,7 +46,7 @@ hello world!
 
 ### 从动手做开始
 
-如果我们想用到中间代码联合编译/链接，或者有大量的源文件做不同的处理，那么敲一行一行的命令将是灾难级的。即使通过按上下箭头的方式回退命令也会浪费很多时间。`makefile`的作用便显现出来了。但是为了便于学习，从上面的最小示例开始，先有一个感性的认知：
+如果我们想用到中间代码联合编译/链接，或者有大量的源文件做不同的处理，那么敲一行一行的命令将是灾难级的。即使通过按上下箭头的方式回退命令也会浪费很多时间。`makefile`的作用便显现出来了。但是为了便于学习，从上面的最小示例开始，先动手做一下，有一个感性的认知：
 
 在与`main.c`同目录下创建文件`makefile`:
 
@@ -74,7 +74,7 @@ clean:
 比如:
 
 ```shell
-$ make main.out
+(base) ➜ make main.out
 # test make
 gcc -o main.out main.c
 ```
@@ -91,19 +91,17 @@ main.out: main.c
 	gcc -o main.out main.c
 ```
 
-再比如：
+再试一下用`clean`把刚刚的`main.out`删掉：
 
 ```shell
-$ make clean
+(base) ➜ make clean
 rm main.out
 ```
 
-`clean` 任务清除刚刚生成的 `main.out` 文件。
-
-三个任务中，`all` 为内置的任务名，一般一个 Makefile 中都会包含，当直接调用 `make` 后面没有跟任务名时，默认执行的就是 `all`。
+上面的三个任务中，`all` 为内置的任务名，一般一个 Makefile 中都会包含，当直接调用 `make` 后面没有跟任务名时，默认执行的就是 `all`因此`make all`可以简写为`make`。
 
 ```shell
-$ make
+(base) ➜ make
 gcc -o main.out main.c
 ```
 
@@ -111,28 +109,26 @@ gcc -o main.out main.c
 
 可以看到，通过 `make` 命令，能将上面的编译进行有效自动化管理。通过将从输入文件到输出文件的编译规则编写成 Makefile 脚本，Make 工具将自动处理文件间依赖及是否需要编译的检测。
 
-`make` 命令所使用的编译配置文件可以是 `Makefile`，`makefile` 或 `GUNMake`。
+定义任务的基本语法为：
 
-其中定义任务的基本语法为：
-
-```
+```makefile
 target1 [target2 ...]: [pre-req-1 pre-req-2 ...]
 	[command1
 	 command2
 	 ......]
 ```
 
-上面形式也可称作是一条编译规则（rule）。
+上面的形式也可称作是一条编译规则（rule）。
 
 其中，
 
-- `target` 为任务名或文件产出。如果该任务不产出文件，则称该任务为 `Phony Targets`。`make` 内置的 phony target 有 `all`, `install` 及 `clean` 等，这些任务都不实际产出文件，一般用来执行一些命令。
+- `target` 为任务名或文件产出。如果该任务不产出文件，则称该任务为 `Phony Targets`。`make` 内置的 `phony targets` 有 `all`, `install` 及 `clean` 等，这些任务都不实际产出文件，一般用来执行一些命令。
 - `pre-req123...` 这些是依赖项，即该任务所需要的外部输入，这些输入可以是其他文件，也可以是其他任务产出的文件。
 - `command` 为该任务具体需要执行的 shell 命令。
 
 ### 任务间的依赖
 
-前面调用 `all` 的效果等同于调用 `main.out` 任务，因为 `all` 的输入依赖为 `main.out` 文件。Make 在执行任务前会先检查其输入的依赖项，执行 `all` 时发现它依赖 `main.out` 文件，于是本地查找，发现本地没有，再从 Makefile 中查找看是否有相应任务会产生该文件，结果确实有相应任务能产生该文件，所以先执行能够产生依赖项的任务。
+前面调用 `all` 的效果等同于调用 `main.out` 任务，因为 `all` 的输入依赖为 `main.out` 文件。Make 在执行任务前会先检查其输入的依赖项，执行 `all` 时发现它依赖 `main.out` 文件，于是本地查找，发现本地没有，再从 Makefile 中查找看是否有相应任务会产生该文件，结果确实有相应任务(`main.out`对应的规则)能产生该文件，所以先执行能够产生依赖项的任务。
 
 ### 增量编译
 
@@ -141,15 +137,15 @@ target1 [target2 ...]: [pre-req-1 pre-req-2 ...]
 什么意思。比如上面的示例，当执行
 
 ```shell
-$ make main.out 
+(base) ➜ make main.out 
 ```
 
 试图生成 `main.out` 产出时，会检查这个任务的依赖文件 `main.c` 是否有修改过。
 
-比如前面我们已经执行过该任务产生过 `main.out`。再次执行时，会得到如下提示：
+前面我们已经执行过该任务产生过 `main.out`。再次执行时，会得到如下提示：
 
 ```shell
-$ make main.out 
+(base) ➜ make main.out 
 make: Nothing to be done for 'main.out'.
 ```
 
@@ -171,9 +167,9 @@ return 0;
 再次执行 `make main.out` 会发现任务正常执行并产生了新的输出，
 
 ```shell
-$ make main.out
+(base) ➜ make main.out
 gcc -o main.out main.c
-$ ./main.out
+(base) ➜ ./main.out
 hello ucore!⏎
 ```
 
@@ -190,7 +186,7 @@ hello ucore!⏎
 拿这里的 `all` 来说，当我们执行 `make` 或 `make all` 时，得到：
 
 ```shell
-$ make
+(base) ➜ make
 make: Nothing to be done for 'all'.
 ```
 
@@ -214,13 +210,13 @@ rm main.out
 再次执行：
 
 ```shell
-$ make
+(base) ➜ make
 echo "[all] done"
 [all] done
-$ make
+(base) ➜ make
 echo "[all] done"
 [all] done
-$ make main.out
+(base) ➜ make main.out
 make: `main.out' is up to date.
 ```
 
