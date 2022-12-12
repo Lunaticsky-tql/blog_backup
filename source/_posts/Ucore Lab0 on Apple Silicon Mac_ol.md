@@ -3,6 +3,7 @@ title: Ucore Lab0 on Apple Silicon Mac
 categories: 操作系统实验
 tags:
   - 操作系统
+abbrlink: 23191
 ---
 ## Ucore Lab0 on Apple Silicon Mac
 

@@ -106,7 +106,7 @@ fun_features:
   # 为文章内容中的标题添加锚图标
   # Add an anchor icon to the title on the post page
   anchorjs:
-    enable: true
+    enable: false
     element: h1,h2,h3,h4,h5,h6
     # Options: left | right
     placement: left
@@ -245,6 +245,7 @@ custom_css:
   - /css/remove-shadow.css
   - /css/zan.css
   - /css/code_fold
+  - /css/link.css
 
 # 网页访问统计
 # Analysis of website visitors

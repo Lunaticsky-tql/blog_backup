@@ -1,0 +1,15 @@
+
+
+.markdown-body a {
+    text-decoration: none;
+    color: #13618e!important;
+    border-bottom: 3px solid #d5effa;
+    box-shadow: inset 0 -3px 0 #d5effa;
+    background: transparent;
+    transition: background 150ms ease;
+
+}
+.markdown-body a:hover, .markdown-body a:focus {
+    text-decoration: none;
+    background: #d5effa;
+  }

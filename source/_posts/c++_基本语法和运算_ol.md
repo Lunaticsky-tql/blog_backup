@@ -3,9 +3,10 @@ title: c++_基本语法和运算
 categories: 笔记
 tags:
   - C++
-abbrlink: 64911
 ---
 ## C++回顾复习
+
+<div class="note note-info">注：此系列内容仅供应对C++程序设计基础笔试使用。</div>
 
 ### 认识C++
 
@@ -13,11 +14,11 @@ abbrlink: 64911
 
 main不是C++中的保留字。因此`int main;`在C++中合法。
 
-<p class="note note-secondary">下列哪个是C++语言的合法的字符常量
+<div class="note note-secondary">下列哪个是C++语言的合法的字符常量
 "0"
 '054’
 ‘\x89'
-‘\092’</p>
+‘\092’</div>
 
 > A选项，双引号表示的是字符串常量；B选项054表示八进制整数，但是缺少转义符号\；D选项是将其后的整数092表示八进制整数，但是八进制不存在9这个数。注意，单引号表示的字符常量，可以是整数，但必须带有转义符号\，其字符常量为整数表示的ASC码对应的字符
 
@@ -33,7 +34,7 @@ main不是C++中的保留字。因此`int main;`在C++中合法。
 
 注意区分枚举类型定义和枚举类型变量定义。前者定义的数据类型，后者是定义变量。定义类型名时不应该有=
 
-<p class="note note-warning">因此 enum a=[one,two,three);是不对的</p>
+<div class="note note-warning">因此 enum a=[one,two,three);是不对的</div>
 
 还可以这样写
 
@@ -50,7 +51,7 @@ cout<<my<<' '<<your<<' '<<his<<' '<<her<<endl;
 
 使用`.length()`和`strlen()`时计算的字符串长度都不包含`\0`
 
-<p class="note note-warning">注意:+不支持两个字符串字面常量的连接,如 string word4 "hello"+"world!";</p>
+<div class="note note-warning">注意:+不支持两个字符串字面常量的连接,如 string word4 "hello"+"world!";</div>
 
 ### 运算符和表达式
 
