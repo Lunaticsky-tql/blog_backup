@@ -3,6 +3,7 @@ title: c++_基本语法和运算
 categories: 笔记
 tags:
   - C++
+abbrlink: 64911
 ---
 ## C++回顾复习
 

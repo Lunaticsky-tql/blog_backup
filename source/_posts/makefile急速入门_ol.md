@@ -16,7 +16,7 @@ abbrlink: 23557
 
 下面的过程想必接触过linux平台下的编程都应该很熟悉：
 
-示例代码*main.c*：
+新建一个示例程序*main.c*：
 
 ```c++
 #include <stdio.h>
@@ -46,7 +46,7 @@ hello world!
 
 ### 从动手做开始
 
-如果我们想用到中间代码联合编译/链接，或者有大量的源文件做不同的处理，那么敲一行一行的命令将是灾难级的。即使通过按上下箭头的方式回退命令也会浪费很多时间。`makefile`的作用便显现出来了。但是为了便于学习，从上面的最小示例开始，先动手做一下，有一个感性的认知：
+如果我们想用到中间代码联合编译/链接，或者有大量的源文件做不同的处理，那么敲一行一行的命令将是灾难级的。即使通过按上下箭头的方式回退命令也会浪费很多时间，这时`makefile`的作用便显现出来了。但是为了便于学习，从上面的最小示例开始，先动手做一下，有一个感性的认知：
 
 在与`main.c`同目录下创建文件`makefile`:
 
@@ -60,7 +60,7 @@ touch makefile
 
 ```makefile
 all:main.out
-
+  # make all
 main.out: main.c
 	# test make
 	gcc -o main.out main.c
@@ -91,19 +91,24 @@ main.out: main.c
 	gcc -o main.out main.c
 ```
 
-再试一下用`clean`把刚刚的`main.out`删掉：
+习惯上`clean`任务被定义用于清除生成的目标构建文件。在这里试一下用`clean`把刚刚的`main.out`删掉：
 
 ```shell
 (base) ➜ make clean
 rm main.out
 ```
 
-上面的三个任务中，`all` 为内置的任务名，一般一个 Makefile 中都会包含，当直接调用 `make` 后面没有跟任务名时，默认执行的就是 `all`因此`make all`可以简写为`make`。
+如果`make`后面什么都不跟，会默认只执行第一个任务。因此我们通常会在第一行定义一个依赖(习惯上叫做`all`)来使`makefile`在我们输入`make`时能够将所有需要的目标都构建出来。
+
+可以试一下：
 
 ```shell
 (base) ➜ make
 gcc -o main.out main.c
+# make all
 ```
+
+和所预料的一样。
 
 ### Make 规则
 
@@ -112,27 +117,40 @@ gcc -o main.out main.c
 定义任务的基本语法为：
 
 ```makefile
-target1 [target2 ...]: [pre-req-1 pre-req-2 ...]
+target [target2 ...]: [pre-req-1 pre-req-2 ...]
 	[command1
 	 command2
 	 ......]
 ```
 
-上面的形式也可称作是一条编译规则（rule）。
-
 其中，
 
-- `target` 为任务名或文件产出。如果该任务不产出文件，则称该任务为 `Phony Targets`。`make` 内置的 `phony targets` 有 `all`, `install` 及 `clean` 等，这些任务都不实际产出文件，一般用来执行一些命令。
-- `pre-req123...` 这些是依赖项，即该任务所需要的外部输入，这些输入可以是其他文件，也可以是其他任务产出的文件。
+- `target` 为任务名或文件产出。从上面的例子可以看出，`target`可以是一个目标文件(如`main.out`)，也可以是一个执行文件，还可以是一个标签（如`all`，`clean`)等。
+- `pre-req123...` 这些是依赖项，即该任务所需要的外部输入，这些输入可以是已有的文件，也可以是其他任务产出的文件。
 - `command` 为该任务具体需要执行的 shell 命令。
 
-### 任务间的依赖
+因此简单的说，我们把想生成的文件或者想执行的命令名写到冒号前面，把生成的目标文件依赖文件写到冒号后面，下面`tab`对齐写想执行的命令就可以了。
 
-前面调用 `all` 的效果等同于调用 `main.out` 任务，因为 `all` 的输入依赖为 `main.out` 文件。Make 在执行任务前会先检查其输入的依赖项，执行 `all` 时发现它依赖 `main.out` 文件，于是本地查找，发现本地没有，再从 Makefile 中查找看是否有相应任务会产生该文件，结果确实有相应任务(`main.out`对应的规则)能产生该文件，所以先执行能够产生依赖项的任务。
+
+### make是如何工作的
+
+现在来以输入`make`命令为例，简要分析make的工作过程。
+
+首先在当前目录下找名字叫“makefile”的文件；
+
+>  事实上，执行make命令时，是按照GNUmakefile、makefile、Makefile的顺序依次尝试找到存在的文件并执行。
+
+`make`执行第一条指令对应任务`all`；
+
+`all`发现其依赖`main.out`不存在，需要更新，转而去执行`main.out`对应的任务；
+
+`main.out`发现它所依赖的`main.c`不存在，需要更新，而且没有找到对应`main.c`任务，执行自己的`command`产生`main.c`；
+
+`main.out`执行完了，`all`继续执行自己的`command`把注释打印了出来。
 
 ### 增量编译
 
-使用 Makefile 进行编译有个好处是，在执行任务时，它会先检查依赖项是否比需要产出的文件新，如果说依赖项更新，则说明我们需要产出的目标文件属于过时的产物，需要重新生成。
+其实上面说的还不是很严谨。准确的说，在执行任务时，它会先检查依赖项是否比需要产出的文件新，如果说依赖项更新(包括依赖项不存在)，则说明我们需要产出的目标文件属于过时的产物，需要重新生成。
 
 什么意思。比如上面的示例，当执行
 
@@ -148,6 +166,8 @@ target1 [target2 ...]: [pre-req-1 pre-req-2 ...]
 (base) ➜ make main.out 
 make: Nothing to be done for 'main.out'.
 ```
+
+> 有的版本的GNU make 提示的也可能是 make: 'main.out' is up to date.
 
 现在对输入文件 `main.c` 进行修改：
 
@@ -177,54 +197,50 @@ hello ucore!⏎
 
 过时的任务才会被重新执行，而未过时的会跳过，并输出相应信息。
 
-以上，Makefile 天然实现了增量编译的效果，在大型项目下会节省不少编译时间，因为它只编译过期的任务。
+Makefile 天然实现了增量编译的效果，这是使用 Makefile 进行自动化编译的最大的方便之处。在大型项目下会节省不少编译时间，因为它只编译过期的任务。
 
 ### Phony 类型任务的执行
 
-需要注意的是，phony 类型的任务永远都属于过时类型，即，每次 `make` 都会执行。因为这种类型的任务它没有文件产出，就无所谓检查，它的主体只是调用了另外的命令而以。
+上面提到，`target`既可以是文件名，也可以是标签，那么`make`怎么知道到底是指哪一种情况？有疑惑就对了。我们还是通过实验来验证这个问题：
 
-拿这里的 `all` 来说，当我们执行 `make` 或 `make all` 时，得到：
+还是使用一开始的示例，这次钻一个牛角尖：在这个目录下创建一个名叫`clean`的文件。
+
+```shell
+touch clean
+```
+
+然后再`make clean`一下，我们会看到：
+
+```shell
+(base) ➜ make clean
+make: Nothing to be done for 'clean'.
+```
+
+也就是说，`make`会将其优先视作文件。那么我们如果只是希望将其用作标签，那么应该如何解决呢？
+
+Makefile中，有一个`.PHONY`指令。[Phony](https://www.bilibili.com/video/BV1ih411e7gn/?spm_id_from=333.337.search-card.all.click&vd_source=acb594007d0011f12244c20c5476e73d)的意思是伪造的，假的。可以理解为，在Makefile中，`.PHONY`后面的target表示的也是一个伪造的target, 而不是真实存在的文件target。
+
+因此，在头部加上一行`.PHONY: clean`就可以解决这样的二义性问题。
+
+当然，即便不加`.PHONY`，将`target`用作标签的任务，也属于phony类型的任务，只是有潜在的二义性罢了。phony 类型的任务永远都属于过时类型，即，每次 `make` 都会执行。因为这种类型的任务它没有文件产出，就无所谓检查，它的主体只是调用了另外的命令而以。
+
+拿这里的 `all` 来说，当我们连续两次执行 `make` 或 `make all` 时，得到：
 
 ```shell
 (base) ➜ make
-make: Nothing to be done for 'all'.
-```
-
-这里看不出来 `all` 有没有执行，因为目前它还没有包含任何一句命令，调用 `all` 后实际执行的是它的依赖文件 `main.out` 中的任务，而因为后者已经是最新的了，所以无须执行，所以得到了如上的输出。
-
-为了验证 phony 类型任务是否每次都执行，向 `all` 及 `main.out` 中添加 `echo` 命令打印一些信息、
-
-```makefile
-all:main.out
-+	echo "[all] done"
-main.out: main.c
-
 gcc -o main.out main.c
-
-+	echo "[main.out] done"
-clean:
-
-rm main.out
+# make all
+(base) ➜ make
+# make all
 ```
 
-再次执行：
-
-```shell
-(base) ➜ make
-echo "[all] done"
-[all] done
-(base) ➜ make
-echo "[all] done"
-[all] done
-(base) ➜ make main.out
-make: `main.out' is up to date.
-```
-
-可以看到，属于 phony 类型的任务 `all` 每次都会执行其中定义的 shell 命令，而非 phony 类型的任务 `main.out` 则走了增量编译的逻辑。
+可以看到，属于 phony 类型的任务 `all` 每次都会执行其中定义的 `command`(在这里只是一行注释)，而非 phony 类型的任务 `main.out` 则走了增量编译的逻辑。
 
 ## Makefile 基本知识
 
 如果说通过上面的部分能够对`makefile`的工作方式和用途有了大概的理解，弄清楚下面的内容将能够看懂大部分`makefile`代码，并且尝试根据自己的实际情况添加或修改命令。
+
+当然，如果要深入使用，还是离不开查阅文档。这里只是抛砖引玉，仅介绍部分最常用的语法和特性。
 
 ### 变量/宏
 
@@ -280,7 +296,9 @@ clean:
 	rm $(TARGET)
 ```
 
-减少了重复代码，更加易于维护，需要修改时，改动比较小。自动变量特别是`$@`和`$^`在实际中用的比较多，建议熟记。
+减少了重复代码，更加易于维护，需要修改时，改动比较小。
+
+自动变量特别是`$@`和`$^`在实际中用的比较多，建议熟记。
 
 ### VPATH & vpath
 
@@ -499,10 +517,10 @@ $(call func, hello zhaixue.cc)
 
 如果希望进行更深入的了解可以参阅：
 
-[官网](https://www.gnu.org/software/make/)
+[GNU make官网](https://www.gnu.org/software/make/)
 
 [GCC and Make Compiling, Linking and Building C/C++ Applications](https://www3.ntu.edu.sg/home/ehchua/programming/cpp/gcc_make.html#zz-2.)
 
 以及中文教程：
 
-[宅学部落](https://www.zhaixue.cc/makefile/makefile-intro.html)
+[跟我一起写Makefile](https://seisman.github.io/how-to-write-makefile/index.html)
