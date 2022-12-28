@@ -3,7 +3,6 @@ title: 计算机网络-书面作业1
 categories: 笔记
 tags:
   - 寄网
-abbrlink: 54831
 ---
 # 计算机网络-书面作业1
 
@@ -19,28 +18,45 @@ abbrlink: 54831
 
 在统计多路复用机制中，端到端的时延具有不确定性，请简要分析影响端到端时延的主要因素。
 
+
+
 ![img](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E4%B9%A6%E9%9D%A2%E4%BD%9C%E4%B8%9A1/20221120095815944612_600_clip_image002.png)
 
 1.
+
+![image-20221228093807403](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E4%B9%A6%E9%9D%A2%E4%BD%9C%E4%B8%9A1/20221228103350003675_727_image-20221228093807403.png)
+
+![image-20221228095021089](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E4%B9%A6%E9%9D%A2%E4%BD%9C%E4%B8%9A1/20221228103353392389_877_image-20221228095021089.png)
 $$
 \mathrm{Latency_1 = PROP + TRANSP}=\frac{(4+2)\times 10^3}{2 \times 10^{8}}+\frac{10^{4} \times 8}{100\times 10^6}+\frac{10^{4} \times 8}{10\times 10^6}\\
-=3\times 10^{-5}+8\times 10^{-4}+8\times 10^{-3}=8.83\times 10^{-3}
+=3\times 10^{-5}+8\times 10^{-4}+8\times 10^{-3}=8.83\times 10^{-3}\text{s}
 $$
 可以看到传播速率主要取决于链路2的传输速度。
 
 2.
 
 
+
 $$
-\mathrm{Latency_2} =\mathrm{Latency_1}-\frac{4}{5}\frac{10^{4} \times 8}{100\times 10^6}=8.19\times 10^{-3}
+\mathrm{Latency_2} =\mathrm{Latency_1}-\frac{4}{5}\frac{10^{4} \times 8}{100\times 10^6}=8.19\times 10^{-3}\text{s}
 $$
-为什么可以这么算?因为中转路由器在接收所有分组后第一个分组还没有在链路2上传完，所以只能节省等四个分组的时间。
+为什么可以这么算?
 
+![image-20221228101441745](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E4%B9%A6%E9%9D%A2%E4%BD%9C%E4%B8%9A1/20221228103355518362_356_image-20221228101441745.png)
 
+同时也可以看出，在这个问题中，节省的时间仅取决于第一个链路的时延。因为第二条链路比较慢，所以总体上来说并没有节省太多时间。
 
-从这个问题可以看出，端到端时延的除了受链路长度客观限制影响以外，更多的不确定性来源于网络的拥塞程度，并且受瓶颈链路影响非常大。
+（3）主要因素包括：
 
++ 核心：存储转发设备中的排队时延
 
++ 路由器中的处理时间：路由决策、差错检验、分片等操作
+
++ 报文分组大小和分组数量，数据流的个数，数据流占带宽的频率，都会影响时延。 
+
++ 链路的传输速率，链路长度 
+
+排队时延是导致“不确定性“的最主要因素。
 
 ### 第二章问题
 
@@ -115,17 +131,19 @@ www.a.shifen.com是百度域名曾经的一个别名，`shifen.com`和`baidu.com
 
 在DNS域名系统中，域名解析时使用UDP协议提供的传输层服务（DNS服务器使用UDP的53端口），而UDP提供的是不可靠的传输层服务，请你解释DNS协议应如何保证可靠机制。
 
-首先，查阅了解了为什么DNS使用UDP:其实感性上就可以理解，DNS并不需要TCP所提供的全部可靠性机制，而TCP会相比UDP耗费更多的资源。当然，其实DNS 在设计之初就在区域传输中引入了 TCP 协议。
+首先，查阅了解了为什么DNS使用UDP:其实感性上就可以理解，DNS并不需要TCP所提供的全部可靠性机制，而TCP会相比UDP耗费更多的资源。当然，其实DNS 在设计之初就在区域传输中引入了 TCP 协议的可选项。
 
 关于如何保证可靠性，主要有以下几个方面:
 
-从DNS应用层本身来说，首先报文中问题的数量、回答的数量，就可以可以用来进行一定的校验，同时DNS也是有生存周期的，在生命周期过后会进行重新请求更新以保证数据的正确性.
+从DNS应用层本身来说，首先报文中问题的数量、回答的数量，就可以可以用来进行一定的校验，同时DNS也是有生存周期的，在生命周期过后会进行重新请求更新以保证数据的正确性。
 
-从可用性上来说，DNS的权威服务器也是冗余支持的.
+从可用性上来说，DNS的权威服务器也是冗余支持的。
 
 从安全性上来说，DNS脆弱性主要有两个可能的方面:一是课本中提到的DDoS攻击，当然由于缓存机制的存在很难造成实质性的危害;另外更常见的是针对缓存进行欺骗的所谓投毒攻击，现在也有DNS 安全扩展 ([DNSSEC](https://cloud.google.com/dns/docs/dnssec?hl=zh-cn))对其进行保护。
 
 当然以上几个方面和TCP从协议层面上保证的可靠性肯定不能等同而论，但足以满足实际应用是需求。
+
+> 答案就写了超时重传和差错检测，大概其实是想问如果要实现可靠机制需要增加哪些机制吧。
 
 ###### 捎带复习一下域名格式压缩
 
