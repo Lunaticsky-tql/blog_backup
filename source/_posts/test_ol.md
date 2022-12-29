@@ -1,8 +1,9 @@
 ---
 title: test
-categories: 小寄�?
+categories: 小寄巧
 tags:
   - test
-abbrlink: 63534
 ---
 aaaabbbb
+
+cccc
