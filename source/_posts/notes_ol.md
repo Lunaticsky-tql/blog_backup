@@ -63,3 +63,5 @@ meld默认使用GBK编码
 ```
 gsettings set org.gnome.meld detect-encodings "['GBK', 'UTF-8', 'ISO-8859-15', 'UTF-16']"
 ```
+
+test
