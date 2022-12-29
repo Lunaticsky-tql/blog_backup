@@ -4,7 +4,6 @@ categories: 小寄巧
 tags:
   - linux
 abbrlink: 42356
-hide: true
 ---
 ## macOS配置命令别名
 
