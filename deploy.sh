@@ -1,7 +1,7 @@
 git add .
-if [[$OSTYPE == "darwin"*]]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
     git commit -m "Backup on windows"
-elif [[$OSTYPE == "msys"]]; then
+elif [[ "$OSTYPE" == "msys" ]]; then
     git commit -m "Backup through git bash"
 else
     git commit -m "Backup on linux or OS X"
