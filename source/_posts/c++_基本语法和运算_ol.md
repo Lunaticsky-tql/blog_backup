@@ -1,6 +1,7 @@
 ---
 title: c++_基本语法和运算
 categories: 笔记
+date: 2022-11-24 10:00:00
 tags:
   - C++
 abbrlink: 64911

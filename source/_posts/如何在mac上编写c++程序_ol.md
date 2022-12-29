@@ -1,6 +1,7 @@
 ---
 title: 如何在mac上编写运行c++程序
 categories: 小寄巧
+date: 2022-9-30 10:00:00
 tags:
   - C++
   - 环境配置

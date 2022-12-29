@@ -1,6 +1,7 @@
 ---
 title: 编译原理一二章
 categories: 笔记
+date: 2022-11-18 10:00:00
 tags:
   - 编译原理
 abbrlink: 34738

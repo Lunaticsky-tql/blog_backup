@@ -1,6 +1,7 @@
 ---
 title: Ucore Lab0 on Apple Silicon Mac
 categories: 操作系统实验
+date: 2022-10-23 23:00:00
 tags:
   - 操作系统
 abbrlink: 23191

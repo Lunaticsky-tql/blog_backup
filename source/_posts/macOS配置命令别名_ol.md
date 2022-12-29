@@ -1,6 +1,7 @@
 ---
 title: macOS配置命令别名
 categories: 小寄巧
+date: 2022-10-23 23:00:00
 tags:
   - linux
 abbrlink: 42356

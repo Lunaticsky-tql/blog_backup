@@ -1,6 +1,7 @@
 ---
 title: 体系结构-cache
 categories: 作业
+date: 2022-11-30 10:00:00
 tags:
   - 体系结构
 abbrlink: 64660

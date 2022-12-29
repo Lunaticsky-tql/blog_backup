@@ -1,6 +1,7 @@
 ---
 title: 编译原理-词法分析
 categories: 笔记
+date: 2022-11-20 10:00:00
 tags:
   - 编译原理
 abbrlink: 6004

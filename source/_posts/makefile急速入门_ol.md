@@ -1,6 +1,7 @@
 ---
 title: makefile急速入门
 categories: 小寄巧
+date: 2022-12-11 10:00:00
 tags:
   - 环境配置
 abbrlink: 23557

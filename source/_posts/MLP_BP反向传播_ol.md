@@ -1,6 +1,7 @@
 ---
 title: MLP_BP反向传播
 categories: 作业
+date: 2022-12-10 10:00:00
 tags:
   - 机器学习
 abbrlink: 43013
