@@ -178,10 +178,6 @@ A
 
 ![image-20221018193551401](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/20221019110843340452_876_image-20221018193551401.png)
 
-![image-20221031161210652](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20221031161210652.png)
-
-![image-20221031161504084](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20221031161504084.png)
-
 ![image-20221018205754448](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/20221019110847145883_201_image-20221018205754448.png)
 
 > D.其他线程对此不可见

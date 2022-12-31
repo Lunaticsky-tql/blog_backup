@@ -1,10 +1,10 @@
 ---
 title: MLP_BP反向传播
 categories: 作业
-date: 2022-12-10 10:00:00
 tags:
   - 机器学习
 abbrlink: 43013
+date: 2022-12-31 17:11:51
 ---
 # MLP_BP反向传播
 
@@ -30,7 +30,7 @@ $$
 
 以经典的手写体识别任务为例，说明本次实验推导所用符号的含义：
 
-![image-20221124210535110](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/MLP_BP%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/20221124231353617444_705_image-20221124210535110.png)
+![](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/MLP_BP%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/20221231171137685205_418_image-20221231170939828.png)
 
 其中$\sigma$为激活函数，此处使用sigmoid函数即
 
@@ -110,7 +110,7 @@ $c$为类的个数，比如手写体识别中为10，数字$j$对应于类$j+1$�
 
 阅读下面的求解过程时建议将下图固定在屏幕上。
 
-![image-20221124210539379](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/MLP_BP%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/20221124231401909241_717_image-20221124210539379.png)
+![](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/MLP_BP%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/20221231171137685205_418_image-20221231170939828.png)
 
 #### 最后一层
 

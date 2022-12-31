@@ -1,11 +1,12 @@
 ---
 title: Ucore Lab0 on Apple Silicon Mac
 categories: 操作系统实验
-date: 2022-10-23 23:00:00
 tags:
   - 操作系统
 abbrlink: 23191
+date: 2022-12-31 17:17:37
 ---
+
 ## Ucore Lab0 on Apple Silicon Mac
 
 ### 介绍
@@ -30,7 +31,7 @@ brew install qemu
 
 按照网上的解决方案，我安装了`macport`，并
 
-```
+```shell
 sudo port -v selfupdate
 sudo port install i386-elf-gcc
 ```
@@ -69,6 +70,7 @@ git config --global --add safe.directory 报错信息中homebrew-cask路径
 这时尝试qemu生成ucore的dmg，发现提示`i386-elf-gcc`找不到。这才注意到通过homebrew下载的是`x86_64-elf-gcc`。
 
 经过搜索，得知在make时需要添加`make GCCPREFIX=x86_64-elf-`指定交叉编译工具。这时可以高兴的看到控制台闪烁，执行也很顺利。
+
 
 ### 执行
 
