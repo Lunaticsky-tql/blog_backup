@@ -4,7 +4,7 @@ categories: 操作系统实验
 tags:
   - 操作系统
 abbrlink: 23191
-date: 2022-12-31 17:17:37
+date: 2022-9-30 17:17:37
 ---
 
 ## Ucore Lab0 on Apple Silicon Mac
