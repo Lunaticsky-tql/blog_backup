@@ -1,10 +1,8 @@
 ---
 title: macOS配置命令别名
 categories: 小寄巧
-date: 2022-10-23 23:00:00
 tags:
   - linux
-abbrlink: 42356
 ---
 ## macOS配置命令别名
 
@@ -69,3 +67,16 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ```
 
 在`.zshrc`中配置`alias`，`source`保存即可，里面还可以配置其他实用的配置。[这个博客](https://mrseawave.github.io/blogs/articles/2021/08/29/oh-my-zsh/)有较详细叙述。
+
+## windows的git bash设置永久别名
+
+```shell
+cd /etc/profile.d
+vim aliases.sh # 编辑aliases文件
+```
+
+![image-20230128114429306](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/macOS%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E5%88%AB%E5%90%8D/20230128114558552930_510_image-20230128114429306.png)
+
+文件中已经给出了一些实例，按需添加即可，比如可以将常用的脚本添加进来。
+
+之后重启终端即可。
