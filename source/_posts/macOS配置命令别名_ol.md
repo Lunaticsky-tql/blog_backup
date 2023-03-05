@@ -3,6 +3,7 @@ title: macOS配置命令别名
 categories: 小寄巧
 tags:
   - linux
+abbrlink: 42356
 ---
 ## macOS配置命令别名
 
@@ -71,8 +72,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ## windows的git bash设置永久别名
 
 ```shell
-cd /etc/profile.d
-vim aliases.sh # 编辑aliases文件
+vim /etc/profile.d/aliases.sh # 编辑aliases文件
 ```
 
 ![image-20230128114429306](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/macOS%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E5%88%AB%E5%90%8D/20230128114558552930_510_image-20230128114429306.png)
