@@ -1,3 +1,10 @@
+---
+title: 使用frp内网穿透远程访问Vmware虚拟机
+categories: 小寄巧
+tags:
+  - 环境配置
+abbrlink: 18710
+---
 # 使用frp内网穿透远程访问Vmware虚拟机
 
 ## 为什么需要内网穿透功能
@@ -62,4 +69,3 @@ RestartSec=5
 [Install]
 WantedBy = multi-user.target
 ```
-
