@@ -193,7 +193,7 @@ where not exists (select
 *
 from goods
 where shelf.id=e1.shelf.id and
-goods_name&lt;&gt;e1.goods_name);
+goods_name<>e1.goods_name);
 ```
 
 5.聚合查询
@@ -204,7 +204,7 @@ goods_name&lt;&gt;e1.goods_name);
 select shelf_id,count(*)
 from goods
 group by shef_id
-having count(*)&gt; 10;
+having count(*)>10;
 ```
 
 
