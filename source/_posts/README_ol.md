@@ -1,8 +1,9 @@
 ---
-title: QLIon
+title: QLion代码编辑器
 categories: 作业
 tags:
   - C++
+abbrlink: 38550
 ---
 # 高级语言程序设计实验报告
 
