@@ -3,6 +3,7 @@ title: C++运算符重载
 categories: 笔记
 tags:
   - C++
+abbrlink: 53807
 ---
 # C++运算符重载
 
