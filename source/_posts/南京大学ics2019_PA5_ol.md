@@ -3,6 +3,7 @@ title: 南京大学ics2019_PA5
 categories: 作业
 tags:
   - 系统设计
+abbrlink: 27788
 date: 2023-06-01 23:59:38
 ---
 # PA5实验报告
