@@ -3,8 +3,6 @@ title: 南京大学ics2019_PA4
 categories: 作业
 tags:
   - 系统设计
-abbrlink: 6069
-date: 2023-06-01 23:56:06
 ---
 # PA4实验报告
 
@@ -1012,9 +1010,9 @@ typedef union {
 
 结合PA3的前两个必答题，在此以内核进程`hello`为例，将上下文切换的整个细节总结如下:
 
-[excalidraw](https://excalidraw.com/#json=SKS2GLn5PZejFW5Sl80Vx,P_LvNulzauRJ4pbzz_3O9g)
+[excalidraw](https://excalidraw.com/#json=5d-KBtTMJBi6eNu4fkmrg,jm4Dt4nkNF8tgd7ix_B7ng)
 
-![trap](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235600805122_688_trap-16856336998032.png)
+![trap1](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230602001029829434_199_trap1.png)
 
 ###### 分时多任务的具体过程 
 
