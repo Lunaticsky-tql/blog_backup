@@ -3,6 +3,7 @@ title: 南京大学ics2019_PA4
 categories: 作业
 tags:
   - 系统设计
+abbrlink: 44109
 ---
 # PA4实验报告
 
