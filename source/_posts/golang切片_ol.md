@@ -1,10 +1,11 @@
 ---
-title: golang切片
+title: Go 语言入门指南：slice使用解析
 categories: 笔记
 tags:
   - Go
+abbrlink: 29701
 ---
-# Go 语言入门指南：slice使用解析|青训营
+# Go 语言入门指南：slice使用解析
 
 在讲slice使用之前，先来看一下切片的结构, 理解slice的底层存储对得心应手的使用slice来说是必须的。切片的数据结构是一个结构体, 结构体内有三个参数, pointer指向底层数组中的某个元素, length表示长度, cap表示最大容量。
 
