@@ -1,5 +1,5 @@
 ---
-title: Go高质量编程实践
+title: Go 高质量编程实践
 categories: 笔记
 tags:
   - Go
