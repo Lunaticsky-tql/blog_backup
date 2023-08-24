@@ -3,6 +3,7 @@ title: Go 刷题快速入门
 categories: 笔记
 tags:
   - Go
+abbrlink: 41936
 ---
 # Go 刷题快速入门
 
