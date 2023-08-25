@@ -3,6 +3,7 @@ title: 重新认识HTTP(一)
 categories: 笔记
 tags:
   - 寄网
+abbrlink: 64429
 ---
 # 重新认识HTTP(一)
 
