@@ -1,0 +1,11 @@
+# Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
+url: http://Lunaticsky-tql.github.io
+# The window style which shows when you select tags
+# Options: square, scrollable
+tag_option_ui: square
+# Turn on the random sleep time when uploading when encountering the request limitation from GitHub
+random_sleep_uploading: false
+windows:
+    initial_browse_dir: 'C:\Users\LENOVO\Desktop'
+linux:
+    initial_browse_dir: '/Users/tianjiaye/Documents'
