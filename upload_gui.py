@@ -1,4 +1,5 @@
 import math
+import sys
 import time
 from queue import Queue
 from threading import Thread
@@ -28,7 +29,7 @@ if platform.system().lower() == 'windows':
 else:
     is_windows = False
 
-blog_base_dir = os.getcwd()
+blog_base_dir =sys.path[0]
 blog_dir = os.path.join(blog_base_dir, "source", "_posts")
 blog_theme = "fluid"
 blog_img_dir = os.path.join(blog_base_dir, "themes", blog_theme, "source", "img")
@@ -36,9 +37,9 @@ category_list = []
 tag_list = []
 
 code_pattern = re.compile(r'```(.+?)\n([\s\S]*?)\n```')
-with open('uploader_config.yml', 'r', encoding='utf-8') as uploader_config_file:
+with open(os.path.join(blog_base_dir,"uploader_config.yml"), 'r', encoding='utf-8') as uploader_config_file:
     uploader_config = yaml.safe_load(uploader_config_file)
-with open('github_config.yml', 'r', encoding='utf8') as github_config_file:
+with open(os.path.join(blog_base_dir,"github_config.yml"), 'r', encoding='utf8') as github_config_file:
     github_config = yaml.safe_load(github_config_file)
 headers = {
     'Authorization': 'token ' + github_config['token']

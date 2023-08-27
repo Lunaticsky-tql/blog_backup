@@ -19,6 +19,8 @@ alias v="vim"
 
 ### 永久别名
 
+**写在前面：知其然也要知其所以然，下面的命令不要急着拷贝运行一把梭！**
+
 由于现在的macOS默认是采用的`zsh`而不是`bash`，因此配置文件路径为
 
 ```shell
@@ -68,6 +70,20 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ```
 
 在`.zshrc`中配置`alias`，`source`保存即可，里面还可以配置其他实用的配置。[这个博客](https://mrseawave.github.io/blogs/articles/2021/08/29/oh-my-zsh/)有较详细叙述。
+
+所以，安装插件后可以(不安装插件也可以在用户根目录新建这个文件)
+
+```shell
+vim ~/.zshrc
+```
+
+然后添加自己想添加的别名，如`alias v="vim"`
+
+最后
+
+```shell
+source ~/.zshrc
+```
 
 ## windows的git bash设置永久别名
 

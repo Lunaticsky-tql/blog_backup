@@ -25,19 +25,23 @@ date: 2023-08-26 16:06:51
 
 **HTTP/1.1缺省为持久连接**
 
-- 在相同的TCP连接上服务器接收请求、给出响应；再接收请求、 给出响应；响应后保持连接
+在 HTTP/1.1 [[RFC 2616\]](https://link.zhihu.com/?target=https%3A//tools.ietf.org/html/rfc7540) 中, Connection: keep-alive 被 IETF 正式标准化, 并默认开启 keep-alive, 当不需要 TCP 连接维持时需要显式的在 Header 中设置 Connection: close
 
-HTTP/1.1支持流水线机制
+**HTTP/1.1支持流水线机制**
 
-- 需要按序响应
+在 HTTP/1.0 中, HTTP 请求都是完全阻塞的, 即客户端只有在上一次 HTTP 请求完成以后才可以继续发送下一次 HTTP 请求,  HTTP/1.1 对此作了改进, 允许 pipelining 方式的调用, 即客户端可以在没有收到 Response 的情况下连续发送多次  HTTP Request。
 
-经历较少的慢启动过程，减少往返时间
+但是，服务端依旧是顺序对请求进行处理, 并按照收到请求的次序予以返回, 也就说在 HTTP/1.1 中 HTTP 请求的处理仍然是线性的。这就是所谓的队头阻塞问题。
 
-- 降低响应时间
+举个例子，在流水线机制下即便 Client 连续发送了多个 HTTP Request, 若其中`image1.jpg`因为某些原因服务器响应非常耗时, 则在其后的 Request 都处于排队阻塞的状态，这样以来即便客户给了服务器一堆请求，服务器还是单线程的，挨个相应每一个图片，流水线的意义也就不大了。
+
+后面会讲到HTTP2通过流的方式解决了这个问题。
 
 下面以客户端获取一个含有两个图片的网页为例说明比较HTTP1.0和HTTP1.1：
 
 ![image-20230825212013023](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP%E4%BA%8C/20230825233745413813_440_image-20230825212013023.png)
+
+
 
 ## 连接状态保存
 
@@ -173,7 +177,7 @@ cookie=value; max-age=3600
 
 Session存储在服务器的内存中，根据业务需要，Session可以在内存中，也可以持久化到file，数据库，memcache，redis等。客户端只保存sessionid到cookie中，而不会保存session，session销毁只能通过invalidate或超时，关掉浏览器并不会关闭session。
 
-### HTTP认证
+## HTTP认证
 
 #### 基本认证
 
