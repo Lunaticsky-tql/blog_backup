@@ -599,6 +599,7 @@ class Uploader(ttk.Frame):
 
     def upload_to_github(self, md_path, md_title, config, is_hide=False):
         """Upload the file to GitHub and my blog"""
+        md_title = md_title.replace("\"", "").replace("(", "").replace(")", "")
         with open(md_path, 'r', encoding='utf-8') as md:
             text = md.read()
             is_dir_exists = self.upload_dir(md_title, text)
