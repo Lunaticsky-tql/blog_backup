@@ -23,17 +23,17 @@ abbrlink: 16720
 
 ### 倒排索引优化改进
 
-![image-20220922093753305](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143627586751_718_image-20220922093753305.png)
+![image-20220922093753305](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205858253275_753_20221013143627586751_718_image-20220922093753305.png)
 
 为了减少字符串所占用的内存，我们可以将键进行序列化。
 
 Assume we have 1GB of text 800,000 documents 100 million tokens （Reuters-RCV1 collection）
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143628933413_566_image-20220922094643439.png" alt="image-20220922094643439" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205859512816_862_20221013143628933413_566_image-20220922094643439.png" alt="image-20220922094643439" width="50%" height="50%" />
 
 （假设是用int存docID）
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143629914308_735_image-20220922095054178.png" alt="image-20220922095054178" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205900610358_356_20221013143629914308_735_image-20220922095054178.png" alt="image-20220922095054178" width="50%" height="50%" />
 
 16*1.4
 
@@ -51,37 +51,37 @@ Assume we have 1GB of text 800,000 documents 100 million tokens （Reuters-RCV1 
 
 1、将文档中的词进行id的映射，这里可以用hash的方法去构造
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143631068932_652_image-20220922100056227.png" alt="image-20220922100056227" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205902036538_244_20221013143631068932_652_image-20220922100056227.png" alt="image-20220922100056227" width="50%" height="50%" />
 
 当然，可以先把全部文档读一遍构建映射，再分块构建倒排索引，也可以在构建每一块的倒排索引的时候边构建边映射。
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143632700535_256_image-20220922101046446.png" alt="image-20220922101046446" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205903463513_670_20221013143632700535_256_image-20220922101046446.png" alt="image-20220922101046446" width="50%" height="50%" />
 
 2、将文档分割成大小相等的部分。分治
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143634153162_211_image-20220922095854934.png" alt="image-20220922095854934" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205904763116_686_20221013143634153162_211_image-20220922095854934.png" alt="image-20220922095854934" width="50%" height="50%" />
 
 3、将每部分按照词ID对上文档ID的方式进行排序（保证分块可以在内存里放下）
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143635299312_759_image-20220922095946828.png" alt="image-20220922095946828" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205905976403_245_20221013143635299312_759_image-20220922095946828.png" alt="image-20220922095946828" width="50%" height="50%" />
 
-![image-20220922100557902](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143636457198_361_image-20220922100557902.png)
+![image-20220922100557902](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205907157527_173_20221013143636457198_361_image-20220922100557902.png)
 
 4、将每部分排序好后的结果进行合并，最后写出到磁盘中。
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143637743125_385_image-20220922095721101.png" alt="image-20220922095721101" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205908490376_671_20221013143637743125_385_image-20220922095721101.png" alt="image-20220922095721101" width="50%" height="50%" />
 
 归并的过程中也可以分治，比如内存中只能放100个词条的总倒排索引，可以在第100个的时候写出磁盘（因为已经确定是最后结果了），从101个再继续。
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143639158715_536_image-20220922102146120.png" alt="image-20220922102146120" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205909676971_525_20221013143639158715_536_image-20220922102146120.png" alt="image-20220922102146120" width="50%" height="50%" />
 
 #### SPIMI（Single-Pass In-Memory Indexing）
 
 不作映射，其他与BSBI一样
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143640277003_250_image-20220922101959755.png" alt="image-20220922101959755" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205910771188_815_20221013143640277003_250_image-20220922101959755.png" alt="image-20220922101959755" width="50%" height="50%" />
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143641398914_475_image-20220922102104189.png" alt="image-20220922102104189" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205911947753_460_20221013143641398914_475_image-20220922102104189.png" alt="image-20220922102104189" width="50%" height="50%" />
 
 因为D显然要比T小的多
 
@@ -95,25 +95,25 @@ Assume we have 1GB of text 800,000 documents 100 million tokens （Reuters-RCV1 
 
 ##### 朴素方案一：重建索引
 
-![image-20220928141323699](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143642866848_892_image-20220928141323699.png)
+![image-20220928141323699](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205913207853_240_20221013143642866848_892_image-20220928141323699.png)
 
 ##### 朴素方案二：辅助索引
 
-![image-20220928141427687](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143644019596_168_image-20220928141427687.png)
+![image-20220928141427687](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205915431629_883_20221013143644019596_168_image-20220928141427687.png)
 
 使用辅助索引的话，一个很简便的思路是一个词建一个文档，归并便变为两个文档的合并。
 
-![image-20220928141820357](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143645445454_230_image-20220928141820357.png)
+![image-20220928141820357](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205916785627_424_20221013143645445454_230_image-20220928141820357.png)
 
 有什么缺陷？文件大小可能差距很大，且大量小文件不便于存储和对索引的快速读写（存储系统的问题）
 
-![image-20220928142759774](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143646682137_270_image-20220928142759774.png)
+![image-20220928142759774](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205917919255_546_20221013143646682137_270_image-20220928142759774.png)
 
 更大的问题，随着文档的数量变大，归并会越来越慢！
 
 
 
-![image-20220928142854979](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143647947499_639_image-20220928142854979.png)
+![image-20220928142854979](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205920273505_343_20221013143647947499_639_image-20220928142854979.png)
 
 合并时termID是有序的，归并时类似于归并排序，最坏复杂度是较大的那个索引的termID个数。而单个倒排索引合并只需要把新的list放到旧的后面就可以了，因为新的list中的docID肯定会比旧的大（就像上面图上所示）
 $$
@@ -125,13 +125,13 @@ $$
 
 无效向量
 
-![image-20220928142307585](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143649321808_563_image-20220928142307585.png)
+![image-20220928142307585](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205921700479_104_20221013143649321808_563_image-20220928142307585.png)
 
 ### 倒排索引压缩
 
 #### 一些朴素的偷懒方法
 
-![image-20220928155207922](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143650616612_634_image-20220928155207922.png)
+![image-20220928155207922](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205922962959_958_20221013143650616612_634_image-20220928155207922.png)
 
 
 
@@ -143,35 +143,35 @@ $$
 
 是一种很蠢的方法
 
- <img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143654714754_145_image-20220928152210011.png" alt="image-20220928152210011" width="50%" height="50%" />
+ <img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205924880094_389_20221013143654714754_145_image-20220928152210011.png" alt="image-20220928152210011" width="50%" height="50%" />
 
 ##### 方法二：指针
 
-![image-20220928151740804](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143655839716_271_image-20220928151740804.png)
+![image-20220928151740804](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205926029760_841_20221013143655839716_271_image-20220928151740804.png)
 
 ##### 方法二的优化：分段指针
 
-![image-20220928152418457](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143657755792_576_image-20220928152418457.png)
+![image-20220928152418457](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205927711537_423_20221013143657755792_576_image-20220928152418457.png)
 
 当然，找termID对应的词项会慢一些。
 
 ##### 采用前缀的方式
 
-![image-20220928153011321](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143659531464_413_image-20220928153011321.png)
+![image-20220928153011321](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205929015383_614_20221013143659531464_413_image-20220928153011321.png)
 
 #### 索引表压缩
 
 ##### Encoding gaps
 
-![image-20220928153421273](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143700905497_456_image-20220928153421273.png)
+![image-20220928153421273](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205930212514_131_20221013143700905497_456_image-20220928153421273.png)
 
 ##### Variable length codings
 
-![image-20220928153533933](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143702089613_543_image-20220928153533933.png)
+![image-20220928153533933](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205931738018_759_20221013143702089613_543_image-20220928153533933.png)
 
 例子：可变长UTF-8
 
-![image-20220928153849498](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143703419174_526_image-20220928153849498.png)
+![image-20220928153849498](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205934903217_281_20221013143703419174_526_image-20220928153849498.png)
 
 UTF-8 的编码规则很简单，只有二条：
 
@@ -201,11 +201,11 @@ UTF-8 的编码规则很简单，只有二条：
 
 根据[维基百科](https://en.wikipedia.org/wiki/Elias_gamma_coding)所述，gamma编码过程如下图所示。虽具体过程与课上讲述稍有不同，但原理是一样的。
 
-![image-20220930155723916](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143704774266_595_image-20220930155723916.png)
+![image-20220930155723916](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205936111502_610_20221013143704774266_595_image-20220930155723916.png)
 
 编码具体案例和解码过程。
 
-![image-20220930155802505](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143706251591_500_image-20220930155802505.png)
+![image-20220930155802505](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205937375262_217_20221013143706251591_500_image-20220930155802505.png)
 
 ### 查询优化
 
@@ -215,15 +215,15 @@ UTF-8 的编码规则很简单，只有二条：
 
 动机
 
-![image-20221005150319520](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143708733468_476_image-20221005150319520.png)
+![image-20221005150319520](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205939925179_393_20221013143708733468_476_image-20221005150319520.png)
 
 怎么选取间隔？“摔瓶子”。开根号
 
-![image-20221005150404678](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143710120784_928_image-20221005150404678.png)
+![image-20221005150404678](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205941010984_115_20221013143710120784_928_image-20221005150404678.png)
 
 实例：
 
-![image-20221005150523460](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143711476304_852_image-20221005150523460.png)
+![image-20221005150523460](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205942199865_675_20221013143711476304_852_image-20221005150523460.png)
 
 <p class="note note-info">为什么是先跳再判断，如果跳过了再倒回去，而不是比较之后再跳？后者比较次数太多，开销大，且慢。</p>
 
@@ -235,35 +235,35 @@ UTF-8 的编码规则很简单，只有二条：
 
 缺点：不支持模糊查询
 
-![image-20221005152131580](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143713258991_492_image-20221005152131580.png)
+![image-20221005152131580](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205944152423_245_20221013143713258991_492_image-20221005152131580.png)
 
 ##### B树
 
 实际使用
 
-![image-20221005152231798](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143716445073_262_image-20221005152231798.png)
+![image-20221005152231798](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205946525988_190_20221013143716445073_262_image-20221005152231798.png)
 
 #### 通配符查询支持
 
 前缀：B树天然支持
 
-![image-20221005153943805](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143718721740_938_image-20221005153943805.png)
+![image-20221005153943805](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205948024690_287_20221013143718721740_938_image-20221005153943805.png)
 
 后缀：对逆序建B树
 
-![image-20221005154022485](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143720264162_261_image-20221005154022485.png)
+![image-20221005154022485](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205949456832_729_20221013143720264162_261_image-20221005154022485.png)
 
 中间的？好像有点问题。。。
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143721509249_850_image-20221012140726185.png" alt="image-20221012140726185" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205950707639_732_20221013143721509249_850_image-20221012140726185.png" alt="image-20221012140726185" width="50%" height="50%" />
 
 #### 轮排索引
 
-![image-20221012141847402](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143722646249_170_image-20221012141847402.png)
+![image-20221012141847402](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205951813968_784_20221013143722646249_170_image-20221012141847402.png)
 
 采用B树。但通常这种方法产生的B树会非常大
 
-![image-20221012143335531](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143723834048_694_image-20221012143335531.png)
+![image-20221012143335531](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205953060880_952_20221013143723834048_694_image-20221012143335531.png)
 
 #### K-gram
 
@@ -271,11 +271,11 @@ UTF-8 的编码规则很简单，只有二条：
 
 在一定长度的字串上建索引
 
-![image-20221012143730369](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143725269033_823_image-20221012143730369.png)
+![image-20221012143730369](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205954611963_730_20221013143725269033_823_image-20221012143730369.png)
 
 查\$co,ter,er\$,\$代表起始和结束符号
 
-![image-20221012144353569](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143726834159_151_image-20221012144353569.png)
+![image-20221012144353569](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205955905050_710_20221013143726834159_151_image-20221012144353569.png)
 
 ### 拼写检查支持
 
@@ -283,7 +283,7 @@ UTF-8 的编码规则很简单，只有二条：
 
 动态规划求字符串距离？
 
-![image-20221012150059012](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143728315657_544_image-20221012150059012.png)
+![image-20221012150059012](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205957265992_890_20221013143728315657_544_image-20221012150059012.png)
 
 词项太多，算法显得有些复杂，慢
 
@@ -291,7 +291,7 @@ UTF-8 的编码规则很简单，只有二条：
 
 Jaccard distance判断相似度
 
-![image-20221012151057155](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20221013143729475948_696_image-20221012151057155.png)
+![image-20221012151057155](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B4%A2%E5%BC%95%E6%9E%84%E5%BB%BA%E3%80%81%E5%8E%8B%E7%BC%A9%E5%8F%8A%E6%9F%A5%E8%AF%A2%E6%94%AF%E6%8C%81/20230828205958320184_528_20221013143729475948_696_image-20221012151057155.png)
 
 求并集的小trick
 

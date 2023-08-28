@@ -93,26 +93,26 @@ my_hexo_test_server
 
 可以看到生成网页如下所示：
 
-![image-20221026200601767](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232042709573_203_image-20221026200601767.png)
+![image-20221026200601767](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210657935762_127_20221028232042709573_203_image-20221026200601767.png)
 
 ## Wireshark 分析TCP连接过程
 
 由于服务器在本地，选择`Loopback:lo0`即可。
 
-![image-20221026200751668](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232044366413_373_image-20221026200751668.png)
+![image-20221026200751668](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210700374694_433_20221028232044366413_373_image-20221026200751668.png)
 
 首先我们需要尝试找到TCP建立连接三次握手的位置。刷新网页，并输入`http`进行过滤，以隐藏其他无关的数据包。
 
-![image-20221028173616526](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232045903947_824_image-20221028173616526.png)
+![image-20221028173616526](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210701652648_872_20221028232045903947_824_image-20221028173616526.png)
 找到第一个`GET`数据包。右键选中，`Follow stream`——`TCPstream`，显示握手信息。
 
-![image-20221028174135897](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232048121868_131_image-20221028174135897.png)
+![image-20221028174135897](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210702797226_521_20221028232048121868_131_image-20221028174135897.png)
 
 ### 三次握手
 
 下面展示了三次握手的过程，并结合握手信息对照报文段进行分析：
 
-![image-20221028175332107](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232049728449_411_image-20221028175332107.png)
+![image-20221028175332107](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210704135079_964_20221028232049728449_411_image-20221028175332107.png)
 
 
 
@@ -120,7 +120,7 @@ my_hexo_test_server
 
 捕获的第一段报文如下所示：
 
-![image-20221028174837176](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232051494572_180_image-20221028174837176.png)
+![image-20221028174837176](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210705714512_581_20221028232051494572_180_image-20221028174837176.png)
 
 博客示例网页运行在`localhost:4000`，目的端口号匹配。同时可以看到Flag字段值为2，也即第二位SYN字段为1，其余全0。
 
@@ -128,7 +128,7 @@ my_hexo_test_server
 
 第二段报文如下所示：
 
-![image-20221028175454476](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232054080895_215_image-20221028175454476.png)
+![image-20221028175454476](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210707089949_308_20221028232054080895_215_image-20221028175454476.png)
 
  从端口号可以看出，这是服务器发给客户的。Flag字段为ACK和SYN。这次我们注意一下确认序列号的值。从[Wireshark Wiki](https://wiki.wireshark.org/TCP_Relative_Sequence_Numbers)我们可以了解到，考虑到可读性其在列表中采用了相对序列号。在详细信息中可以看到原始(`raw`)序列号。我们可以看到：
 
@@ -140,7 +140,7 @@ my_hexo_test_server
 
 同样可以验证ACK(ack=k+1）。
 
-![image-20221028180628702](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232056001837_289_image-20221028180628702.png)
+![image-20221028180628702](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210708887036_756_20221028232056001837_289_image-20221028180628702.png)
 
 也可对照查看右侧的十六进制报文源码。
 
@@ -176,11 +176,11 @@ my_hexo_test_server
 
 左边的实线连起来的表示同一次会话发生的各个阶段。沿着这条线走到最底端，可以看到四次挥手的过程。
 
-![image-20221028181245513](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232058311718_623_image-20221028181245513.png)
+![image-20221028181245513](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210711202693_873_20221028232058311718_623_image-20221028181245513.png)
 
 结合TCP连接关闭的过程，可以看到第81到84个报文是挥手的过程。分析方式与握手类似，在此不再赘述。
 
-![image-20221028181501786](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232100061679_207_image-20221028181501786.png)
+![image-20221028181501786](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210712345252_558_20221028232100061679_207_image-20221028181501786.png)
 
 另外，其实两端中的任何一个都可以主动提出关闭连接。只是通常情况下是客户端。
 
@@ -200,15 +200,15 @@ A并不知道B有没有正确的收到了A的ACK。正常情况下什么也不�
 
 <p class="note note-primary">一定要四次挥手吗？</p>
 
-![image-20221102103437478](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221102112611088782_354_image-20221102103437478.png)
+![image-20221102103437478](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210713552048_108_20221102112611088782_354_image-20221102103437478.png)
 
-![image-20221102103222135](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221102112614834681_752_image-20221102103222135.png)
+![image-20221102103222135](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210714695223_822_20221102112614834681_752_image-20221102103222135.png)
 
 客户端和服务端的生命周期总结如下：
 
-![image-20221028181827531](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232101334092_481_image-20221028181827531.png)
+![image-20221028181827531](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210715568267_759_20221028232101334092_481_image-20221028181827531.png)
 
-![image-20221028181835974](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232103339683_762_image-20221028181835974.png)
+![image-20221028181835974](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210717454207_339_20221028232103339683_762_image-20221028181835974.png)
 
 ### 传输窗口
 
@@ -218,27 +218,27 @@ A并不知道B有没有正确的收到了A的ACK。正常情况下什么也不�
 
 这对应于Wireshark中的Caculated window size，如下图所示。
 
-![image-20221028184429901](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232105453916_456_image-20221028184429901.png)
+![image-20221028184429901](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210719179687_261_20221028232105453916_456_image-20221028184429901.png)
 
 
 
 ## Http传输分析
 
-![image-20221028190921283](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232107541741_783_image-20221028190921283.png)
+![image-20221028190921283](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210720298497_440_20221028232107541741_783_image-20221028190921283.png)
 
 以下是前三个HTTP传输报文。
 
-![image-20221028191110711](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232109214457_454_image-20221028191110711.png)
+![image-20221028191110711](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210721857050_893_20221028232109214457_454_image-20221028191110711.png)
 
 查看第一次客户端向服务器发送GET请求，含有浏览器请求头以及请求行。GET方法没有请求体。
 
-![image-20221028190632604](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232111055813_462_image-20221028190632604.png)
+![image-20221028190632604](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210723036742_240_20221028232111055813_462_image-20221028190632604.png)
 
 从右边解析出的明文可以看出HTTP是采用ASCII码进行传输的。
 
 之后请求成功，返回200状态码及HTML。
 
-![image-20221028191208877](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232113806376_581_image-20221028191208877.png)
+![image-20221028191208877](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210725379619_811_20221028232113806376_581_image-20221028191208877.png)
 
 分析文本的十六进制编码：
 
@@ -257,12 +257,12 @@ A并不知道B有没有正确的收到了A的ACK。正常情况下什么也不�
 
 给第二行每个字节前加%后用UrlDecode解码，可以还原出我的名字。
 
-![image-20221028193717733](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232117064239_862_image-20221028193717733.png)
+![image-20221028193717733](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210728206705_896_20221028232117064239_862_image-20221028193717733.png)
 
 再之后请求图片：
 
 同时我们可以看到图片信息也请求成功。
 
-![image-20221028194251309](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20221028232118651904_458_image-20221028194251309.png)
+![image-20221028194251309](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C_Wireshark%E5%88%86%E6%9E%90%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B/20230828210729172278_543_20221028232118651904_458_image-20221028194251309.png)
 
 > 在 `vim` 内调用 `:%!xxd` 命令，其实就是调用系统的 `xxd` 命令，对打开的内容进行16进制转换。

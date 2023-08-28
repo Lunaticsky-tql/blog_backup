@@ -1,6 +1,7 @@
 ---
 title: 软件工程-需求分析作业
 categories: 作业
+date: 2023-03-22 10:00:00
 tags:
   - 软件工程
 abbrlink: 53897
@@ -69,7 +70,7 @@ abbrlink: 53897
 
 ### 系统总业务流程图及其描述
 
-![image-20230227190111733](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E4%BD%9C%E4%B8%9A-2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A/20230409235202901387_783_image-20230227190111733.png)
+![image-20230227190111733](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E4%BD%9C%E4%B8%9A/20230828210646449880_738_20230409235202901387_783_image-20230227190111733.png)
 
 - 学生
 
@@ -89,7 +90,7 @@ abbrlink: 53897
 
 下面以主修选课为例，说明选课子业务的流程：
 
-![image-20230302191509591](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E4%BD%9C%E4%B8%9A-2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A/20230409235205419738_553_image-20230302191509591.png)
+![image-20230302191509591](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E4%BD%9C%E4%B8%9A/20230828210649539046_353_20230409235205419738_553_image-20230302191509591.png)
 
 
 
@@ -110,13 +111,13 @@ abbrlink: 53897
 
 ### 数据流图
 
-![image-20230307231017064](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E4%BD%9C%E4%B8%9A-2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A/20230409235207392543_716_image-20230307231017064.png)
+![image-20230307231017064](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E4%BD%9C%E4%B8%9A/20230828210650750888_483_20230409235207392543_716_image-20230307231017064.png)
 
 ### 数据字典
 
 下面采用数据库表的方式描述项目主要流程中使用的数据字典：
 
-![image-20230308091548193](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E4%BD%9C%E4%B8%9A-2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A/20230409235209631863_631_image-20230308091548193.png)
+![image-20230308091548193](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E4%BD%9C%E4%B8%9A/20230828210652278097_565_20230409235209631863_631_image-20230308091548193.png)
 
 ```sql
 SET NAMES utf8mb4;

@@ -25,7 +25,7 @@ abbrlink: 30344
 
 #### 2.1 概念模型ER图
 
-![image-20220919004148336](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%9F%E6%9C%AB%E5%B7%A5%E7%A8%8B%E4%BD%9C%E4%B8%9A/20220919004325018293_610_image-20220919004148336.png)
+![image-20220919004148336](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%9C%9F%E6%9C%AB%E5%B7%A5%E7%A8%8B%E4%BD%9C%E4%B8%9A%E8%AE%BE%E8%AE%A1/20230828211224660894_271_20220919004325018293_610_image-20220919004148336.png)
 
 #### 2.2 关系模式转换
 
@@ -215,11 +215,11 @@ having count(*)>10;
 
 
 
-![image-20220415222750452](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%9F%E6%9C%AB%E5%B7%A5%E7%A8%8B%E4%BD%9C%E4%B8%9A/20220919004326633367_468_image-20220415222750452.png)
+![image-20220415222750452](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%9C%9F%E6%9C%AB%E5%B7%A5%E7%A8%8B%E4%BD%9C%E4%B8%9A%E8%AE%BE%E8%AE%A1/20230828211230228848_283_20220919004326633367_468_image-20220415222750452.png)
 
 #### 3.2 转为关系模型
 
-![image-20220415222820109](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%9F%E6%9C%AB%E5%B7%A5%E7%A8%8B%E4%BD%9C%E4%B8%9A/20220919004327928426_899_image-20220415222820109.png)
+![image-20220415222820109](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%9C%9F%E6%9C%AB%E5%B7%A5%E7%A8%8B%E4%BD%9C%E4%B8%9A%E8%AE%BE%E8%AE%A1/20230828211231407880_506_20220919004327928426_899_image-20220415222820109.png)
 
 #### 3.3 生成SQL语句
 

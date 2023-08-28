@@ -12,7 +12,7 @@ date: 2023-05-23 23:08:42
 
 ## 关于PA究竟整了个什么的问题
 
-![image-20230417214640107](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225355617758_115_image-20230417214640107.png)
+![image-20230417214640107](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210933443509_251_20230523225355617758_115_image-20230417214640107.png)
 
 ## 一阶段
 
@@ -28,7 +28,7 @@ date: 2023-05-23 23:08:42
 fatal error: bits/libc-header-start.h: No such file or directory
 ```
 
-![image-20230416202629539](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225359236876_857_image-20230416202629539.png)
+![image-20230416202629539](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210935594767_446_20230523225359236876_857_image-20230416202629539.png)
 
 解决方法:
 
@@ -62,15 +62,15 @@ sudo apt-get install gcc-multilib
 
 可以看到第一个我们需要实现的指令是`call`指令。
 
-![image-20230416203550556](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225403430212_787_image-20230416203550556.png)
+![image-20230416203550556](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210936480131_528_20230523225403430212_787_image-20230416203550556.png)
 
 首先在`nemu/src/isa/x86/exec/all-instr.h`把需要实现的指令声明。
 
-![image-20230416230556955](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225407881850_360_image-20230416230556955.png)
+![image-20230416230556955](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210937636344_421_20230523225407881850_360_image-20230416230556955.png)
 
 ##### call_prepare
 
-![image-20230416215526140](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225409905724_209_image-20230416215526140.png)
+![image-20230416215526140](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210938436096_558_20230523225409905724_209_image-20230416215526140.png)
 
 这里顺带把后面几个可能用到的也填了:
 
@@ -86,7 +86,7 @@ sudo apt-get install gcc-multilib
 
 这个指令学长贴心的给出了勘误:
 
-![image-20230416213829809](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225414254273_952_image-20230416213829809.png)
+![image-20230416213829809](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210939643621_797_20230523225414254273_952_image-20230416213829809.png)
 
 填`opcode_table`
 
@@ -113,21 +113,21 @@ static inline void rtl_push(const rtlreg_t* src1) {
 
 错误代码:
 
-![image-20230416233834598](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225417105196_820_image-20230416233834598.png)
+![image-20230416233834598](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210940913969_388_20230523225417105196_820_image-20230416233834598.png)
 
 于是开始寻找这个函数的原型。
 
 这是2018版
 
-![image-20230416233012943](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225419412587_384_image-20230416233012943.png)
+![image-20230416233012943](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210941888400_540_20230523225419412587_384_image-20230416233012943.png)
 
 2019版在Vsocde找了半天没找到，看到唯一一个框架代码给出的示例，发现含义确实和预想的不一样，最后一个参数才是长度。
 
-![image-20230416233317635](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225422546936_285_image-20230416233317635.png)
+![image-20230416233317635](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210943221334_840_20230523225422546936_285_image-20230416233317635.png)
 
 当然这个函数原型也是能找到的，只是因为`rtl-wrapper.h`做了包装，Vscode没法直接跳转而已。这个因为是体系结构抽象层的接口，在`nemu/include/rtl/rtl.h`里面。
 
-![image-20230416233126823](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225426665320_827_image-20230416233126823.png)
+![image-20230416233126823](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210944258582_792_20230523225426665320_827_image-20230416233126823.png)
 
 ##### sub
 
@@ -154,7 +154,7 @@ make_EHelper(sub) {
 
 框架代码的`make_group`就是干这事的，不加跑不起来，因为译码的时候要用。
 
-![image-20230417211556676](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225429817644_186_image-20230417211556676.png)
+![image-20230417211556676](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210945133885_542_20230523225429817644_186_image-20230417211556676.png)
 
 ```C++
 /* 0x80, 0x81, 0x83 */
@@ -292,7 +292,7 @@ J指令看上去已经实现好了，但是运行还是不正确。仔细想了�
 
 可以看到现在`call`指令已经能够运行了。
 
-![image-20230417193049419](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225433985560_176_image-20230417193049419.png)
+![image-20230417193049419](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210946163716_943_20230523225433985560_176_image-20230417193049419.png)
 
 可以看到`push`的实现并不完善，它没有识别到后面的立即数。通过操作码定位到发现是`make_DopHelper(SI)`函数实现出现了问题，改正即可。
 
@@ -345,7 +345,7 @@ make_EHelper(pop)
 
 现在来到了`xor`。经历了实现`call`指令的折磨，对实现`xor`也更有信心了。
 
-![image-20230417195212809](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225437555540_310_image-20230417195212809.png)
+![image-20230417195212809](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210947894128_296_20230523225437555540_310_image-20230417195212809.png)
 
 `xor`的执行函数在`logic.c`里面。
 
@@ -368,17 +368,17 @@ make_EHelper(xor)
 
 对照手册，我们需要关心的`opcode`是`0x30-0x35`。
 
-![image-20230417212128063](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225440170402_511_image-20230417212128063.png)
+![image-20230417212128063](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210949076005_747_20230523225440170402_511_image-20230417212128063.png)
 
 ##### ret
 
 `dummy`跑通的临门一脚。
 
-![image-20230417212351555](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225442415385_539_image-20230417212351555.png)
+![image-20230417212351555](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210950019919_424_20230523225442415385_539_image-20230417212351555.png)
 
 先去附录找到c3对应的内容，定位到`ret`的页面:
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225446946199_759_image-20230417212512264.png" alt="image-20230417212512264" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210950956612_740_20230523225446946199_759_image-20230417212512264.png" alt="image-20230417212512264" width="50%" height="50%" />
 
 可以看到`ret`有好几种形式。但是我们显然只需要实现`c3`就可以满足需要。
 
@@ -399,7 +399,7 @@ make_EHelper(ret)
 
 **<font color='green'>HIT GOOD TRAP!</font>**
 
-![image-20230417213124076](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225449300327_530_image-20230417213124076.png)
+![image-20230417213124076](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210952140025_873_20230523225449300327_530_image-20230417213124076.png)
 
 ### 问题
 
@@ -482,7 +482,7 @@ bash runall.sh ISA=x86
 
 这里面第一个需要实现的指令是`lea`
 
-![image-20230417215053287](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225452474954_811_image-20230417215053287.png)
+![image-20230417215053287](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210953365114_681_20230523225452474954_811_image-20230417215053287.png)
 
 查表加上`opcode_table`之后提示我`exec_and`没实现。其实这不是`lea`的锅。因为框架把`make_EHelper(lea)`已经实现了，`lea`就这样完成了。实际上是因为` 10060`的`and`指令导致的。
 
@@ -490,23 +490,23 @@ bash runall.sh ISA=x86
 
 在手册附录的Opcode Map发现这个位置是一个指令组:
 
-![image-20230417221653277](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225455484191_658_image-20230417221653277.png)
+![image-20230417221653277](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210954270458_365_20230523225455484191_658_image-20230417221653277.png)
 
 在Push页面能够看到对应的说明:
 
-![image-20230417221609462](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225457657194_609_image-20230417221609462.png)
+![image-20230417221609462](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210955314802_440_20230523225457657194_609_image-20230417221609462.png)
 
 上网查阅，反汇编码 `pushl` 相当于 `push dword`。
 
 这个`pushl`也是把指令组写了，把操作码写了，就完成了。
 
-![image-20230417222933927](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225500684153_287_image-20230417222933927.png)
+![image-20230417222933927](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210956604972_234_20230523225500684153_287_image-20230417222933927.png)
 
 `nop`也得专门整个`opcode`
 
 下面是add
 
-![image-20230417223533752](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225502914875_765_image-20230417223533752.png)
+![image-20230417223533752](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210958013044_302_20230523225502914875_765_image-20230417223533752.png)
 
 看手册，正好一起把同类型的`add`都填了。
 
@@ -514,15 +514,15 @@ bash runall.sh ISA=x86
 
 已经感受到这一部分更多的是体力活了。
 
-![image-20230417224319863](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225508150223_875_image-20230417224319863.png)
+![image-20230417224319863](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210959123415_355_20230523225508150223_875_image-20230417224319863.png)
 
 可以看到0f是`2byte-escape`，这是我们遇到的第一个两字节操作码指令。查2字节的opcode，是这个
 
-![image-20230417224352754](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225511539214_937_image-20230417224352754.png)
+![image-20230417224352754](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828210959943782_857_20230523225511539214_937_image-20230417224352754.png)
 
 这一堆setx指令都很像，属于条件置位指令。
 
-![image-20230417224949597](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225514028827_543_image-20230417224949597.png)
+![image-20230417224949597](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211001084485_247_20230523225514028827_543_image-20230417224949597.png)
 
 emm有一个手册里没有必须要看源码才知道的事情，就是`nemu`将这一类指令抽象成了`setcc`
 
@@ -576,11 +576,11 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
 
 至于填`opcode_table`，理解了之后自然就知道要填到下面一组了。
 
-![image-20230417230808371](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225518351098_207_image-20230417230808371.png)
+![image-20230417230808371](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211001972913_374_20230523225518351098_207_image-20230417230808371.png)
 
 0f是2字节opcode，找第二个mapb对应的那一行
 
-![image-20230418013425827](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225520582515_551_image-20230418013425827.png)
+![image-20230418013425827](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211003032356_500_20230523225520582515_551_image-20230418013425827.png)
 
 可以看到movvsx和movvzx。这两个指令都是在mov的基础上加了符号拓展功能。
 
@@ -592,13 +592,13 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
   /* 0xbc */	EMPTY, EMPTY, IDEXW(mov_E2G,movsx,1), IDEXW(mov_E2G,movsx,2),
 ```
 
-![image-20230418013811138](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225522647884_770_image-20230418013811138.png)
+![image-20230418013811138](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211004265633_434_20230523225522647884_770_image-20230418013811138.png)
 
 test
 
 根据手册，TEST 计算其两个操作数的按位逻辑与。  每一位如果操作数的对应位均为 1，则结果为 1，否则为0.运算结果被丢弃，只改变标志寄存器。
 
-![image-20230418014447181](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225525580415_996_image-20230418014447181.png)
+![image-20230418014447181](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211005286340_139_20230523225525580415_996_image-20230418014447181.png)
 
 据此实现即可。
 
@@ -613,7 +613,7 @@ make_EHelper(test) {
 }
 ```
 
-![image-20230418014935039](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225528634250_287_image-20230418014935039.png)
+![image-20230418014935039](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211006164465_661_20230523225528634250_287_image-20230418014935039.png)
 
 框架将这一类型的执行抽象成了`jcc`，调用了之前提到的`setcc`。因此可以这样填:
 
@@ -624,11 +624,11 @@ make_EHelper(test) {
   /* 0x7c */	IDEXW(J,jcc,1),IDEXW(J,jcc,1),IDEXW(J,jcc,1),IDEXW(J,jcc,1),
 ```
 
-![image-20230418015752384](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225532714858_663_image-20230418015752384.png)
+![image-20230418015752384](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211007026317_528_20230523225532714858_663_image-20230418015752384.png)
 
 leave
 
-![image-20230418015919938](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225537226215_675_image-20230418015919938.png)
+![image-20230418015919938](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211008006723_218_20230523225537226215_675_image-20230418015919938.png)
 
 填表，补充执行逻辑:
 
@@ -641,7 +641,7 @@ make_EHelper(leave) {
 }
 ```
 
-![image-20230418020130781](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225541621025_331_image-20230418020130781.png)
+![image-20230418020130781](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211008961219_129_20230523225541621025_331_image-20230418020130781.png)
 
 dec，inc，cmp
 
@@ -673,27 +673,27 @@ make_EHelper(inc) {
 
 `dec`一样的道理，就不放了。
 
-终于迎来了二阶段的第一个**<font color='green'>HIT GOOD TRAP</font>**！![image-20230418023433434](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225545270182_921_image-20230418023433434.png)
+终于迎来了二阶段的第一个**<font color='green'>HIT GOOD TRAP</font>**！![image-20230418023433434](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211009777130_241_20230523225545270182_921_image-20230418023433434.png)
 
 加上中间填`op_table`习惯性的把旁边的也填了，其实现在就已经过的不少了。而且也发现名称排列和难度并不是对应的。。。
 
-![image-20230418024006777](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225547548141_708_image-20230418024006777.png)
+![image-20230418024006777](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211010814853_962_20230523225547548141_708_image-20230418024006777.png)
 
 比如`add`里面有一个0x6a打头的push，中间做的时候也把它写了。
 
 bit里面这个指令还过不去
 
-![image-20230418024335643](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225552798478_263_image-20230418024335643.png)
+![image-20230418024335643](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211011974792_798_20230523225552798478_263_image-20230418024335643.png)
 
 看手册是`Shift Grp2`的指令，看源码是`sar`指令。
 
-![image-20230418024515008](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225556392323_529_image-20230418024515008.png)
+![image-20230418024515008](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211012908169_848_20230523225556392323_529_image-20230418024515008.png)
 
 这一组带S指令都有移位功能，源码里的TODO也挨着，就对着手册一起做了。
 
 框架中没有`exec_rol`，现在`make_group`的时候加上会报错。
 
-![image-20230418030440421](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225600429965_544_image-20230418030440421.png)
+![image-20230418030440421](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211015047565_478_20230523225600429965_544_image-20230418030440421.png)
 
 这个是`not`，对应第三个指令组，开填。
 
@@ -718,17 +718,17 @@ static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
 }
 ```
 
-![image-20230418031209236](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225605558034_150_image-20230418031209236.png)
+![image-20230418031209236](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211016555061_465_20230523225605558034_150_image-20230418031209236.png)
 
 到div了。
 
 imul
 
-![image-20230418032107060](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225610807036_934_image-20230418032107060.png)
+![image-20230418032107060](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211017591066_520_20230523225610807036_934_image-20230418032107060.png)
 
 填表即可。
 
-![image-20230418032213094](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225613870020_798_image-20230418032213094.png)
+![image-20230418032213094](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211018515110_896_20230523225613870020_798_image-20230418032213094.png)
 
 符号拓展
 
@@ -745,11 +745,11 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
 
 下面指令果然涉及到了符号拓展。
 
-![image-20230418033030503](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225618043780_280_image-20230418033030503.png)
+![image-20230418033030503](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211019431563_647_20230523225618043780_280_image-20230418033030503.png)
 
 手册里说这个位置是cwd，但
 
-![image-20230418033009533](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225621183658_884_image-20230418033009533.png)
+![image-20230418033009533](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211020458211_219_20230523225621183658_884_image-20230418033009533.png)
 
 框架中给的是cltd和cwtl，cltd就是CWD/CDQ，而cwtl对应CBW/CWDE。
 
@@ -784,19 +784,19 @@ make_EHelper(cwtl) {
 }
 ```
 
-![image-20230418034230992](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225625599245_402_image-20230418034230992.png)
+![image-20230418034230992](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211021325565_511_20230523225625599245_402_image-20230418034230992.png)
 
 还差两个
 
-![image-20230418034312229](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225630693991_523_image-20230418034312229.png)
+![image-20230418034312229](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211022715667_250_20230523225630693991_523_image-20230418034312229.png)
 
 recursion，call_rm没实现。
 
-![image-20230418034508931](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225633722246_665_image-20230418034508931.png)
+![image-20230418034508931](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211023566968_525_20230523225633722246_665_image-20230418034508931.png)
 
 手册上call写的很长，只需要关注r/m部分就可以了
 
-![image-20230418034759314](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225635958260_687_image-20230418034759314.png)
+![image-20230418034759314](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211024660721_703_20230523225635958260_687_image-20230418034759314.png)
 
 对应实现:
 
@@ -814,7 +814,7 @@ make_EHelper(call_rm) {
 
 这时候发现只有`string`过不了了。
 
-![image-20230418180917748](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225639988445_167_image-20230418180917748.png)
+![image-20230418180917748](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211026175881_831_20230523225639988445_167_image-20230418180917748.png)
 
 一开始看到运行到了bad指令以为是自己跳转指令实现的有问题，回去检查了一遍没发现毛病，看指导书才发现是自己少做了东西。然后2020版的文档这个位置就挨着不要以为有TDDO才需要实现的免责声明。多少有点挑衅了。但又不能说什么，谁让我没好好看文档。。。
 
@@ -848,11 +848,11 @@ int strcmp(const char* s1, const char* s2) {
 
 然后发现neg没实现。实现了就好。
 
-![image-20230418182437373](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225645128900_949_image-20230418182437373.png)
+![image-20230418182437373](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211027295891_667_20230523225645128900_949_image-20230418182437373.png)
 
 顺利AP。
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225647440928_407_image-20230418182631614.png" alt="image-20230418182631614" style="zoom: 50%;" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211028239443_674_20230523225647440928_407_image-20230418182631614.png" alt="image-20230418182631614" style="zoom: 50%;" />
 
 #### 问题
 
@@ -905,21 +905,21 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 
 `nemu/src/monitor/diff-test/diff-test.c`-`void init_difftest`
 
-![image-20230417234512940](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225651167723_797_image-20230417234512940.png)
+![image-20230417234512940](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211029323323_152_20230523225651167723_797_image-20230417234512940.png)
 
 给`ref_difftest_setregs`传入的参数是cpu。在PA1中我们完成了这个结构体，寄存器顺序如下:
 
-![image-20230417235814052](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225653391160_373_image-20230417235814052.png)
+![image-20230417235814052](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211030355455_952_20230523225653391160_373_image-20230417235814052.png)
 
 再看调用的API:
 
 `nemu/tools/qemu-diff/src/diff-test.c`
 
-![image-20230417234630438](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225657431948_677_image-20230417234630438.png)
+![image-20230417234630438](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211031585613_677_20230523225657431948_677_image-20230417234630438.png)
 
 `nemu/tools/qemu-diff/src/isa/x86/include/isa.h`
 
-![image-20230417232210081](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225701591453_145_image-20230417232210081.png)
+![image-20230417232210081](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211032473395_332_20230523225701591453_145_image-20230417232210081.png)
 
 可以看到顺序是符合约定的。其中`array`是存`gdb`通信的字符串消息的。
 
@@ -961,13 +961,13 @@ make_EHelper(out) {
 }
 ```
 
-![image-20230418190251286](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225703718139_454_image-20230418190251286.png)
+![image-20230418190251286](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211033387892_259_20230523225703718139_454_image-20230418190251286.png)
 
 看手册，果然是IN，OUT指令。在opcode_table里面补上即可。
 
-![image-20230418190440852](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225706985852_641_image-20230418190440852.png)
+![image-20230418190440852](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211034316175_681_20230523225706985852_641_image-20230418190440852.png)
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225709250708_350_image-20230418192239874.png" alt="image-20230418192239874" width="67%" height="67%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211035280904_873_20230523225709250708_350_image-20230418192239874.png" alt="image-20230418192239874" width="67%" height="67%" />
 
 ### 时钟
 
@@ -996,17 +996,17 @@ void __am_timer_init() {
 
 至于怎么跑，`make ARCH=native mainargs=H run`可以看到:
 
-![image-20230418194525024](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225713545364_139_image-20230418194525024.png)
+![image-20230418194525024](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211036423311_503_20230523225713545364_139_image-20230418194525024.png)
 
 因此可以`make ARCH=x86-nemu mainargs=t run`，当然`naive`也是可以对照着看的。
 
 一开始发现进入之后不打印，一直死循环，发现是没有实现`printf`。补上就可以了。
 
-![image-20230418194930929](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225716611404_456_image-20230418194930929.png)
+![image-20230418194930929](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211037278159_262_20230523225716611404_456_image-20230418194930929.png)
 
 跑分，随便跑了一个，现在性能还是比较拉胯。
 
-![image-20230418201037377](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225720787415_925_image-20230418201037377.png)
+![image-20230418201037377](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211039337832_998_20230523225720787415_925_image-20230418201037377.png)
 
 #### 键盘
 
@@ -1034,7 +1034,7 @@ void __am_timer_init() {
   }
 ```
 
-![image-20230418202105754](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225723117288_548_image-20230418202105754.png)
+![image-20230418202105754](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211040355929_180_20230523225723117288_548_image-20230418202105754.png)
 
 ### VGA
 
@@ -1087,7 +1087,7 @@ void __am_vga_init()
     fb[i] = i;
   draw_sync();
 }
-![image-20230418210820936](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225728354796_263_image-20230418210820936.png)
+![image-20230418210820936](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211041560535_570_20230523225728354796_263_image-20230418210820936.png)
 ```
 
 #### 问题
@@ -1115,13 +1115,13 @@ while(*p !=0xff);
 
 正常先循环读后写，一切正常。
 
-![image-20230418224522431](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225733159116_222_image-20230418224522431.png)
+![image-20230418224522431](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211042853070_743_20230523225733159116_222_image-20230418224522431.png)
 
 去掉volatile:
 
 经过编译器优化后，编译器认为指针指向的内容都是0了，下面while肯定是一个死循环，就自己jmp自己了。表现在设备上，就是一直在读，写不进去，就出问题了。
 
-![image-20230418224713003](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225737654532_187_image-20230418224713003.png)
+![image-20230418224713003](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211043774455_612_20230523225737654532_187_image-20230418224713003.png)
 
 ###### 如何检测多个键同时被按下？
 
@@ -1141,23 +1141,23 @@ inline 关键字实际上表示建议内联，gcc中O0优化时是不内联的�
 
 在我的环境下，去掉`static`和去掉`inline`是没有影响的。
 
-![image-20230418165948224](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523225741529190_435_image-20230418165948224.png)
+![image-20230418165948224](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211044662641_241_20230523225741529190_435_image-20230418165948224.png)
 
 但是都去掉，就报错了：
 
-![image-20230418171100319](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523230801541908_353_image-20230418171100319.png)
+![image-20230418171100319](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211046474774_474_20230523230801541908_353_image-20230418171100319.png)
 
 因为头文件会被许多文件引用所以如果去掉static inline,这个函数就会被多次定义，在链接的时候会报错。
 
 重新编译NEMU. 请问重新编译后的NEMU含有38个`dummy`变量的实体(统计得到的加上`common.h`里的)
 
-![image-20230418172006341](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523230807076612_975_image-20230418172006341.png)
+![image-20230418172006341](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211047556012_298_20230523230807076612_975_image-20230418172006341.png)
 
 `nemu/include/debug.h`加了之后没变化(虽然理论上会多)
 
 加上等于0，报错。
 
-![image-20230418180715096](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523230813184695_469_image-20230418180715096.png)
+![image-20230418180715096](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211048550534_453_20230523230813184695_469_image-20230418180715096.png)
 
 课上讲过，在C语言中只声明不初始化是一种弱定义，当声明多个同名同类型的变量时，编译不会报错，但是到了链接阶段，由于全是弱符号，链接器会随便选择一个。但是，有了初始化之后之后就不一样了，这变成了强定义，编译器无法忽略。
 
@@ -1196,7 +1196,7 @@ OBJ_DIR ?= $(BUILD_DIR)/obj-$(ISA)$(SO)
 BINARY ?= $(BUILD_DIR)/$(ISA)-$(NAME)$(SO)
 ```
 
-![image-20230418215016739](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523230818475318_173_image-20230418215016739.png)
+![image-20230418215016739](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211049486409_502_20230523230818475318_173_image-20230418215016739.png)
 
 关于SRC:
 
@@ -1225,7 +1225,7 @@ $(OBJ_DIR)/%.o: src/%.c
 
 第二步只是打印一下我现在要链接生成目标了。
 
-![image-20230418221720529](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523230824465256_348_image-20230418221720529.png)
+![image-20230418221720529](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211050452384_863_20230523230824465256_348_image-20230418221720529.png)
 
 最后一行便是生成NEMU的临门一脚。
 
@@ -1246,13 +1246,13 @@ override的意思是不允许通过命令行指定的方式替代在Makefile中�
 
 执行出来就是这一句。
 
-![image-20230418221942591](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523230831361885_388_image-20230418221942591.png)
+![image-20230418221942591](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211052523101_993_20230523230831361885_388_image-20230418221942591.png)
 
 ### 课后题
 
 1.指令使用条件问题
 
-![image-20230418163951487](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230523230835450240_415_image-20230418163951487.png)
+![image-20230418163951487](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA2/20230828211053630092_596_20230523230835450240_415_image-20230418163951487.png)
 
 为什么用jbe而不是jle？
 

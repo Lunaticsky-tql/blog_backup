@@ -104,7 +104,7 @@ void init_proc()
 
 注意按照指导书，我们就不需要使用原来的`naive_uload()`了。`context_kload`会调用CTE的`kcontext()`来创建一个上下文。调用`switch_boot_pcb()`则是为了初始化`current`指针.
 
-![image-20230524103308566](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235455853128_651_image-20230524103308566.png)
+![image-20230524103308566](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205703143955_661_20230601235455853128_651_image-20230524103308566.png)
 
 ###  实现上下文切换(2)
 
@@ -182,7 +182,7 @@ _Context *schedule(_Context *prev)
 }
 ```
 
-![image-20230529100302757](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235457992775_260_image-20230529100302757.png)
+![image-20230529100302757](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205704516608_486_20230601235457992775_260_image-20230529100302757.png)
 
 
 
@@ -205,7 +205,7 @@ _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, 
 
 `argc/argv/envp`加上返回地址，就是4个4字节的指针，按照调用约定放到栈底。不过这个是在讲义后面提到的，也是阅读了这一部分才明白原理。
 
-形象点说就是这样:<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235500203470_105_image-20230529104434579.png" alt="image-20230529104434579" width="67%" height="67%" />
+形象点说就是这样:<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205705617321_438_20230601235500203470_105_image-20230529104434579.png" alt="image-20230529104434579" width="67%" height="67%" />
 
 
 
@@ -237,7 +237,7 @@ _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, 
 
 解答:编译Navy-apps中的程序时, 我们都把它们链接到0x83000000的内存位置, 如果我们正在运行仙剑奇侠传, 同时也想运行hello程序, 它们的内容就会被相互覆盖。
 
-![image-20230529100930844](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235504869760_814_image-20230529100930844.png)
+![image-20230529100930844](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205706936987_880_20230601235504869760_814_image-20230529100930844.png)
 
 ### 给用户进程传递参数
 
@@ -341,7 +341,7 @@ void _start(int argc, char *argv[], char *envp[]) {
 
 后来发现有个[博客](https://vgalaxy.work/2022/01/01/icspa4/#%E7%94%A8%E6%88%B7%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%8F%82%E6%95%B0)的问题和我类似:
 
-![image-20230531210624959](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235508361359_580_image-20230531210624959.png)
+![image-20230531210624959](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205708311090_229_20230601235508361359_580_image-20230531210624959.png)
 
 但是我尝试了传完整路径，还是不行(哭)
 
@@ -380,7 +380,7 @@ int main(int argc, char *argv[])
 
 可以看到直接跳过了加载动画。
 
-![image-20230531212149363](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235512642869_760_image-20230531212149363.png)
+![image-20230531212149363](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205709364413_382_20230601235512642869_760_image-20230531212149363.png)
 
 ## 阶段二
 
@@ -414,7 +414,7 @@ NULL 是一个标准规定的宏定义，用来表示空指针常量。在C中�
 
 先看一下加上`HAS_VME`是什么情况:
 
-![image-20230529222248388](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235517932149_981_image-20230529222248388.png)
+![image-20230529222248388](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205710798062_415_20230601235517932149_981_image-20230529222248388.png)
 
 是这条指令:
 
@@ -428,7 +428,7 @@ NULL 是一个标准规定的宏定义，用来表示空指针常量。在C中�
 
 查阅手册`0x21`也是与`cr`寄存器有关，一起补上。
 
-![image-20230529223520788](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235521194013_589_image-20230529223520788.png)
+![image-20230529223520788](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205712227982_962_20230601235521194013_589_image-20230529223520788.png)
 
 
 
@@ -454,7 +454,7 @@ make_EHelper(mov_cr2r) {
 
 `CPU_state`也要补上这两个寄存器。寄存器的结构需`#include "mmu.h"`，在`nemu/src/isa/x86/include/isa/mmu.h`里定义。
 
-![image-20230529224445299](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235523234821_360_image-20230529224445299.png)
+![image-20230529224445299](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205713198935_761_20230601235523234821_360_image-20230529224445299.png)
 
 看上去好像能跑了？但还不是在虚拟地址上跑的嘛。因为目前`isa_vaddr_read()`, `isa_vaddr_write()`并没有进行改动。这个就合并到下一节完成。
 
@@ -486,7 +486,7 @@ _Context *schedule(_Context *prev)
 
 需要按讲义中所讲取消原来进入开机菜单的选项，直接运行dummy。现在还没实现分页，可以看到也是能正常运行的。因为它只是调用了一下系统调用。
 
-![image-20230530150819865](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235527208599_859_image-20230530150819865.png)
+![image-20230530150819865](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205716575380_419_20230601235527208599_859_image-20230530150819865.png)
 
 然后打开`makefile.compile`里的`VME=enable`之后，就发现寄喽。
 
@@ -601,7 +601,7 @@ return elf_header.e_entry;
 
 判断页面存在需要看最后一位是不是1，手册里说的很清楚。
 
-![image-20230530193239098](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235531573391_617_image-20230530193239098.png)
+![image-20230530193239098](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205717905352_201_20230601235531573391_617_image-20230530193239098.png)
 
 ```C++
 int _map(_AddressSpace *as, void *va, void *pa, int prot)
@@ -727,7 +727,7 @@ void isa_vaddr_write(vaddr_t addr, uint32_t data, int len)
 
 改正之后能够在分页机制上Hit good trap。
 
-![image-20230530215433304](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235535787076_209_image-20230530215433304.png)
+![image-20230530215433304](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205718828968_290_20230601235535787076_209_image-20230530215433304.png)
 
 ### 在分页机制上运行仙剑奇侠传
 
@@ -781,7 +781,7 @@ extern PCB *current;
 
 好了，我们跑一下仙剑奇侠传看看:
 
-![image-20230530221047921](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235540421541_424_image-20230530221047921.png)
+![image-20230530221047921](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205720681183_927_20230601235540421541_424_image-20230530221047921.png)
 
 emm。确实如讲义所说。我们现在不得不处理数据跨页的问题了。
 
@@ -820,13 +820,13 @@ emm。确实如讲义所说。我们现在不得不处理数据跨页的问题�
   }
 ```
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235542835305_606_image-20230531155347228.png" alt="image-20230531155347228" width="67%" height="67%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205722617786_472_20230601235542835305_606_image-20230531155347228.png" alt="image-20230531155347228" width="67%" height="67%" />
 
 ### 支持虚存管理的多道程序
 
 这次只需要把调度代码改回去就可以了，不需要做额外的事情。
 
-![image-20230531164538774](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235547658121_402_image-20230531164538774.png)
+![image-20230531164538774](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205725791533_135_20230601235547658121_402_image-20230531164538774.png)
 
 ## 阶段三
 
@@ -912,7 +912,7 @@ void raise_intr(uint32_t NO, vaddr_t ret_addr)
 
 可以看到每隔一段时间都触发一次时钟中断事件。
 
-![image-20230531172613664](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235551684634_469_image-20230531172613664.png)
+![image-20230531172613664](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205726912624_659_20230601235551684634_469_image-20230531172613664.png)
 
 ### 展示你的计算机系统
 
@@ -929,7 +929,7 @@ void raise_intr(uint32_t NO, vaddr_t ret_addr)
 
 `amdev.h`里有张键位表，可以参考。
 
-![image-20230531192942805](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235555185137_348_image-20230531192942805.png)
+![image-20230531192942805](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205728206939_964_20230601235555185137_348_image-20230531192942805.png)
 
 `change_gcb`需要添加外部引用。在`proc.c`定义:
 
@@ -966,7 +966,7 @@ _Context *schedule(_Context *prev)
 
 为了更清晰的验证实现的效果，我将hello的输出注释掉了，并添加了键盘事件的Log。可以看到按F1-F3键的时候游戏会重新进入，hello也在一直运行。当然如果一直按的和上一次相同的按键不会有变化。
 
-![image-20230531192547493](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/PA4%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/20230601235557711505_227_image-20230531192547493.png)
+![image-20230531192547493](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205729380091_270_20230601235557711505_227_image-20230531192547493.png)
 
 ## 必答题
 
@@ -1014,7 +1014,7 @@ typedef union {
 
 [excalidraw](https://excalidraw.com/#json=5d-KBtTMJBi6eNu4fkmrg,jm4Dt4nkNF8tgd7ix_B7ng)
 
-![trap1](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230602001029829434_199_trap1.png)
+![trap1](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA4/20230828205730980698_757_20230602001029829434_199_trap1.png)
 
 ###### 分时多任务的具体过程 
 

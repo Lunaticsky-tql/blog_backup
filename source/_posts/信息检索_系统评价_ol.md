@@ -10,7 +10,7 @@ abbrlink: 23422
 
 ## 总思路
 
-![image-20221102140305383](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B3%BB%E7%BB%9F%E8%AF%84%E4%BB%B7/20221102181425241957_651_image-20221102140305383.png)
+![image-20221102140305383](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B3%BB%E7%BB%9F%E8%AF%84%E4%BB%B7/20230828210413749537_765_20221102181425241957_651_image-20221102140305383.png)
 
 ## 单查询
 
@@ -34,19 +34,19 @@ $$
 
 #### P-R曲线的例子
 
-![image-20221102141151261](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B3%BB%E7%BB%9F%E8%AF%84%E4%BB%B7/20221102181427482098_652_image-20221102141151261.png)
+![image-20221102141151261](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B3%BB%E7%BB%9F%E8%AF%84%E4%BB%B7/20230828210415422791_840_20221102181427482098_652_image-20221102141151261.png)
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B3%BB%E7%BB%9F%E8%AF%84%E4%BB%B7/20221102181431710114_302_image-20221102141322869.png" alt="image-20221102141322869" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B3%BB%E7%BB%9F%E8%AF%84%E4%BB%B7/20230828210416775229_758_20221102181431710114_302_image-20221102141322869.png" alt="image-20221102141322869" width="50%" height="50%" />
 
-![image-20221102142019252](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B3%BB%E7%BB%9F%E8%AF%84%E4%BB%B7/20221102181432975281_362_image-20221102142019252.png)
+![image-20221102142019252](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B3%BB%E7%BB%9F%E8%AF%84%E4%BB%B7/20230828210417972832_913_20221102181432975281_362_image-20221102142019252.png)
 
 #### 平均正确率AP
 
-![image-20221102142247895](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B3%BB%E7%BB%9F%E8%AF%84%E4%BB%B7/20221102181435795246_414_image-20221102142247895.png)
+![image-20221102142247895](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B3%BB%E7%BB%9F%E8%AF%84%E4%BB%B7/20230828210419282313_192_20221102181435795246_414_image-20221102142247895.png)
 
 #### Precision@N
 
 Precision@N：在第N个位置上的正确率，对于搜索引擎，大量统计数据表明，大部分搜索引擎用户只关注前一、两页的结果，因此， P@10，P@20对大规模搜索引擎来说是很好的评价指标
 
-![image-20221102142715051](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B3%BB%E7%BB%9F%E8%AF%84%E4%BB%B7/20221102181437971719_189_image-20221102142715051.png)
+![image-20221102142715051](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2_%E7%B3%BB%E7%BB%9F%E8%AF%84%E4%BB%B7/20230828210420576008_695_20221102181437971719_189_image-20221102142715051.png)
 

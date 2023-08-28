@@ -16,11 +16,11 @@ date: 2023-06-01 23:59:38
 
 首先进入主界面选旧的回忆，读最后一个档(倒数第二个档试过没有怪)，进去走迷宫，上下左右移动，走一会儿遇到怪物，自动进入战斗场景。往右下角走会快一些。~~怪物画的好涩~~
 
-![image-20230601104023742](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230601235912474020_401_image-20230601104023742.png)
+![image-20230601104023742](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230828210311800040_251_20230601235912474020_401_image-20230601104023742.png)
 
 按照指导书，修改 `navy-apps/apps/pal/src/FLOAT/FLOAT.c`和对应的头文件。
 
-![image-20230601111018328](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230601235917144417_751_image-20230601111018328.png)
+![image-20230601111018328](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230828210313128796_270_20230601235917144417_751_image-20230601111018328.png)
 
 根据讲义:
 
@@ -35,7 +35,7 @@ date: 2023-06-01 23:59:38
 
 相应的，IEEE754的标准，[图源](https://blog.csdn.net/gao_zhennan/article/details/120717424)
 
-![image-20230601112028613](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230601235920917333_702_image-20230601112028613.png)
+![image-20230601112028613](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230828210314320862_982_20230601235920917333_702_image-20230601112028613.png)
 
 这一部分有点像CSAPP的DataLab，但是由于使用定点表示实数的场景越来越少，这一部分实际价值也并不大。可以看到后面版本的PA已经将这一部分去除。
 
@@ -43,7 +43,7 @@ date: 2023-06-01 23:59:38
 
 先考虑浮点转定点。
 
-![image-20230601153308456](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230601235924396067_218_image-20230601153308456.png)
+![image-20230601153308456](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230828210315373336_905_20230601235924396067_218_image-20230601153308456.png)
 
 ```C
 typedef int FLOAT;
@@ -182,13 +182,13 @@ static inline FLOAT F_div_int(FLOAT a, int b)
 
 成功运行战斗场景。
 
-![image-20230601111624447](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230601235927896331_956_image-20230601111624447.png)
+![image-20230601111624447](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230828210316468177_507_20230601235927896331_956_image-20230601111624447.png)
 
 ## 通往高速的次元
 
 如果用VMware的话需要开这两个选项:
 
-![image-20230601112713746](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230601235930759689_235_image-20230601112713746.png)
+![image-20230601112713746](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230828210320091905_497_20230601235930759689_235_image-20230601112713746.png)
 
 报这种错误:
 
@@ -214,7 +214,7 @@ perf record nemu/build/x86-nemu nanos-lite/build/nanos-lite-x86-nemu.bin
 
 我感觉也不太好看出什么。。
 
-![image-20230601113933501](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230601235934898992_647_image-20230601113933501.png)
+![image-20230601113933501](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA5/20230828210321017793_737_20230601235934898992_647_image-20230601113933501.png)
 
 好吧，下一章第一句话就是
 

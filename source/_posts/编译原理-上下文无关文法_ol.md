@@ -74,11 +74,11 @@ $$
 
 一一对应即可，非常简单
 
-![image-20221115092857560](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20221201120121396547_551_image-20221115092857560.png)
+![image-20221115092857560](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20230828205642582509_675_20221201120121396547_551_image-20221115092857560.png)
 
 注意别忘了终态的规则(替换空串)
 
-![image-20221115093159798](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20221201120122982777_294_image-20221115093159798.png)
+![image-20221115093159798](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20230828205643806820_805_20221201120122982777_294_image-20221115093159798.png)
 
 “不包含子串011的01串，3显然不需要包含进CFG”
 
@@ -88,25 +88,25 @@ $$
 
 消除二义性没有固定的套路，建立在对文法理解的基础上。
 
-![image-20221201134248289](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20221201134248289.png)
+![image-20221201134248289](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20230828205645038077_709_image-20221201134248289.png)
 
 ### 消除左递归
 
 消除直接左递归很简单，在龙书第二章有所讲述。下面一个消除间接左递归的例子：
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20221201120126538302_916_image-20221115094108795.png" alt="image-20221115094108795" width="67%" height="67%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20230828205646564550_859_20221201120126538302_916_image-20221115094108795.png" alt="image-20221115094108795" width="67%" height="67%" />
 
 ### 消除空字
 
 消除空字需要注意的一点时一定要替换“干净”，即所有与含有空字的非终结符文法定义相关的条目都要考虑并替换
 
-![image-20221115094610591](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20221201120128030368_860_image-20221115094610591.png)
+![image-20221115094610591](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20230828205648003494_548_20221201120128030368_860_image-20221115094610591.png)
 
-![image-20221115094838176](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20221201120129388514_865_image-20221115094838176.png)
+![image-20221115094838176](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20230828205649177202_905_20221201120129388514_865_image-20221115094838176.png)
 
 ### 消除回路
 
-![image-20221115095219937](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20221201120130871049_366_image-20221115095219937.png)
+![image-20221115095219937](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20230828205650398355_928_20221201120130871049_366_image-20221115095219937.png)
 
 ### 左公因子提取
 
@@ -181,4 +181,4 @@ PS：证明$\mathrm{L}_3{ }^{\prime}$不能用正则表达式表示
 $a^i b^i \in L_3 \rightarrow \Rightarrow s_i\left(s_j\right)$ 到终态路径标记为 $b^i$
 $\rightarrow$ 初态 $\rightarrow$ 终态还有标为 $a^i b^i$ 的路径 $\rightarrow D$ 接受 $a^i b^i$, 与”D(确定)“矛盾！
 
-![image-20221115103746485](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20221201120132392020_526_image-20221115103746485.png)
+![image-20221115103746485](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95/20230828205651744661_709_20221201120132392020_526_image-20221115103746485.png)

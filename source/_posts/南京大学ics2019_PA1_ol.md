@@ -1,6 +1,7 @@
 ---
 title: 南京大学ics2019_PA1
 categories: 作业
+date: 2023-05-22 10:00:00
 tags:
   - 系统设计
 abbrlink: 4251
@@ -161,7 +162,7 @@ static int cmd_si(char *args){
 }
 ```
 
-![image-20230321183104988](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A-PA1%E6%8A%A5%E5%91%8A/20230322090859031854_838_image-20230321183104988.png)
+![image-20230321183104988](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA1/20230828205843099038_654_20230322090859031854_838_image-20230321183104988.png)
 
 ##### 打印寄存器
 
@@ -182,7 +183,7 @@ void isa_reg_display()
 }
 ```
 
-![image-20230321183847648](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A-PA1%E6%8A%A5%E5%91%8A/20230322090859916082_681_image-20230321183847648.png)
+![image-20230321183847648](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA1/20230828205844107732_739_20230322090859916082_681_image-20230321183847648.png)
 
 #### 实现扫描内存
 
@@ -472,9 +473,9 @@ int get_domin_op_pos(int p, int q)
 
 实现效果：
 
-![image-20230321194541159](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A-PA1%E6%8A%A5%E5%91%8A/20230322090903021377_849_image-20230321194541159.png)
+![image-20230321194541159](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA1/20230828205845305075_505_20230322090903021377_849_image-20230321194541159.png)
 
-![image-20230321194853335](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A-PA1%E6%8A%A5%E5%91%8A/20230322090904623223_231_image-20230321194853335.png)
+![image-20230321194853335](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA1/20230828205846416684_863_20230322090904623223_231_image-20230321194853335.png)
 
 #### 感想
 
@@ -553,11 +554,11 @@ NEMU是通过监视点来模拟断点的，而gdbz正如上文所示是通过创
 
 可以通过搜索解决问题。关于selector的详细阐述在内存管理部分，
 
-![image-20230321211615894](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20230321211615894.png)
+![image-20230321211615894](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA1/20230828205847482942_898_image-20230321211615894.png)
 
 点进去就可以看到段选择子的格式。
 
-![image-20230321211811752](/Users/tianjiaye/Library/Application Support/typora-user-images/image-20230321211811752.png)
+![image-20230321211811752](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA1/20230828205849258235_907_image-20230321211811752.png)
 
 ## 必答题
 
@@ -585,11 +586,11 @@ find . -name "*[.h/.c]" | xargs wc -l
 find . -name "*[.h/.c]" | xargs grep "^." | wc -l
 ```
 
-![image-20230321202840329](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A-PA1%E6%8A%A5%E5%91%8A/20230322090905518782_851_image-20230321202840329.png)
+![image-20230321202840329](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA1/20230828205850634028_644_20230322090905518782_851_image-20230321202840329.png)
 
 `git checkout`到原来的状态后结果如下：
 
-![image-20230321204938932](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A-PA1%E6%8A%A5%E5%91%8A/20230322090906611356_503_image-20230321204938932.png)
+![image-20230321204938932](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA1/20230828205851869518_327_20230322090906611356_503_image-20230321204938932.png)
 
 可以看到这次PA总共写了523行代码。
 
@@ -603,5 +604,5 @@ find . -name "*[.h/.c]" | xargs grep "^." | wc -l
 
 这次实验的很多错误的发现都有这个的帮助。不过有时候gcc的检查也会显得过于严格。比如下面`eval`函数虽然已经包含了所有分支的处理，但最后还是要求我们return一个值。
 
-![image-20230321205535450](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A-PA1%E6%8A%A5%E5%91%8A/20230322090907728645_363_image-20230321205535450.png)
+![image-20230321205535450](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA1/20230828205853446704_485_20230322090907728645_363_image-20230321205535450.png)
 

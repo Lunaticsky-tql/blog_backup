@@ -1,13 +1,14 @@
 ---
 title: Hybrid Image
 categories: 作业
+date: 2022-10-21 10:00:00
 tags:
   - 计算机视觉
 abbrlink: 37973
 ---
 # Hybrid Image
 
-![image-20230329203201849](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/2013599_%E7%94%B0%E4%BD%B3%E4%B8%9A_HW1/20230329203430934130_398_image-20230329203201849.png)
+![image-20230329203201849](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Hybrid%20Image/20230828210854731226_846_20230329203430934130_398_image-20230329203201849.png)
 
 •A. Oliva, A. Torralba, P.G. Schyns,  [“Hybrid Images,”](http://cvcl.mit.edu/hybridimage.htm) SIGGRAPH 2006
 
@@ -63,7 +64,7 @@ int main()
 
 以经典的`Einstein`和`Marilyn`为例得到结果如下所示:
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/2013599_%E7%94%B0%E4%BD%B3%E4%B8%9A_HW1/20230329204715965717_301_image-20230329095603969.png" alt="image-20230329095603969" width="67%" height="67%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Hybrid%20Image/20230828210855964441_824_20230329204715965717_301_image-20230329095603969.png" alt="image-20230329095603969" width="67%" height="67%" />
 
 #### 频率域高斯滤波
 
@@ -199,16 +200,16 @@ imshow(text, amplitude);
 
 使用OpenCV附带的Trackbar功能实现了自动调节截止频率的功能。展示如下:
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/2013599_%E7%94%B0%E4%BD%B3%E4%B8%9A_HW1/20230329204718785139_962_image-20230329110649015.png" alt="image-20230329110649015" width="67%" height="67%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Hybrid%20Image/20230828210857054735_334_20230329204718785139_962_image-20230329110649015.png" alt="image-20230329110649015" width="67%" height="67%" />
 
 可以看到$\sigma=16$时能够取得较好的混合效果。
 
 得到两个图片的幅值矩阵如下所示:
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/2013599_%E7%94%B0%E4%BD%B3%E4%B8%9A_HW1/20230329204722119165_954_image-20230329112108249.png" alt="image-20230329112108249" width="67%" height="67%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Hybrid%20Image/20230828210858221680_112_20230329204722119165_954_image-20230329112108249.png" alt="image-20230329112108249" width="67%" height="67%" />
 
 换用自己喜欢的图像尝试一下:
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/2013599_%E7%94%B0%E4%BD%B3%E4%B8%9A_HW1/20230329204725159317_763_image-20230329112218382.png" alt="image-20230329112218382" width="67%" height="67%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Hybrid%20Image/20230828210859490938_460_20230329204725159317_763_image-20230329112218382.png" alt="image-20230329112218382" width="67%" height="67%" />
 
 因为这两张图片都不存在明显的高频信号，因此不是一个很好的样例。

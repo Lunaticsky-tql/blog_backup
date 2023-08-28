@@ -1,6 +1,7 @@
 ---
 title: 软件工程-软件设计作业
 categories: 作业
+date: 2023-03-23 11:00:00
 tags:
   - 软件工程
 abbrlink: 48981
@@ -17,7 +18,7 @@ abbrlink: 48981
 
 下面通过用例图从总体上描述描述机票预订系统的功能性需求。
 
-![image-20230408230603393](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A-2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A/20230409235255868737_526_image-20230408230603393.png)
+![image-20230408230603393](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A/20230828210425289726_730_20230409235255868737_526_image-20230408230603393.png)
 | <font color='green'>登录</font> |
 | ------------------------------- |
 | **用例ID：** 1                |
@@ -169,7 +170,7 @@ abbrlink: 48981
 
 活动图中的每个圆角矩形中为动作状态，描述原子性的行为。登录和注册部分的用例较为复杂，在这里用活动图来较为详细的描述登录和注册的流程。
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A-2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A/20230409235259075956_784_image-20230409202727243.png" alt="image-20230409202727243" width="150%" height="150%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A/20230828210426308912_650_20230409235259075956_784_image-20230409202727243.png" alt="image-20230409202727243" width="150%" height="150%" />
 
 用户未登录或注册完成时，随时可以点击取消结束该用例流程。用户进入登录页面，输入用户名，手机号，密码。系统会查找该用户的手机号是否已完成注册。若用户未注册，系统会自动为用户进行注册，提示用户输入个人信息，通过验证码验证手机号可用后即可完成注册。由于注册时用户有可能改变手机号信息，因此注册阶段也需要验证手机号。确定用户使用手机号注册后系统生成手机验证码，并提示用户输入。用户正确输入验证码后系统接受注册信息，存储新用户信息并自动登录，前端通知用户并结束用例流程，供用户选择后续操作。
 
@@ -177,7 +178,7 @@ abbrlink: 48981
 
 类图是系统的概念基础。下面将整个订票系统涉及的实体和控制类通过类图描述。
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A-2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A/20230409235301223716_963_image-20230409231700319.png" alt="image-20230409231700319" width="150%" height="150%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A/20230828210427690596_694_20230409235301223716_963_image-20230409231700319.png" alt="image-20230409231700319" width="150%" height="150%" />
 
 类图部分事实上是在整个设计过程中考虑和修改次数最多的部分。
 
@@ -197,7 +198,7 @@ abbrlink: 48981
 
 用户可查看个人信息，修改个人信息是可选的。同时用户选择结束个人信息管理时前端页面关闭，处理该事务的DAO关闭，数据库需要持续运行。这个过程中所有的消息都是同步消息。
 
-![image-20230409203220770](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A-2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A/20230409235303100664_328_image-20230409203220770.png)
+![image-20230409203220770](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A/20230828210430070649_951_20230409235303100664_328_image-20230409203220770.png)
 
 > →查询个人信息请求(用户→系统前端)
 >
@@ -231,7 +232,7 @@ abbrlink: 48981
 
 旅客乘机包含查询航班信息，预订机票，查看已订机票，获取取票凭据，取票几个阶段。为清晰的表示各阶段之间的关系，不再表示出具体前后端交互的过程，转而强调各个类之间的关系。
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A-2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A/20230409235304935117_188_image-20230409214542211.png" alt="image-20230409214542211" width="150%" height="150%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A/20230828210431213370_167_20230409235304935117_188_image-20230409214542211.png" alt="image-20230409214542211" width="150%" height="150%" />
 
 > 查询航班信息(旅客→Flights类）
 >
@@ -293,7 +294,7 @@ abbrlink: 48981
 
 下面给出用户退票用例的协作图。
 
-![image-20230409222120459](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A-2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A/20230409235306483524_888_image-20230409222120459.png)
+![image-20230409222120459](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A/20230828210432463999_484_20230409235306483524_888_image-20230409222120459.png)
 
 > →查询已订机票(旅客→系统前端)
 >
@@ -333,7 +334,7 @@ abbrlink: 48981
 
 下面给出管理员整个工作流程的状态图：
 
-![image-20230409225349414](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A-2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A/20230409235308064551_965_image-20230409225349414.png)
+![image-20230409225349414](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A/20230828210433617962_729_20230409235308064551_965_image-20230409225349414.png)
 
 这一部分结合实际比较容易理解。管理员进入系统后可以选择进行个人信息管理，或进行系统其他部分的管理。当进行其他部分管理时均为工作状态。管理员对航班、旅客或账单进行常规的增删改查后，完成工作，注销账号。在已登录状态注销账号进入未登录状态。管理员不管完成工作与否随时可注销账号。
 
@@ -345,7 +346,7 @@ abbrlink: 48981
 
 下面是整个预订系统的构件图。
 
-![image-20230409231814194](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A-2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A/20230409235310195363_408_image-20230409231814194.png)
+![image-20230409231814194](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A/20230828210434840176_157_20230409235310195363_408_image-20230409231814194.png)
 
 可以看到整个系统的依赖关系还是较为复杂的。一定程度上构件图是对类图依赖关系的强化。
 
@@ -355,7 +356,7 @@ abbrlink: 48981
 
 下面是该预订系统的部署图。
 
-![image-20230409234037704](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A-2013599-%E7%94%B0%E4%BD%B3%E4%B8%9A/20230409235311789954_391_image-20230409234037704.png)
+![image-20230409234037704](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E4%BD%9C%E4%B8%9A/20230828210436138065_382_20230409235311789954_391_image-20230409234037704.png)
 
 我们的系统是前后端分离的，通过TCP/IP协议进行信息交互。同时采用MariaDB作为数据库。软件开发商需要提供前端WebAPP，以及后端的实现，还要设计数据库模式。硬件上我们需要存储数据信息以及运行应用的服务器，应对高并发我们还要加设防火墙，并设置负载均衡节点。当然，为了让用户取票据和纸质凭据，我们还需要嵌入式系统和打印机。
 

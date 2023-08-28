@@ -20,11 +20,11 @@ Lenet5的提出在当时主要依靠人工进行特征提取的时代无疑是�
 
 关于维度表示的说明：
 
-![image-20230108195305664](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230305200443272609_409_image-20230108195305664.png)
+![image-20230108195305664](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230828210830689024_823_20230305200443272609_409_image-20230108195305664.png)
 
 整体的结构图如下所示：
 
-![image-20230108193022548](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230305200444819985_702_image-20230108193022548.png)
+![image-20230108193022548](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230828210831714613_857_20230305200444819985_702_image-20230108193022548.png)
 
 
 
@@ -199,7 +199,7 @@ $$
 $$
 我们可以通过`im2col`来进行优化，将卷积运算转化为矩阵相乘。[这篇论文](https://www.researchgate.net/publication/332186100_DeLTA_GPU_Performance_Model_for_Deep_Learning_Applications_with_In-depth_Memory_System_Traffic_Analysis)中对`im2col`实现的排布方式进行了非常直观的展示：
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230305200446840095_839_image-20230108225739278.png" alt="image-20230108225739278" width="80%" height="80%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230828210832783559_268_20230305200446840095_839_image-20230108225739278.png" alt="image-20230108225739278" width="80%" height="80%" />
 
 其中$C_i$为输入通道个数，图中为3。$C_o$为输出通道个数，图中为2。$H_0$和$W_0$代表卷积后输出图像的高和宽，对应于文中第一张图中的$OH$和$OW$
 $$
@@ -257,7 +257,7 @@ def forward(self, X):
 
 对于反向传播，可以通过下面简单的例子进行理解：
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230305200448882525_978_image-20230108223119000.png" alt="image-20230108223119000" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230828210834019523_589_20230305200448882525_978_image-20230108223119000.png" alt="image-20230108223119000" width="50%" height="50%" />
 
 列出 $a ， W ， z$ 的矩阵表达式如下:
 $$
@@ -301,7 +301,7 @@ $$
 
 
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230305200450427910_422_image-20230108223730899.png" alt="image-20230108223730899" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230828210835040764_715_20230305200450427910_422_image-20230108223730899.png" alt="image-20230108223730899" width="50%" height="50%" />
 
 可以得到
 $$
@@ -392,7 +392,7 @@ def backward(self, back_grad):
 
 全连接层与正常的神经网络基本相同。正向传播就是正常的线性变换，反向传播在实际实现时使用计算图的思想理解比较容易，比如下面是3节点层和2节点层反向传播的示意图：
 
-![image-20230108232916872](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230305200451954546_926_image-20230108232916872.png)
+![image-20230108232916872](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230828210836169019_246_20230305200451954546_926_image-20230108232916872.png)
 
 ```python
 class Linear(Layer):
@@ -429,7 +429,7 @@ python3.8，依赖numpy及matplotlib。
 
 使用54000个数据作为训练集，6000个数据作为验证集，Adam的学习率设置为1e-3。执行20个epoch得到的结果，测试集准确率为98.27%。
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230305200453760864_136_image-20230108234919998.png" alt="image-20230108234919998" width="80%" height="80%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230828210837132026_873_20230305200453760864_136_image-20230108234919998.png" alt="image-20230108234919998" width="80%" height="80%" />
 
 从验证集及损失函数看，模型比较有效的学得了训练集上的参数，且训练集和测试集的正确率同步上升，未发生明显的过拟合。由于并没有对模型进行更细致的参数调优或组合，和LeCun 论文中的 99.27%仍有微小的差距。
 
@@ -437,4 +437,4 @@ python3.8，依赖numpy及matplotlib。
 
 
 
-![image-20230108234646628](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230305200455107633_269_image-20230108234646628.png)
+![image-20230108234646628](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Lenet5%20%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/20230828210837983994_639_20230305200455107633_269_image-20230108234646628.png)

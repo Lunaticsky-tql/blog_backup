@@ -1,6 +1,7 @@
 ---
 title: Go 语言入门指南：slice使用解析
 categories: 笔记
+date: 2023-08-21 10:00:00
 tags:
   - Go
 abbrlink: 29701
@@ -164,7 +165,7 @@ printLenCap(nums)  // len: 5, cap: 8 [1 2 3 4 50]
 printLenCap(nums2) // len: 4, cap: 6 [3 4 50 60]
 ```
 
-![slice](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/golang%E5%88%87%E7%89%87/20230821221521427663_524_slice.jpg)
+![slice](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Go%20%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%EF%BC%9Aslice%E4%BD%BF%E7%94%A8%E8%A7%A3%E6%9E%90/20230828210826094432_897_20230821221521427663_524_slice.jpg)
 
 - nums2 执行了一个切片操作 `[2, 4)`，此时 nums 和 nums2 指向的是同一个数组。
 - nums2 增加 2 个元素 50 和 60 后，将底层数组下标 [4] 的值改为了 50，下标[5] 的值置为 60。

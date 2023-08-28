@@ -1,6 +1,7 @@
 ---
 title: Go 高质量编程实践
 categories: 笔记
+date: 2023-08-22 10:00:00
 tags:
   - Go
 abbrlink: 2118

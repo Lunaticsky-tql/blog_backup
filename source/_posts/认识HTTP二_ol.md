@@ -1,12 +1,12 @@
 ---
-title: 重新认识HTTP(二)
+title: HTTP总结(二)
 categories: 笔记
 tags:
   - 寄网
 abbrlink: 31511
 date: 2023-08-26 16:06:51
 ---
-# 重新认识HTTP(二)
+# HTTP总结(二)
 
 可以说，我们浏览网页，下载资源，甚至克隆一个感兴趣的github仓库，都在与HTTP协议打交道。但是，在计算机网络课程和考研中HTTP都不作为重点去讲述，而在面试和实际工作中却经常需要接触。因此更深入的了解HTTP协议显得尤为重要。[上一部分](https://lunaticsky-tql.github.io/posts/64429/)主要讲述了包括HTTP协议中报文发送和接受本身的内容，如请求方法，状态码，以及常见首部字段的含义。这一部分继续从连接的角度看HTTP协议。
 
@@ -39,7 +39,7 @@ date: 2023-08-26 16:06:51
 
 下面以客户端获取一个含有两个图片的网页为例说明比较HTTP1.0和HTTP1.1：
 
-![image-20230825212013023](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP%E4%BA%8C/20230825233745413813_440_image-20230825212013023.png)
+![image-20230825212013023](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A4%E8%AF%86HTTP%E4%BA%8C/20230828205258987659_478_20230825233745413813_440_image-20230825212013023.png)
 
 
 
@@ -55,7 +55,7 @@ cookie或许是我们上网中很熟悉的东西了。很多网站都会弹框�
 
 **cookie储存在客户端**。Server 可以在 HTTP response 中返回  `Set-Cookie` header 来告诉浏览器要设定 cookie。 设定的语法如下： 
 
-```plaintext
+```http
 Set-Cookie: [cookie名称]=[cookie值]
 ```
 
@@ -63,7 +63,7 @@ Set-Cookie: [cookie名称]=[cookie值]
 
 Request 中的 cookie header 会是  `[cookie名称]=[cookie值]` 的形式，用分号串接之后的结果： 
 
-```plaintext
+```http
 Cookie: [cookie1]=[value1]; [cookie2]=[value2]
 ```
 
@@ -170,7 +170,7 @@ cookie=value; max-age=3600
 
 现在主流的浏览器都是默认禁止第三方cookie的。如果希望了解更多可以参阅[这篇文章](https://zhuanlan.zhihu.com/p/131256002)
 
-#### Session
+### Session
 
 客户端第一次发送信息到服务器时，服务器为该客户端创建一个 session 对象，该 session 包含客户端身份信息，同时为该 session 生成一个 sessionID 。
 服务端将这个 sessionID 分配给客户端，客户端发送请求时带有此 sessionID ，服务端就可以区分客户端。
@@ -227,7 +227,7 @@ Basic 内容为： **用户名:密码** 的base64形式，如`lunaticsky:tqla314
 
 另外还有很多其他原因，比如这种基本认证浏览器会弹出一个弹窗要求用户输入用户名和密码，不能进行定制，用户体验不好。
 
-![image-20230825225412200](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP%E4%BA%8C/20230826160646173640_409_image-20230825225412200.png)
+![image-20230825225412200](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%A4%E8%AF%86HTTP%E4%BA%8C/20230828205300371135_814_20230826160646173640_409_image-20230825225412200.png)
 
 #### Session认证
 
@@ -247,4 +247,4 @@ Basic 内容为： **用户名:密码** 的base64形式，如`lunaticsky:tqla314
 
 ## 总结
 
-这一部分从HTTP连接的角度介绍了连接管理，连接状态保存和用户认证相关的内容。特别是根据笔试题目对cookie相关的知识点进行了较为详细的补充。后续会进一步从连接的角度对HTTP协议进行剖析。
+这一部分从HTTP连接的角度介绍了连接管理，连接状态保存和用户认证相关的内容。特别是根据最近笔试题目对cookie相关的知识点进行了较为详细的补充。后续会进一步从HTTP发展历程的角度重新深入的认识HTTP。

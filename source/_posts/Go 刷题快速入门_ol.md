@@ -1,6 +1,7 @@
 ---
 title: Go 刷题快速入门
 categories: 笔记
+date: 2023-08-23 10:00:00
 tags:
   - Go
 abbrlink: 41936

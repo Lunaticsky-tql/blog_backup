@@ -38,17 +38,17 @@ sudo port install i386-elf-gcc
 
 但是发现它安装过程中构建失败了。
 
-![image-20221003224714488](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20221003231400206876_223_image-20221003224714488.png)
+![image-20221003224714488](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20230828210509161934_583_20221003231400206876_223_image-20221003224714488.png)
 
 查看发现果然是架构问题：
 
-![image-20221003224809467](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20221003231401953713_177_image-20221003224809467.png)
+![image-20221003224809467](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20230828210510441170_930_20221003231401953713_177_image-20221003224809467.png)
 
 查看报错信息。谷歌后从[github issue](https://github.com/riscv-collab/riscv-gnu-toolchain/issues/800)中得知是有支持apple silicon版本的最新i386-elf-gcc的。
 
-![image-20221003225239013](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20221003231403860364_202_image-20221003225239013.png)
+![image-20221003225239013](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20230828210511905247_542_20221003231403860364_202_image-20221003225239013.png)
 
-![image-20221003225245971](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20221003231405125684_549_image-20221003225245971.png)
+![image-20221003225245971](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20230828210513865427_993_20221003231405125684_549_image-20221003225245971.png)
 
 有希望！但是按官网命令安装问题也没有解决，所谓补丁也不起效。后来尝试用homebrew安装：`brew install i386-elf-gdb`，但没有安装成功。提示
 
@@ -76,7 +76,7 @@ git config --global --add safe.directory 报错信息中homebrew-cask路径
 
 然后`make qemu`执行的过程也比较顺利。
 
-![image-20221003230427926](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20221003231407841829_266_image-20221003230427926.png)
+![image-20221003230427926](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20230828210515089897_183_20221003231407841829_266_image-20221003230427926.png)
 
 ### 调试
 
@@ -183,10 +183,10 @@ debug: $(UCOREIMG)
 
 已知问题: lab1 的`chellenge`无法正常切换`user_mode`，初步排查发现是出现了操作数异常，可能是`%esp`未正确赋值，但目前还没有找到方案。如果对此部分有较深研究，也欢迎交流。
 
-![image-20221130221829874](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20221130222055575294_180_image-20221130221829874.png)
+![image-20221130221829874](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20230828210516439336_347_20221130222055575294_180_image-20221130221829874.png)
 
-![image-20221130221851517](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20221130222057952350_733_image-20221130221851517.png)
+![image-20221130221851517](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20230828210517766871_274_20221130222057952350_733_image-20221130221851517.png)
 
 chellenge以外的部分以及后两个实验均可正确得到结果。
 
-![image-20221130222030887](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20221130222100838376_161_image-20221130222030887.png)
+![image-20221130222030887](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/Ucore%20Lab0%20on%20Apple%20Silicon%20Mac/20230828210519668627_236_20221130222100838376_161_image-20221130222030887.png)

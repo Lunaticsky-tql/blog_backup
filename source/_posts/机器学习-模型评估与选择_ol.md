@@ -12,25 +12,25 @@ abbrlink: 4810
 
 书后习题
 
-![image-20220930231043281](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234157710423_473_image-20220930231043281.png)
+![image-20220930231043281](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205809208213_235_20220930234157710423_473_image-20220930231043281.png)
 
 ### 经验误差和泛化误差
 
 #### 定义
 
-![image-20220930140833923](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234159328307_660_image-20220930140833923.png)
+![image-20220930140833923](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205812256325_334_20220930234159328307_660_image-20220930140833923.png)
 
-![image-20220930141041690](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234200690193_368_image-20220930141041690.png)
+![image-20220930141041690](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205813431862_658_20220930234200690193_368_image-20220930141041690.png)
 
 #### 解决过拟合现象：正则化
 
-![image-20220930141142762](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234202870906_724_image-20220930141142762.png)
+![image-20220930141142762](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205815454555_696_20220930234202870906_724_image-20220930141142762.png)
 
 ### 性能度量
 
 #### 基本概念
 
-![image-20220930163038120](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234204833875_372_image-20220930163038120.png)
+![image-20220930163038120](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205818125789_846_20220930234204833875_372_image-20220930163038120.png)
 
 #### P-R曲线和ROC曲线
 
@@ -40,28 +40,28 @@ abbrlink: 4810
 
 [知乎](https://zhuanlan.zhihu.com/p/92218196)上有一个案例对这些曲线描述的比较形象。
 
-![image-20220930194835021](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234208101296_478_image-20220930194835021.png)
+![image-20220930194835021](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205819444654_648_20220930234208101296_478_image-20220930194835021.png)
 
-![image-20220930194858579](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234209475943_307_image-20220930194858579.png)
+![image-20220930194858579](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205820611781_176_20220930234209475943_307_image-20220930194858579.png)
 
 TPR真阳性，FPR假阳性
 
 一个表现平平的分类器(表现是指分类标准能否将两种样本有效的分开，而threshold是指划分标准更倾向于查全率或准确率)
 
-<p align="center"><img alt="image-20220927211547461" height=""src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234211807031_249_norm.gif" width=""/></p>
+<p align="center"><img alt="image-20220927211547461" height=""src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205821765720_481_20220930234211807031_249_norm.gif" width=""/></p>
 
 一个更好一些的分类器
-<p align="center"><img alt="image-20220927211547461" height="" src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234215190380_315_norm2.gif" width=""/></p>
+<p align="center"><img alt="image-20220927211547461" height="" src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205824598151_175_20220930234215190380_315_norm2.gif" width=""/></p>
 
 F1计算
 
-<p align="center"><img src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234218188978_486_F1.gif" width="" hight=""/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205826410667_477_20220930234218188978_486_F1.gif" width="" hight=""/></p>
 
 ##### 用途
 
 基于P-R曲线可以大致评判机器学习模型的好坏
 
-![image-20220930224302678](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234219845677_195_image-20220930224302678.png)
+![image-20220930224302678](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205828242463_385_20220930234219845677_195_image-20220930224302678.png)
 
 ROC也是如此。
 
@@ -85,9 +85,9 @@ ROC也是如此。
 
 很像高中化学读图题的定性分析：
 
-![image-20220930222355725](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234221742723_477_image-20220930222355725.png)
+![image-20220930222355725](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205830154968_899_20220930234221742723_477_image-20220930222355725.png)
 
-![image-20220930222637642](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234223625316_668_image-20220930222637642.png)
+![image-20220930222637642](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205831728167_536_20220930234223625316_668_image-20220930222637642.png)
 
 就像做核酸”粉饰太平“一样(
 $$
@@ -101,7 +101,7 @@ $\operatorname{cost}_{0 \mid 1}$ 表示: 实际为正类, 而错判成负类的�
 
 
 
-![image-20220930142416369](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234224685263_266_image-20220930142416369.png)
+![image-20220930142416369](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205832760860_905_20220930234224685263_266_image-20220930142416369.png)
 
 
 
@@ -115,7 +115,7 @@ $\beta$&gt;1时查全率有更大影响；$\beta$&lt;1时查准率有更大影�
 
 对二分类问题，使用留出法不仅可估计出学习器 A 和 B 的测试错误率，还可获得两学习器分类结果的差别，使用McNemar 检验可以做到。
 
-![image-20220930233428713](https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234226080145_532_image-20220930233428713.png)
+![image-20220930233428713](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205834083424_981_20220930234226080145_532_image-20220930233428713.png)
 
 
 
@@ -139,6 +139,6 @@ $$
 
 偏差一方差分解说明，泛化性能是由**「学习算法的能力」**、**「数据的充分性」**以及**「学习任务本身的难度所共同决定」**的。
 
-<p align="center"><img alt="image-20220930230353084" height="50%" src="https://raw.githubusercontent.com/Lunaticsky-tql/my_picbed/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20220930234228241789_843_image-20220930230353084.png" width="50%"/></p>
+<p align="center"><img alt="image-20220930230353084" height="50%" src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9/20230828205835267931_997_20220930234228241789_843_image-20220930230353084.png" width="50%"/></p>
 
 随训练强度，偏差减小，方差增大，即学习的越充分，但受数据影响越大，可能出现过拟合现象。

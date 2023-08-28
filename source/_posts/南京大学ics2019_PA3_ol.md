@@ -16,15 +16,15 @@ date: 2023-05-29 23:59:01
 
 对于x86，"上文提到的新指令“比较多，这里先按在`nanos-lite`中`make ARCH=x86-nemu run`报错的顺序来补充指令。
 
-![image-20230501195612494](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235657523461_176_image-20230501195612494.png)
+![image-20230501195612494](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211426961668_883_20230601235657523461_176_image-20230501195612494.png)
 
 查看手册，这是`Grp7`中`lidt`指令。
 
-![image-20230501195859504](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235659951694_782_image-20230501195859504.png)
+![image-20230501195859504](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211428026749_969_20230601235659951694_782_image-20230501195859504.png)
 
 IDTR的格式在这，Figure9-1:
 
-![image-20230501202135298](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235705286388_738_image-20230501202135298.png)
+![image-20230501202135298](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211429350111_168_20230601235705286388_738_image-20230501202135298.png)
 
 因此我们的寄存器结构应该长这样:
 
@@ -37,7 +37,7 @@ struct{
 
 下面为其添加执行操作。我们可以在手册中查到对应的伪代码。因为我们用不到GDT(NEMU里没有分段机制)，因此只看上面部分即可。而且我们是模拟32位机器，根据我们寄存器结构的实现，我们只需要实现`ELSE`部分即可。
 
-![image-20230501202925594](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235710126502_482_image-20230501202925594.png)
+![image-20230501202925594](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211430306114_209_20230601235710126502_482_image-20230501202925594.png)
 
 综上，代码如下所示:
 
@@ -53,7 +53,7 @@ make_EHelper(lidt) {
 
 注册新指令，跑一下:
 
-![image-20230501205158212](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235712152820_107_image-20230501205158212.png)
+![image-20230501205158212](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211431479331_469_20230601235712152820_107_image-20230501205158212.png)
 
 嗯，该实现`int`指令了(之前注册过opcode_table，所以直接跳到这里了)
 
@@ -135,7 +135,7 @@ void raise_intr(uint32_t NO, vaddr_t ret_addr);
 
 然后是`iret`。这就是保存上下文部分的工作了，说明这一部分已经完成。
 
-![image-20230501215158239](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235717680355_998_image-20230501215158239.png)
+![image-20230501215158239](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211432470334_640_20230601235717680355_998_image-20230501215158239.png)
 
 ### 保存上下文
 
@@ -160,11 +160,11 @@ make_EHelper(iret) {
 
 `pusha`
 
-![image-20230501222920241](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235720131761_628_image-20230501222920241.png)
+![image-20230501222920241](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211433753019_996_20230601235720131761_628_image-20230501222920241.png)
 
 顾名思义，它的功能是把所有通用寄存器都压入栈中。这个可以说是非常赏心悦目了，对照实现即可。`popa`显然也是对称的，不再赘述。
 
-<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235723245458_604_image-20230501223135299.png" alt="image-20230501223135299" width="50%" height="50%" />
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211434803453_893_20230601235723245458_604_image-20230501223135299.png" alt="image-20230501223135299" width="50%" height="50%" />
 
 ```C++
 make_EHelper(pusha) {
@@ -201,7 +201,7 @@ __am_asm_trap:
 
 ### 事件分发
 
-![image-20230501223811235](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235726797182_626_image-20230501223811235.png)
+![image-20230501223811235](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211436161726_962_20230601235726797182_626_image-20230501223811235.png)
 
 讲义中指出，这是因为CTE的`__am_irq_handle()`函数并未正确识别出自陷事件. 根据`_yield()`的定义, `__am_irq_handle()`函数需要将自陷事件打包成编号为`_EVENT_YIELD`的事件。让它识别一下就好:
 
@@ -223,7 +223,7 @@ switch (e.event) {
 
 可以看到识别出来了。
 
-![image-20230501233745814](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235728897164_790_image-20230501233745814.png)
+![image-20230501233745814](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211437260313_511_20230601235728897164_790_image-20230501233745814.png)
 
 ### 恢复上下文
 
@@ -463,15 +463,15 @@ void init_proc() {
 
 但是为什么报错呢？使用`objdump -S dummy-x86 >dump.txt`查看`dummy`的反汇编代码，发现入口确实找对了，还是这个`endbr32`的 鬼。这好说，改一改编译选项的事，PA2已经遇到过了。
 
-![image-20230502154536429](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235731026927_345_image-20230502154536429.png)
+![image-20230502154536429](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211438200351_288_20230601235731026927_345_image-20230502154536429.png)
 
 加到`navy_apps`的`Makefile.compile`里面就好。
 
-![image-20230502155010170](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235735629917_395_image-20230502155010170.png)
+![image-20230502155010170](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211439456917_201_20230601235735629917_395_image-20230502155010170.png)
 
 同理，在`navy_apps`底下也要`make clean`才能生效。
 
-![image-20230502155347960](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235740625541_326_image-20230502155347960.png)
+![image-20230502155347960](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211440453947_652_20230601235740625541_326_image-20230502155347960.png)
 
 说明loader已经成功加载dummy。
 
@@ -559,7 +559,7 @@ do_syscall(c);
     }
 ```
 
-![image-20230515195959094](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235743907716_132_image-20230515195959094.png)
+![image-20230515195959094](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211441604924_901_20230601235743907716_132_image-20230515195959094.png)
 
 这次对了。0号事件好说。按照提示直接调用`_halt`
 
@@ -567,7 +567,7 @@ do_syscall(c);
     case SYS_exit: _halt(a[1]); break;
 ```
 
-![image-20230515200157973](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235747183942_216_image-20230515200157973.png)
+![image-20230515200157973](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211442505567_744_20230601235747183942_216_image-20230515200157973.png)
 
 ### 操作系统之上的TRM
 
@@ -585,7 +585,7 @@ int _write(int fd, void *buf, size_t count) {
 
 这一步就要man一下看看了。返回值的含义:
 
-![image-20230515203231772](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235751693727_656_image-20230515203231772.png)
+![image-20230515203231772](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211443525293_370_20230601235751693727_656_image-20230515203231772.png)
 
 因此可做如下实现(`do_syscall`中):
 
@@ -611,7 +611,7 @@ int _write(int fd, void *buf, size_t count) {
 
 好了，我们成功运行了永不停息的hello world。
 
-![image-20230515203537734](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235754766515_943_image-20230515203537734.png)
+![image-20230515203537734](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211444501936_479_20230601235754766515_943_image-20230515203537734.png)
 
 #### 堆区管理
 
@@ -649,7 +649,7 @@ void *_sbrk(intptr_t increment) {
 
 输出能够走缓冲区了:
 
-![image-20230515211709483](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235802225361_544_image-20230515211709483.png)
+![image-20230515211709483](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211445507441_346_20230601235802225361_544_image-20230515211709483.png)
 
 ### 必答题
 
@@ -709,7 +709,7 @@ void init_proc() {
 
 单元测试成功:
 
-![image-20230517093932147](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235805595522_997_image-20230517093932147.png)
+![image-20230517093932147](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211446786000_613_20230601235805595522_997_image-20230517093932147.png)
 
 ### 操作系统之上的IOE
 
@@ -768,7 +768,7 @@ size_t events_read(void *buf, size_t offset, size_t len)
 
 这一部分一开始直接把函数参数里的`len`给返回了，就会一直报`receive event`。
 
-![image-20230517120535802](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235809798522_812_image-20230517120535802.png)
+![image-20230517120535802](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211447927853_539_20230601235809798522_812_image-20230517120535802.png)
 
 更新文件描述表:
 
@@ -784,7 +784,7 @@ static Finfo file_table[] __attribute__((used)) = {
 
 正常工作:
 
-![image-20230517120133366](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235812963148_940_image-20230517120133366.png)
+![image-20230517120133366](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211449189955_553_20230601235812963148_940_image-20230517120133366.png)
 
 
 
@@ -810,17 +810,17 @@ size_t fb_write(const void *buf, size_t offset, size_t len)
 
 
 
-![image-20230517154453440](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235817127402_182_image-20230517154453440.png)
+![image-20230517154453440](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211453140815_191_20230601235817127402_182_image-20230517154453440.png)
 
 ### 运行仙剑奇侠传
 
 上一个vga实现`movsb`，紧接着实现`movswd`，将**编译好**的`pal`放到对应文件夹中，就可以运行了。
 
-![image-20230517164713444](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235821779651_126_image-20230517164713444.png)
+![image-20230517164713444](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211456492222_910_20230601235821779651_126_image-20230517164713444.png)
 
-![image-20230517164759642](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235826834827_871_image-20230517164759642.png)
+![image-20230517164759642](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211458145084_544_20230601235826834827_871_image-20230517164759642.png)
 
-![image-20230517170756063](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235833556085_425_image-20230517170756063.png)
+![image-20230517170756063](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211459457348_581_20230601235833556085_425_image-20230517170756063.png)
 
 ### 展示批处理系统
 
@@ -828,9 +828,9 @@ size_t fb_write(const void *buf, size_t offset, size_t len)
 
 
 
-![image-20230517170521104](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235836104923_738_image-20230517170521104.png)
+![image-20230517170521104](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211500565292_239_20230601235836104923_738_image-20230517170521104.png)
 
-![image-20230517170629690](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235838881129_188_image-20230517170629690.png)
+![image-20230517170629690](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211502331847_228_20230601235838881129_188_image-20230517170629690.png)
 
 ### 必答题
 
@@ -840,23 +840,23 @@ size_t fb_write(const void *buf, size_t offset, size_t len)
 
 
 
-![image-20230517174652184](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235842381091_613_image-20230517174652184.png)
+![image-20230517174652184](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211503669868_404_20230601235842381091_613_image-20230517174652184.png)
 
-![image-20230517174823390](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235844474454_763_image-20230517174823390.png)
+![image-20230517174823390](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211504698736_903_20230601235844474454_763_image-20230517174823390.png)
 
 可以看到打开`mgo.mkf`调用了库函数`fopen`
 
-![image-20230517174841335](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235849337123_726_image-20230517174841335.png)
+![image-20230517174841335](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211505735790_671_20230601235849337123_726_image-20230517174841335.png)
 
 播放暂停时还会调用
 
-![image-20230517175011723](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235852617171_673_image-20230517175011723.png)
+![image-20230517175011723](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211506634831_668_20230601235852617171_673_image-20230517175011723.png)
 
 也是直接调用库函数。
 
 这一部分的过程[网上](https://www.cnblogs.com/TKK-YLF/articles/16737509.html)有一张图画的非常清晰，就不班门弄斧了:
 
-![image-20230517180110224](https://raw.githubusercontent.com/Lunaticsky-tql/blog_article_resources/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230601235857281415_765_image-20230517180110224.png)
+![image-20230517180110224](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6ics2019_PA3/20230828211507894301_491_20230601235857281415_765_image-20230517180110224.png)
 
 ##### 更新位置
 
