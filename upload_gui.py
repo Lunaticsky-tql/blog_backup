@@ -36,7 +36,6 @@ blog_img_dir = os.path.join(blog_base_dir, "themes", blog_theme, "source", "img"
 category_list = []
 tag_list = []
 
-code_pattern = re.compile(r'```(.+?)\n([\s\S]*?)\n```')
 with open(os.path.join(blog_base_dir,"uploader_config.yml"), 'r', encoding='utf-8') as uploader_config_file:
     uploader_config = yaml.safe_load(uploader_config_file)
 with open(os.path.join(blog_base_dir,"github_config.yml"), 'r', encoding='utf8') as github_config_file:
