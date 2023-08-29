@@ -1,13 +1,18 @@
 import re, os, requests, shutil
 import base64
+import sys
 import time
 from itertools import chain
 
+import yaml
 from requests.adapters import HTTPAdapter
 from urllib3 import Retry
 
+blog_base_dir = sys.path[0]
 img_patten = r'!\[.*?\]\((.*?)\)+|<img.*?src=[\'\"](.*?)[\'\"].*?>'
-token = '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'
+with open(os.path.join(blog_base_dir, "github_config.yml"), 'r', encoding='utf8') as github_config_file:
+    github_config = yaml.safe_load(github_config_file)
+    token = github_config['token']
 
 
 def download_img(url, asset_folder):

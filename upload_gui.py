@@ -599,7 +599,7 @@ class Uploader(ttk.Frame):
 
     def upload_to_github(self, md_path, md_title, config, is_hide=False):
         """Upload the file to GitHub and my blog"""
-        md_title = md_title.replace("\"", "").replace("(", "").replace(")", "")
+        md_title = md_title.replace("\"", "").replace("(", "").replace(")", "").replace("/", "").replace(":", "")
         with open(md_path, 'r', encoding='utf-8') as md:
             text = md.read()
             is_dir_exists = self.upload_dir(md_title, text)
@@ -617,6 +617,7 @@ class Uploader(ttk.Frame):
                 self.resultview.insert("", END, values=["Uploading images..."])
                 self.resultview.insert("", END, values=["image processed {0}/{1}".format(0, len(matches))])
                 processed = 0
+                print(matches)
                 for match in list(chain(*matches)):
                     original_match = match
                     if not Uploader.uploading:
@@ -678,7 +679,6 @@ class Uploader(ttk.Frame):
             content = self.add_article_config(text, config, is_hide)
             self.write_new_md_to_local(content, new_md_path)
             # if temp md file exists, delete it
-            print("Temp_md_path: ", temp_md_path)
             if os.path.exists(temp_md_path):
                 os.remove(temp_md_path)
             if is_hide:
