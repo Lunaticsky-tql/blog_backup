@@ -1,9 +1,10 @@
 ---
-title: 重新认识HTTP/2
+title: 重新认识HTTP2
 categories: 笔记
 tags:
   - 寄网
-date: 2023-08-29 14:27:14
+abbrlink: 46608
+date: 2023-08-29 21:49:49
 ---
 # 重新认识HTTP/2
 
@@ -15,11 +16,13 @@ HTTP/1.1 链接需要请求以正确的顺序发送，理论上可以用一些�
 
 <img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142651995802_532_image-20230828223930304.png" alt="image-20230828223930304" width="67%" height="67%" />
 
-为此，在 2010 年早期，谷歌通过实践了一个实验性的 SPDY  协议。这种在客户端和服务器端交换数据的替代方案引起了在浏览器和服务器上工作的开发人员的兴趣。明确了响应数量的增加和解决复杂的数据传输，SPDY  成为了 HTTP/2 协议的基础。
+为此，在 2010 年早期，谷歌通过实践了一个实验性的 SPDY  协议。SPDY并不是字母缩略词，而仅仅是"speedy"的缩写。它是对HTTP协议的增强，包括数据流的多路复用、请求优先级以及HTTP报头压缩等。事实上这就是HTTP/2所主要新增的内容。不过一开始，SPDY并不用于取代HTTP，它只是修改了HTTP的请求与应答在网络上传输的方式；这意味着只需增加一个SPDY传输层，现有的所有服务端应用均不用做任何修改。后来，SPDY的成果被采纳而最终演变为HTTP/2。
+
+<img src="https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829213505935335_240_image-20230829212355918.png" alt="image-20230829212355918" width="50%" height="50%" />
 
 HTTP/2 在 HTTP/1.1 有几处基本的不同：
 
-- HTTP/2 是二进制协议而不是文本协议。不再可读，也不可无障碍的手动创建，改善的优化技术现在可被实施。
+- HTTP/2 是二进制协议而不是文本协议。不再可读，也不可无障碍的手动创建。
 - 这是一个多路复用协议。并行的请求能在同一个链接中处理，移除了 HTTP/1.x 中顺序和阻塞的约束。
 - 压缩了标头。因为标头在一系列请求中常常是相似的，其移除了重复和传输重复数据的成本。
 - 其允许服务器在客户端缓存中填充数据，通过服务器推送的机制来提前请求。
@@ -28,7 +31,7 @@ HTTP/2 在 HTTP/1.1 有几处基本的不同：
 
 ## 实践基础
 
-首先，现在的HTTP/2连接几乎都是 HTTP over TLS (即 HTTPS) 的。关于HTTPS，后面会详细介绍。这意味着，我们无法像HTTP/1.x版本一样，若不启用HTTPS，是可以用wireshark抓到明文包的。
+首先，现在的HTTP/2连接几乎都是 HTTP over TLS (即 HTTPS) 的。关于HTTPS，后面会详细介绍。这意味着，我们无法像HTTP/1.x版本一样若不启用HTTPS，是可以用wireshark抓到明文包的。
 
 但是，我们也不是没有办法。毕竟我们从浏览器的F12中就能看到HTTP/2的一些信息的，浏览器知道怎么解密这些信息。是的，否则我们也无法看到想看到的页面。
 
@@ -66,7 +69,9 @@ sudo tcpdump host 103.144.218.5 -w mydump.pcap
 
 以我自己的电脑为例，在终端输入`ifconfig`，查看wifi对应网卡的ip地址，如下所示：
 
-![image-20230829103603439](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142654100695_258_image-20230829103603439.png)
+![image-20230829212654935](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829213511943925_465_image-20230829212654935.png)
+
+可以看到ip地址为`10.136.68.170`。后文中用“客户端”指代。
 
 ## HTTP2协商
 
@@ -93,7 +98,7 @@ HTTP2-Settings: <base64url encoding of HTTP/2 SETTINGS payload>
 如果服务端不同意升级或者不支持 `Upgrade` 所列出的协议，直接忽略即可（当成 HTTP/1.1 请求，以 HTTP/1.1 响应）；如果服务端同意升级，那么需要这样响应：
 
 ```http
-HTTPHTTP/1.1 101 Switching Protocols
+HTTP/1.1 101 Switching Protocols
 Connection: upgrade
 Upgrade: h2c
 
@@ -134,11 +139,13 @@ Connection Preface 的开头是一个固定的字节序列(可以认为这是一
 
 ## HTTP/2 Stream
 
-流(Stream) 是 HTTP/2 协议的核心, 因为在 HTTP/1.x 中, 所有的请求都是在单个 TCP 连接上顺序发送的, HTTP/2  引入了 Stream 的概念, Stream 实际上是一个逻辑概念, 是虚拟的, 并非真实存在的对象。
+**流(Stream)** 是 HTTP/2 协议的核心, 因为在 HTTP/1.x 中, 所有的请求都是在单个 TCP 连接上顺序发送的, HTTP/2  引入了 Stream 的概念, Stream 实际上是一个逻辑概念, 是虚拟的, 并非真实存在的对象。
 
- 一个 TCP 连接上可以同时存在多个 Stream, 这些 Stream 可以并发地传输数据这些数据被称作帧(frame)。因此实际上, HTTP/2 Stream 是对 TCP 连接的多路复用  (Multiplexing)。
+ 一个 TCP 连接上可以同时存在多个 Stream, 这些 Stream 可以并发地传输数据这些数据被称作**帧(Frame)**。因此实际上, HTTP/2 Stream 是对 TCP 连接的多路复用  (Multiplexing)。
 
-在 frame 的结构中我们看到,  frame header 中有 Stream Identifier 字段, 用于指示该 frame 所属的 Stream 序号, 当一个  Stream Identifier 为 N 的 frame 在 TCP 链路上传输时, 我们就可以认为它是在 Stream N 上传输.  Stream 需要由一方主动创建, [RFC 7540](https://link.zhihu.com/?target=https%3A//tools.ietf.org/html/rfc6455) 要求**由客户端初始化的 Stream, 其编号 (即 Identifier) 必须是奇数, 而由服务端初始化的 Stream,  其编号必须是偶数**。特别地, 编号为 0 的 Stream 是用来传输整个 (TCP) 连接的控制消息的。
+后面的内容若提到“流”均指`Stream`，提到”帧“均指`Frame`。
+
+在 Frame 的结构中我们看到,  Frame Header 中有 Stream Identifier 字段, 用于指示该 frame 所属的 Stream 序号, 当一个  Stream Identifier 为 N 的 frame 在 TCP 链路上传输时, 我们就可以认为它是在 Stream N 上传输.  Stream 需要由一方主动创建, [RFC 7540](https://link.zhihu.com/?target=https%3A//tools.ietf.org/html/rfc6455) 要求**由客户端初始化的 Stream, 其编号 (即 Identifier) 必须是奇数, 而由服务端初始化的 Stream,  其编号必须是偶数**。特别地, 编号为 0 的 Stream 是用来传输整个 (TCP) 连接的控制消息的。
 
 ![image-20230829112913643](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142659977825_226_image-20230829112913643.png)
 
@@ -203,7 +210,7 @@ HTTP/2 在单个 TCP 连接上虚拟出多个 Stream, 多个 Stream 实现对一
 
 CSS文件流是js文件流的从属流，权重较低。
 
-## HTTP/2 frame
+## HTTP/2 Frame
 
 我们在计网课上学过，HTTP/2是使用二进制分帧传输的。在这里便对帧涉及到的细节进行讲述。
 
@@ -211,19 +218,19 @@ CSS文件流是js文件流的从属流，权重较低。
 
 ![image-20230829110616241](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142708629121_799_image-20230829110616241.png)
 
-- Length 字段长度为 3 字节, 以字节为单位指示 frame 的 Payload 的长度(即该字段指示的长度不包含 9 字节的 frame header)
-- Type 字段长度为 1 字节, 指示 frame 的类型
-- Flags 字段长度为 1 字节, Flags 字段与 frame 的类型有关, 以 bit 位来表征特定类型 frame 的特定设置
-- R 字段长度为 1 比特, 它是 Reserve 的首字母, 即该字段是保留字段, 目前必须设置为 0
-- Stream Identifier 是 31 位的无符号整数, 它的值代表流编号, 当该字段非 0 时, 表示当前帧属于某个特定的 Stream , 当其为 0 时, 代表该帧是属于整个 TCP 连接的
+- `Length` 字段长度为 3 字节, 以字节为单位指示 frame 的 Payload 的长度(即该字段指示的长度不包含 9 字节的 frame header)
+- `Type` 字段长度为 1 字节, 指示 frame 的类型
+- `Flags` 字段长度为 1 字节, Flags 字段与 frame 的类型有关, 以 bit 位来表征特定类型 frame 的特定设置
+- `R` 字段长度为 1 比特, 它是 Reserve 的首字母, 即该字段是保留字段, 目前必须设置为 0
+- `Stream Identifier` 是 31 位的无符号整数, 它的值代表流编号, 当该字段非 0 时, 表示当前帧属于某个特定的 Stream , 当其为 0 时, 代表该帧是属于整个 TCP 连接的
 
-因为 Length 字段的长度为 3 字节, 所以在 HTTP/2 中, 一个 frame 的最大长度为 $2^{24}$ 字节的 Payload + 9 字节的 header, 在实际交互中, 客户端和服务端任何一方都可以通过 SETTINGS frame 来设置自己所接受的 frame  payload 的最大长度, 这个长度的范围可以取$2^{14}$  到 $2^{24}-1$ (以字节为单位) 的区间内任意一个值,  当设置了该最大值时, 若在以后的通信中接收到的 frame 的 payload 超过之前的设定, 则接收方应发送  FRAME_SIZE_ERROR 错误, 尽管在 HTTP/2 中, frame payload 最大可以设置为 $2^{24}-1$  个字节的大小, 但对于时延敏感的 frame (如 RST_STREAM, 类似于 TCP 的 rst, 用于复位连接) 当 frame  数据过大时传输效率低下, 将会影响整体的性能。
+因为 Length 字段的长度为 3 字节, 所以在 HTTP/2 中, 一个 frame 的最大长度为 $2^{24}$ 字节的 Payload + 9 字节的 header, 在实际交互中, 客户端和服务端任何一方都可以通过 `SETTINGS` frame 来设置自己所接受的 frame payload 的最大长度, 这个长度的范围可以取$2^{14}$  到 $2^{24}-1$ (以字节为单位) 的区间内任意一个值,  当设置了该最大值时, 若在以后的通信中接收到的 frame 的 payload 超过之前的设定, 则接收方应发送  `FRAME_SIZE_ERROR` 错误, 尽管在 HTTP/2 中, frame payload 最大可以设置为 $2^{24}-1$  个字节的大小, 但对于时延敏感的 frame (如 `RST_STREAM`, 类似于 TCP 的 rst, 用于复位连接) 当 frame  数据过大时传输效率低下, 将会影响整体的性能。
 
-以下面这个`SETTING`帧为例。这是一个没有载荷的SETTING帧，是客户端向服务器发ACK。
+以下面这个`SETTING`帧为例。这是一个没有载荷的`SETTING`帧，是客户端向服务器发ACK。
 
 ![image-20230829111247968](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142709689208_586_image-20230829111247968.png)
 
-### DATA frame
+### DATA 帧
 
 ![image-20230829123200882](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142710882929_634_image-20230829123200882.png)
 
@@ -231,17 +238,17 @@ CSS文件流是js文件流的从属流，权重较低。
 
 当需要使用 padding 时, 需要在 frame header 中设置标志, padding 的标志值为 `0x8`, 在设置标识时可以将所有标识位按位或, 写到标识位对应的  offset 上, 它的标志值为` 0x8` 代表需要将标识字段的第四位二进制位设置成 1。
 
-当设置了 padding 标识后, `Pad  length` 字段指示 padding 的长度, 而 Padding 字段便是相应长度的数据, 这里的数据是没有任何语义的, 需要都设置为 0, 接收方若收到设置了 padding 标识的 DATA frame, 并且它的 padding 字段非 0 可以返回 `Connection Error`。若 Pad length 指示的长度与实际的 Padding 长度不匹配, 则接收方应立即报告 `Connection Error`。
+当设置了 padding 标识后, `Pad length` 字段指示 padding 的长度, 而` Padding` 字段便是相应长度的数据, 这里的数据是没有任何语义的, 需要都设置为 0。 接收方若收到设置了 padding 标识的 DATA frame, 并且它的 padding 字段非 0 可以返回 `Connection Error`。若 Pad length 指示的长度与实际的 padding 长度不匹配, 则接收方应立即报告 `Connection Error`。
 
 以下面这个博客css文件的DATA帧为例，就没有padding。
 
 ![image-20230829123341595](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142711803565_423_image-20230829123341595.png)
 
-前面讲到了流的生命周期，DATA frame 只能在状态为 open 或 half-closed (remote) 状态的 Stream 上发送, 当接收方收到不属于这两种状态的 Stream 的 DATA frame 时, 应立即报告 `STREAM_CLOSED` 的 `Stream Error`
+前面讲到了流的生命周期，DATA frame 只能在状态为 open 或 half-closed (remote) 状态的 Stream 上发送, 当接收方收到不属于这两种状态的 Stream 的 DATA frame 时, 应立即报告 `STREAM_CLOSED` 的 `Stream Error`。
 
-### HEADERS frame
+### HEADERS 帧
 
-HEADERS frame 用来初始化一个新的 Stream 或传输 HTTP/2 Header Block (将在下面讨论), Header frame 的 frame type 为 0x1, 它的 Payload 结构[如下所示](https://datatracker.ietf.org/doc/html/rfc7540#page-32):
+`HEADERS` frame 用来初始化一个新的 Stream 或传输 HTTP/2 Header Block (将在下面讨论), `HEADERS` frame 的 frame type 为 0x1, 它的 Payload 结构[如下所示](https://datatracker.ietf.org/doc/html/rfc7540#page-32):
 
 ![image-20230829114341902](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86HTTP2/20230829142713340881_806_image-20230829114341902.png)
 
