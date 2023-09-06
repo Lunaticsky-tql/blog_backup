@@ -4,7 +4,12 @@ url: http://Lunaticsky-tql.github.io
 # Options: square, scrollable
 tag_option_ui: square
 # Turn on the random sleep time when uploading when encountering the request limitation from GitHub
-random_sleep_uploading: false
+random_sleep_uploading: true
+# Proxy setting for accessing GitHub in China
+proxy:
+    http: http://127.0.0.1:7890
+    https: http://127.0.0.1:7890
+# Here is the path to your local repository
 windows:
     initial_browse_dir: 'C:\Users\LENOVO\Desktop'
 linux:

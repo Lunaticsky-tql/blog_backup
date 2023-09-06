@@ -29,20 +29,21 @@ if platform.system().lower() == 'windows':
 else:
     is_windows = False
 
-blog_base_dir =sys.path[0]
+blog_base_dir = sys.path[0]
 blog_dir = os.path.join(blog_base_dir, "source", "_posts")
 blog_theme = "fluid"
 blog_img_dir = os.path.join(blog_base_dir, "themes", blog_theme, "source", "img")
 category_list = []
 tag_list = []
 
-with open(os.path.join(blog_base_dir,"uploader_config.yml"), 'r', encoding='utf-8') as uploader_config_file:
+with open(os.path.join(blog_base_dir, "uploader_config.yml"), 'r', encoding='utf-8') as uploader_config_file:
     uploader_config = yaml.safe_load(uploader_config_file)
-with open(os.path.join(blog_base_dir,"github_config.yml"), 'r', encoding='utf8') as github_config_file:
+with open(os.path.join(blog_base_dir, "github_config.yml"), 'r', encoding='utf8') as github_config_file:
     github_config = yaml.safe_load(github_config_file)
 headers = {
     'Authorization': 'token ' + github_config['token']
 }
+proxy = uploader_config['proxy']
 url_base = 'https://api.github.com/repos/{}/{}/contents/'.format(github_config['user_name'], github_config['repo'])
 optional_tip = ['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'light']
 
@@ -579,7 +580,7 @@ class Uploader(ttk.Frame):
     def upload_dir(self, md_name, text):
         # test if the directory exists on GitHub
         url_dict = url_base + md_name
-        r = requests.get(url_dict, headers=headers)
+        r = requests.get(url_dict, headers=headers, proxies=proxy)
         if r.status_code == 200:
             self.resultview.insert("", END, values=["Directory already exists"])
             return True
@@ -591,7 +592,7 @@ class Uploader(ttk.Frame):
             'content': md_base64.decode('utf-8'),
         }
         data = json.dumps(data)
-        r = requests.put(url, headers=headers, data=data)
+        r = requests.put(url, headers=headers, proxies=proxy, data=data)
         if r.status_code == 201:
             self.resultview.insert("", END, values=["Directory created!"])
             return False
@@ -697,7 +698,7 @@ class Uploader(ttk.Frame):
             # get the old md file sha
             url_md = url_base + md_title + '/' + md_title + '.md'
             md_base64 = base64.b64encode(content.encode('utf-8'))
-            r = requests.get(url_md, headers=headers, verify=False)
+            r = requests.get(url_md, headers=headers, proxies=proxy, verify=False)
             if r.status_code == 200:
                 self.update_md(md_base64, r, url_md)
             else:
@@ -755,7 +756,7 @@ class Uploader(ttk.Frame):
         url_dict = url_base + md_name
         # check if the image exists on GitHub
         if is_dir_exists:
-            r = requests.get(url_dict, headers=headers)
+            r = requests.get(url_dict, headers=headers, proxies=proxy)
             if r.status_code == 200:
                 for file in r.json():
                     if file['sha'] == img_sha1:
@@ -769,7 +770,7 @@ class Uploader(ttk.Frame):
             'content': img_data.decode('utf-8'),
         }
         data = json.dumps(data)
-        r = requests.put(url, headers=headers, data=data)
+        r = requests.put(url, headers=headers, proxies=proxy, data=data)
         # return the download url
         return r.json()['content']['download_url'], False
 
@@ -816,7 +817,7 @@ class Uploader(ttk.Frame):
             'sha': r.json()['sha'],
         }
         data = json.dumps(data)
-        r = requests.put(url_md, headers=headers, data=data)
+        r = requests.put(url_md, headers=headers, proxies=proxy, data=data)
         if r.status_code == 200:
             self.resultview.item(self.resultview.get_children()[-1],
                                  values=["new md file saved to local and updated to GitHub"])
@@ -830,7 +831,7 @@ class Uploader(ttk.Frame):
             'content': md_base64.decode('utf-8'),
         }
         data = json.dumps(data)
-        r = requests.put(url_md, headers=headers, data=data, verify=False)
+        r = requests.put(url_md, headers=headers, proxies=proxy, data=data, verify=False)
         if r.status_code == 201:
             self.resultview.item(self.resultview.get_children()[-1],
                                  values=["new md file saved to local and created to GitHub"])
@@ -842,7 +843,7 @@ class Uploader(ttk.Frame):
     def find_article_info(path):
         tags = []
         cats = []
-        get_categories_and_tags(cats,tags,path)
+        get_categories_and_tags(cats, tags, path)
         return cats, tags
 
     @staticmethod
