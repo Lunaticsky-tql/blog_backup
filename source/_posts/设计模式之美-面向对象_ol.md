@@ -1,12 +1,12 @@
 ---
-title: 设计模式之美-重新认识面向对象
+title: 设计模式之美-面向对象
 categories: 笔记
 tags:
   - 设计模式
-abbrlink: 43433
-date: 2023-09-11 16:28:09
+abbrlink: 17442
+date: 2023-09-11 16:37:38
 ---
-# 设计模式之美-重新认识面向对象
+# 设计模式之美-面向对象
 
 ## 大纲
 
@@ -14,9 +14,9 @@ date: 2023-09-11 16:28:09
 
 设计模式或许显得有些“屠龙技”，但有了这些思想，能让我们站在更高的视角去看软件开发，而不是迷失在框架的细节里。
 
-这一部分主要对“设计原则与思想：面向对象”进行总结。
+这一部分主要对“设计原则与思想：面向对象”进行总结，从软件设计的角度重新认识面向对象。
 
-![image-20230911102731242](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/20230911162803575003_338_image-20230911102731242.png)
+![image-20230911102731242](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/20230911163729034110_551_image-20230911102731242.png)
 
 ## 面向对象
 
@@ -268,7 +268,7 @@ date: 2023-09-11 16:28:09
 
 这确实更忠实的反映了原本的意思，但是更复杂的情况，比如会不会叫，会不会下蛋等，阁下又该如何应对？那估计就要组合爆炸了。类的继承层次会越来越深、继承关系会越来越复杂。
 
-![image-20230910223118620](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/20230911162807231208_166_image-20230910223118620.png)
+![image-20230910223118620](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BE%8E-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/20230911163736193761_420_image-20230910223118620.png)
 
 我们可以利用**组合（composition）、接口(interface)、委托（delegation）**三个技术手段，一块儿来解决刚刚继承存在的问题。
 
