@@ -1,5 +1,5 @@
 ---
-title: 重新认识HTTP2
+title: 重新认识HTTP/2
 categories: 笔记
 tags:
   - 寄网
