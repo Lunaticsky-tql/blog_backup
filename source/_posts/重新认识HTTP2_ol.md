@@ -31,9 +31,9 @@ HTTP/2 在 HTTP/1.1 有几处基本的不同：
 
 ## 实践基础
 
-首先，现在的HTTP/2连接几乎都是 HTTP over TLS (即 HTTPS) 的。关于HTTPS，后面会详细介绍。这意味着，我们无法像HTTP/1.x版本一样若不启用HTTPS，是可以用wireshark抓到明文包的。
+首先，现在的HTTP/2连接几乎都是 HTTP over TLS (即 HTTPS) 的。关于HTTPS，后面会详细介绍。这意味着，我们无法像HTTP/1.x版本一样如果不是HTTPS就可以用wireshark抓到明文包的。
 
-但是，我们也不是没有办法。毕竟我们从浏览器的F12中就能看到HTTP/2的一些信息的，浏览器知道怎么解密这些信息。是的，否则我们也无法看到想看到的页面。
+但是，我们也不是没有办法。毕竟我们从浏览器的F12中就能看到HTTP/2的一些信息。浏览器知道怎么解密这些信息。是的，否则我们也无法看到想看到的页面。
 
 具体来说，Chrome 或者 Firefox 都支持: 如果设置了环境变量 `SSLKEYLOGFILE`, 就把 SSL/TLS 的` pre-master  secret key `写到设置的文件里面去. 之后可以使用这个` pre-master secret key` 文件在 wireshark  里面解密加密的流量。
 

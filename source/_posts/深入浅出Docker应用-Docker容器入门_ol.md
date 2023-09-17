@@ -282,7 +282,7 @@ docker ps -a
 
 1. 创建容器指定名称的容器
 
-通过以下的一条命令，我们就可以完成下载busybox的容器镜像，创建名为busybox-1的容器，为了让容器可以在创建之后长期运行我们要使用-it参数，为了让容器在启动之后再后台运行，我们需要使用-d参数。在容器启动之后我们使用docker ps命令查询正在运行的容器。
+通过以下的一条命令，我们就可以完成下载busybox的容器镜像，创建名为busybox-1的容器，为了让容器可以在创建之后长期运行我们要使用-it参数，为了让容器在启动之后在后台运行，我们需要使用-d参数。在容器启动之后我们使用docker ps命令查询正在运行的容器。
 
 ```shell
 docker run -itd --name ubuntu-2 ubuntu
@@ -450,7 +450,7 @@ apt-get install -y python3 net-tools curl
 
 3. 运行服务
 
-接下来我们启动一个默认的python3 http服务，服务启动在8000端口，并使用`nohup`命令将服务设置为在后台运行(nohup:ignoring input and appending output to 'nphup.out'按回车)。在服务启动之后，我们再容器中使用curl测试一下服务的运行状态。会看到http服务返回了网页。
+接下来我们启动一个默认的python3 http服务，服务启动在8000端口，并使用`nohup`命令将服务设置为在后台运行(nohup:ignoring input and appending output to 'nphup.out'按回车)。在服务启动之后，我们在容器中使用curl测试一下服务的运行状态。会看到http服务返回了网页。
 
 ```shell
 nohup python3 -m http.server 8000 &
@@ -479,7 +479,7 @@ curl [容器IP]:8000
 
 ![image-20230905102847301](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E5%BA%94%E7%94%A8-Docker%E5%AE%B9%E5%99%A8%E5%85%A5%E9%97%A8/20230906115120768011_197_image-20230905102847301.png)
 
-再上一个步骤中我们通过宿主机访问了容器内的服务。除此之外我们还可以在宿主机中通过docker top命令来查看容器中正在运行的具体进程。其命令的语法为docker top 容器名。我们输入如下命令，可以看到ubuntu-3容器运行着2个进程，分别是bash控制台进程和python3http服务器进程。
+在上一个步骤中我们通过宿主机访问了容器内的服务。除此之外我们还可以在宿主机中通过docker top命令来查看容器中正在运行的具体进程。其命令的语法为docker top 容器名。我们输入如下命令，可以看到ubuntu-3容器运行着2个进程，分别是bash控制台进程和python3http服务器进程。
 
 ```shell
 docker top ubuntu-3
