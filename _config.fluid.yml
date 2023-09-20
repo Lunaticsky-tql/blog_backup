@@ -64,8 +64,8 @@ code:
       # 在链接中挑选 style 填入
       # Select a style in the link
       # See: https://highlightjs.org/static/demo/
-      style: "github gist"
-      style_dark: "dark"
+      style: "github"
+      style_dark: "github-dark"
 
     prismjs:
       # 在下方链接页面右侧的圆形按钮挑选 style 填入，也可以直接填入 css 链接
@@ -242,7 +242,8 @@ custom_css:
   - /css/remove-shadow.css
   - /css/zan.css
   - /css/code_fold
-  - /css/link.css
+  - /css/link
+  # - /css/link.css
 
 # 网页访问统计
 # Analysis of website visitors

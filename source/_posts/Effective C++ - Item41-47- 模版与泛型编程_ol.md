@@ -3,6 +3,7 @@ title: Effective C++ - Item41-47 - 模版与泛型编程
 categories: 笔记
 tags:
   - C++
+abbrlink: 4565
 date: 2023-09-19 21:54:11
 ---
 # Effective C++ - Item41-47 - 模版与泛型编程
