@@ -1,12 +1,12 @@
 ---
-title: Effective C++-让自己习惯C++
+title: Effective C++ - Item1-4 - 让自己习惯C++ 
 categories: 笔记
 tags:
   - C++
 abbrlink: 53266
 date: 2023-09-18 22:22:08
 ---
-# Effective C++-让自己习惯 C++
+# Effective C++ - Item1-4 - 让自己习惯 C++ 
 
 ### 总览
 

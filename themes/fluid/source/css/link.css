@@ -9,7 +9,15 @@
     transition: background 150ms ease;
 
 }
+
+
 .markdown-body a:hover, .markdown-body a:focus {
     text-decoration: none;
     background: #d5effa;
   }
+/* class=nchorjs-link的链接不显示背景色 */
+.markdown-body a.anchorjs-link {
+    background: transparent;
+    box-shadow: none;
+    border-bottom: none;
+}
