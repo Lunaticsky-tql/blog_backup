@@ -61,17 +61,5 @@
                       <% import_js(theme.static_prefix.busuanzi, 'busuanzi.pure.mini.js' , 'defer' ) %>
                         <% } %>
                           <% } %>
-                            <!-- add a sorce code icon -->
-                            <span class="post-meta mr-2">
-                              <i class="iconfont icon-code"></i>
-                              <!-- a link with white font color -->
-                              <!-- <a href="https://butterfly.js.org/posts/4aa8abbe/" style="color: #fff">Source Code</a> -->
-                              <!-- https://github.com/Lunaticsky-tql/blog_article_resources/blob/main/page.title.md -->
-                              <!-- construct the souce code url-->
-                              <% var
-                                source_code_url="https://github.com/Lunaticsky-tql/blog_article_resources/blob/main/" +
-                                page.title + "/" +page.title+".md" %>
-                                <a href="<%- source_code_url %>" style="color: #EA7A99">Article Resource Link</a>
-                            </span>
   </div>
   <% } %>

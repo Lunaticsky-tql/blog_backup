@@ -2,7 +2,7 @@
 title: Effective C++ - Item13-17 - 资源管理
 categories: 笔记
 tags:
-  - C++
+  - EffectiveC++
 abbrlink: 30855
 date: 2023-09-19 10:46:30
 ---

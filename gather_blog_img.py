@@ -76,6 +76,7 @@ def get_title(target_path):
 
 def create_local_repo(md_path, dst_dir):
     md_name = get_title(md_path)
+    md_name = md_name.replace("/", " ")
     asset_folder = os.path.join(dst_dir, md_name + '.assets')
     if not os.path.exists(asset_folder):
         os.mkdir(asset_folder)
@@ -123,13 +124,16 @@ def md_img_gather(md_path, dst_dir):
         with open(os.path.join(dst_dir, md_name + '.md'), 'w', encoding='utf-8') as f:
             f.write(text)
         print('The markdown file {0} has been processed.'.format(md_name))
+        # delete the origin md
+        os.remove(md_path)
+
 
 
 if __name__ == '__main__':
     # path = input('Please enter the directory or file path: ')
     path = '/Users/tianjiaye/临时文稿/_posts'
     # dst_dir = input('Please enter the destination directory: ')
-    dst_dir = '/Users/tianjiaye/临时文稿/gather_md'
+    dst_dir = '/Users/tianjiaye/临时文稿/_gather_md'
     if os.path.isdir(path):
         if dst_dir == '':
             dst_dir = path
