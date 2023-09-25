@@ -3,6 +3,7 @@ title: Effective C++ - Item49-52 - 定制new和delete
 categories: 笔记
 tags:
   - EffectiveC++
+abbrlink: 5982
 date: 2023-09-21 12:26:30
 ---
 # Effective C++ - Item49-52 - 定制new和delete
