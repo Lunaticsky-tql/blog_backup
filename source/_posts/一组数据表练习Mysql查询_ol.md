@@ -3,9 +3,12 @@ title: 一组数据表练习Mysql查询
 categories: 笔记
 tags:
   - 数据库
+abbrlink: 65048
 date: 2023-10-14 15:56:32
 ---
 # 一组数据表练习Mysql查询
+
+最近银行和金融相关企业也陆续开始笔面试流程了。相比互联网企业，它们的开发岗位对数据分析也有一定的要求。因此在这里对SQL查询相关技巧进行由浅入深的练习回顾。
 
 ## 数据表格式
 
@@ -354,3 +357,5 @@ where not exists(select * from project
 ```
 
 ![image-20231014155355539](https://raw.githubusercontent.com/Lunaticsky-tql/blog_articles/main/%E4%B8%80%E7%BB%84%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%BB%83%E4%B9%A0Mysql%E6%9F%A5%E8%AF%A2/20231014155627876393_620_image-20231014155355539.png)
+
+思路依旧是循环。最内重子查询去遍历workson表中每个employee参与的每个项目，第二层子查询得到的是该员工没参与过的项目。总的语句含义是一个双重否定，即：不存在这个职员没参加过的项目。
