@@ -41,7 +41,7 @@ namespace std {
 
 具体的，调用`set_new_handler`，这样下一次调用`new_heandler`就可以做些不同的事。为了达到这个目的，可以让 `new-handler` 修改“会影响 `new-handler` 行为”的静态或全局数据。
 
-**卸除 new-handler：** 将`nullptr`传给`set_new_handler`，这样会使`operator new`在内存分配不成功时抛出异常。
+**卸载 new-handler：** 将`nullptr`传给`set_new_handler`，这样会使`operator new`在内存分配不成功时抛出异常。
 
 **抛出 bad_alloc（或派生自 bad_alloc）的异常：** 这样的异常不会被`operator new`捕捉，因此会被传播到内存分配处。
 
@@ -168,7 +168,7 @@ if (pw2 == nullptr) ...                     // 这个测试可能成功
 
 **用来检测运用上的错误：** 如果将“new 所得内存”delete 掉却不幸失败，会导致内存泄漏；如果在“new 所得内存”身上多次 delete 则会导致未定义行为。
 
-此外各式各样的编程错误可能导致 **“overruns”（写入点在分配区块尾端之后）** 和 **“underruns”（写入点在分配区块起点之前）**，以额外空间放置特定的 byte pattern 签名，检查签名是否原封不动就可以检测此类错误，下面给出了一个这样的范例：
+此外各式各样的编程错误可能导致 **“overruns”（写入点在分配区块尾端之后）** 和 **“underruns”（写入点在分配区块起点之前）**，以额外空间放置特定的 byte pattern 签名，检查签名是否一致就可以检测此类错误，下面给出了一个这样的范例：
 
 ```cpp
 static const int signature = 0xDEADBEEF;              // 调试“魔数”
@@ -189,7 +189,7 @@ void* operator new(std::size_t size) {
 }
 ```
 
-实际上这段代码**不能保证内存对齐**，并且有许多地方不遵守 C++ 规范，我们将在条款 51 中进行详细讨论。
+实际上这段代码**不能保证内存对齐**，并且有许多地方不遵守 C++ 规范，将在条款 51 中进行详细讨论。
 
 > 比如x86平台上int4字节，double8字节。尽管Intel x86 上的doubles可被以任何byte边界对齐，但如果它是8-byte对齐，其访问速度会快许多。这个程序便不能保证。
 >
@@ -348,8 +348,6 @@ void Base::operator delete(void* rawMemory, std::size_t size) noexcept {
 **如果即将被删除的对象派生自某个基类而后者缺少虚析构函数，那么 C++ 传给`operator delete`的`size`大小可能不正确**，这或许是“为多态基类声明虚析构函数”的一个足够的理由，能作为对条款 7 的补充。
 
 ### 条款 52：写了 placement new 也要写 placement delete
-
-> 
 
 placement new 最初的含义指的是“**接受一个指针指向对象该被构造之处**”的`operator new`版本，它在标准库中的用途广泛，其中之一是负责在 vector 的未使用空间上创建对象，它的声明如下：
 

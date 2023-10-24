@@ -641,7 +641,7 @@ void advance(IterT& iter, DisT d) {
 > }
 > ```
 >
-> 虽然我嫩运行时绝不会执行+=那一行，但编译器必须确保所有源码都有效。编译器觉得只有random access迭代器才支持`+=`，而`std::list<int>::iterator`不支持`+=`，因此会报错。
+> 虽然我们运行时绝不会执行+=那一行，但编译器必须确保所有源码都有效。编译器觉得只有random access迭代器才支持`+=`，而`std::list<int>::iterator`不支持`+=`，因此会报错。
 
 `iterator_category`是在编译期决定的，然而`if`却是在运行期运作的，无法达成我们的目标。
 
