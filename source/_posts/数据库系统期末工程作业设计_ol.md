@@ -33,9 +33,9 @@ abbrlink: 30344
 
 ​		2.斜体代表外键
 
-goods（<u>goods_id</u>, goods_name, supplier_id, price, good_num, *shelf_no*)
+goods（<u>goods_id</u>, *shelf_id*, goods_name, supplier_id, price, good_num)
 
-//food（<u>goods_id</u>, goods_name, supplier_id, price, shelf_life)
+//food（<u>goods_id</u>, *shelf_id*, goods_name, supplier_id, price, good_num, shelf_life)
 
 supplier（<u>sp_id</u>, sp_name, phone, address)
 
@@ -551,8 +551,6 @@ alter table supply
       references supplier (sp_id)
       on update restrict
       on delete restrict;
-
-
 ```
 
 
