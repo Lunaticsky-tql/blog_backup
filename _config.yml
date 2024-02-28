@@ -106,7 +106,7 @@ deploy:
   type: git
   repo: git@github.com:Lunaticsky-tql/Lunaticsky-tql.github.io.git
   branch: main
-
+  token: $GITHUB_TOKEN
 githubEmojis:
   enable: true
   className: github-emoji
