@@ -3,6 +3,7 @@ title: 认识HTTP二
 categories: 笔记
 tags:
   - 寄网
+abbrlink: 57983
 ---
 # 重新认识HTTP
 
