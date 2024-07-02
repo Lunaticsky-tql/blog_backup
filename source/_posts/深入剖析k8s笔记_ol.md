@@ -3,6 +3,7 @@ title: 深入剖析k8s笔记
 categories: 笔记
 tags:
   - 云原生
+abbrlink: 46631
 date: 2024-07-02 23:11:59
 ---
 ### 整体架构
