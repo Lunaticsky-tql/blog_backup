@@ -104,7 +104,7 @@ theme: fluid # 指定主题
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:Lunaticsky-tql/Lunaticsky-tql.github.io.git
+  repo: https://github.com/Lunaticsky-tql/Lunaticsky-tql.github.io
   branch: main
   token: $GITHUB_TOKEN
 githubEmojis:
